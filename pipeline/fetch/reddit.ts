@@ -63,9 +63,20 @@ const parser = new Parser({
 });
 
 async function fetchViaRss(source: SourceConfig): Promise<RawItem[]> {
-  const feed = await parser.parseURL(
-    `https://www.reddit.com/r/${source.url}/top/.rss?t=day&limit=40`,
-  );
+  // rss-parser's timeout is inactivity-based; race it against a hard cap so a
+  // trickling response can't wedge the whole queue. A stall is almost always
+  // rate-limiting, so the message includes "429" to trigger the retry backoff.
+  const hardCap = new Promise<never>((_, reject) => {
+    const t = setTimeout(
+      () => reject(new Error("hard 30s timeout (treating as 429)")),
+      30_000,
+    );
+    t.unref();
+  });
+  const feed = await Promise.race([
+    parser.parseURL(`https://www.reddit.com/r/${source.url}/top/.rss?t=day&limit=40`),
+    hardCap,
+  ]);
   const items: RawItem[] = [];
   for (const entry of feed.items ?? []) {
     const title = entry.title?.trim();

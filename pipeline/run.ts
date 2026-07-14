@@ -8,10 +8,26 @@ import { fetchHn } from "./fetch/hn";
 import { fetchReddit } from "./fetch/reddit";
 import { fetchRss } from "./fetch/rss";
 import { dedupe } from "./normalize";
-import { scoreClusters } from "./score";
+import { applyCoverage, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
 const MAX_AGE_DAYS = 7;
+
+/**
+ * Hard wall-clock cap per source. Socket-level timeouts are inactivity-based
+ * and a server that trickles bytes can hold a request open forever — observed
+ * in the wild with Reddit's CDN. The timer is unref'd so it never keeps the
+ * process alive itself.
+ */
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) => {
+      const t = setTimeout(() => reject(new Error(`${label}: hard timeout after ${ms / 1000}s`)), ms);
+      t.unref();
+    }),
+  ]);
+}
 
 async function main() {
   console.log(`[ingest] ${SOURCES.length} sources`);
@@ -21,11 +37,13 @@ async function main() {
     SOURCES.map(async (source) => {
       switch (source.type) {
         case "rss":
-          return fetchRss(source);
+          return withTimeout(fetchRss(source), 90_000, source.id);
         case "reddit":
-          return fetchReddit(source);
+          // reddit fetches run serially with retry backoff behind one queue,
+          // so the whole-queue budget has to be generous
+          return withTimeout(fetchReddit(source), 480_000, source.id);
         case "hn":
-          return fetchHn(source);
+          return withTimeout(fetchHn(source), 90_000, source.id);
       }
     }),
   );
@@ -58,6 +76,9 @@ async function main() {
   //    dropped out of feeds but are still < 7 days old.
   const previous = loadPrevious();
   const merged = mergeStories(stories, previous?.stories ?? [], cutoff);
+  // Coverage/blindspot derive purely from articles + config, so recompute for
+  // carried-over stories too (keeps old datasets valid when the config evolves).
+  merged.forEach(applyCoverage);
   merged.sort((a, b) => Date.parse(b.latestPublishedAt) - Date.parse(a.latestPublishedAt));
 
   const dataset: Dataset = {
@@ -119,7 +140,13 @@ function mergeStories(fresh: Story[], previous: Story[], cutoff: number): Story[
   return [...fresh, ...kept];
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+main()
+  .then(() => {
+    // Lingering keep-alive sockets from feed fetches can hold the event loop
+    // open indefinitely (and would hang the CI job) — exit explicitly.
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

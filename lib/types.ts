@@ -1,6 +1,13 @@
 export type SourceType = "rss" | "reddit" | "hn";
 export type Region = "in" | "world";
 
+/** Editorial bucket used for blindspot analysis (outlets only). */
+export type SourceGroup =
+  | "in-mainstream" // large Indian commercial outlets
+  | "in-independent" // independent/non-profit Indian newsrooms
+  | "international" // non-Indian outlets
+  | "official"; // government/primary sources
+
 export interface SourceConfig {
   id: string;
   name: string;
@@ -13,6 +20,10 @@ export interface SourceConfig {
   tier?: number;
   /** True for official/primary sources like PIB (government press releases). */
   primarySource?: boolean;
+  /** Editorial bucket for blindspot analysis. Outlets only. */
+  group?: SourceGroup;
+  /** Who owns/funds this outlet — shown openly in the UI. Outlets only. */
+  ownership?: string;
 }
 
 /** One fetched item before clustering. */
@@ -77,6 +88,14 @@ export type Category =
   | "sports"
   | "other";
 
+/** Unique-outlet counts per editorial bucket. */
+export interface CoverageBuckets {
+  mainstream: number;
+  independent: number;
+  international: number;
+  official: number;
+}
+
 export interface Story {
   id: string;
   headline: string;
@@ -88,6 +107,9 @@ export interface Story {
   score: ScoreBreakdown;
   /** Higher = more community engagement with less mainstream coverage. */
   radarScore: number;
+  coverage: CoverageBuckets;
+  /** Set when an India-relevant story has zero Indian-mainstream coverage. */
+  blindspot?: "mainstream-blindspot";
   firstSeenAt: string;
   latestPublishedAt: string;
 }

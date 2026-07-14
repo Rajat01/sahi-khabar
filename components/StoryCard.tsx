@@ -15,7 +15,17 @@ export function StoryCard({ story, nowIso }: { story: FeedStory; nowIso: string 
             {story.headline}
           </Link>
         </h2>
-        <ScoreBadge band={story.band} total={story.total} compact />
+        <span className="flex shrink-0 items-center gap-1.5">
+          {story.blindspot && (
+            <span
+              className="rounded-full border border-status-serious/50 px-2 py-0.5 text-xs font-medium text-ink-2"
+              title="India-relevant story with no Indian mainstream coverage in our source list"
+            >
+              Blindspot
+            </span>
+          )}
+          <ScoreBadge band={story.band} total={story.total} compact />
+        </span>
       </div>
       {story.summary && (
         <p className="mt-1 line-clamp-2 text-sm text-ink-2">{story.summary}</p>

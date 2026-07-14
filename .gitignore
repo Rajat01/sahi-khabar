@@ -6,3 +6,6 @@ next-env.d.ts
 .env
 .env.local
 .DS_Store
+
+# Local Netlify folder
+.netlify

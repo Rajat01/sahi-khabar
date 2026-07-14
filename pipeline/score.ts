@@ -1,6 +1,7 @@
 import { PRIMARY_SOURCE_DOMAINS, SOURCE_BY_ID } from "../config/sources";
 import type {
   Category,
+  CoverageBuckets,
   Discussion,
   ScoreBreakdown,
   Story,
@@ -86,10 +87,63 @@ function buildStory(cluster: Cluster): Story | null {
     discussions,
     score: baseScore(articles),
     radarScore: radarScore(articles, discussions),
+    coverage: { mainstream: 0, independent: 0, international: 0, official: 0 },
     firstSeenAt: new Date(Math.min(...dates)).toISOString(),
     latestPublishedAt: new Date(Math.max(...dates)).toISOString(),
   };
+  applyCoverage(story);
   return story;
+}
+
+const INDIA_PATTERN =
+  /\b(india|indian|bharat|hindustan|desi|delhi|mumbai|bengaluru|bangalore|kolkata|chennai|hyderabad|pune|ahmedabad|modi|lok sabha|rajya sabha|bjp|congress party|rahul gandhi|kashmir|punjab|kerala|tamil nadu|karnataka|maharashtra|gujarat|bihar|bengal|uttar pradesh|assam|manipur|rupee|rbi|sebi|isro|nifty|sensex|aadhaar|bollywood)\b/i;
+
+/**
+ * Fill in coverage buckets and the blindspot flag. Exported so run.ts can
+ * recompute them for stories carried over from previous datasets.
+ */
+export function applyCoverage(story: Story): void {
+  const buckets: CoverageBuckets = {
+    mainstream: 0,
+    independent: 0,
+    international: 0,
+    official: 0,
+  };
+  const seen = new Set<string>();
+  for (const article of story.articles) {
+    if (seen.has(article.sourceId)) continue;
+    seen.add(article.sourceId);
+    switch (SOURCE_BY_ID[article.sourceId]?.group) {
+      case "in-mainstream":
+        buckets.mainstream++;
+        break;
+      case "in-independent":
+        buckets.independent++;
+        break;
+      case "international":
+        buckets.international++;
+        break;
+      case "official":
+        buckets.official++;
+        break;
+    }
+  }
+  story.coverage = buckets;
+
+  // Blindspot: an India-relevant story that Indian mainstream outlets are not
+  // covering, while others are. Single-source local items don't count — we
+  // require either two non-mainstream outlets or one plus community traction,
+  // so the page shows genuine gaps rather than every niche story.
+  const indiaRelevant =
+    story.region === "in" ||
+    INDIA_PATTERN.test(story.headline + " " + (story.summary ?? ""));
+  const nonMainstream = buckets.independent + buckets.international + buckets.official;
+  story.blindspot =
+    indiaRelevant &&
+    buckets.mainstream === 0 &&
+    (nonMainstream >= 2 || (nonMainstream >= 1 && story.discussions.length >= 1))
+      ? "mainstream-blindspot"
+      : undefined;
 }
 
 function baseScore(articles: StoryArticle[]): ScoreBreakdown {

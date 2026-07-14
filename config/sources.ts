@@ -19,6 +19,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.thehindu.com",
     region: "in",
     tier: 85,
+    group: "in-mainstream",
+    ownership: "The Hindu Group / Kasturi & Sons (family-owned)",
   },
   {
     // The Indian Express RSS is behind aggressive bot protection (403);
@@ -30,6 +32,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.deccanherald.com",
     region: "in",
     tier: 78,
+    group: "in-mainstream",
+    ownership: "The Printers (Mysore) Pvt Ltd (family-owned)",
   },
   {
     id: "scroll",
@@ -39,6 +43,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://scroll.in",
     region: "in",
     tier: 74,
+    group: "in-independent",
+    ownership: "Scroll Media (independent digital newsroom)",
   },
   {
     id: "thewire",
@@ -48,6 +54,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://thewire.in",
     region: "in",
     tier: 70,
+    group: "in-independent",
+    ownership: "Foundation for Independent Journalism (non-profit)",
   },
   {
     id: "hindustantimes",
@@ -57,6 +65,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.hindustantimes.com",
     region: "in",
     tier: 75,
+    group: "in-mainstream",
+    ownership: "HT Media (Bhartia family / Birla group)",
   },
   {
     id: "livemint",
@@ -66,6 +76,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.livemint.com",
     region: "in",
     tier: 78,
+    group: "in-mainstream",
+    ownership: "HT Media (Bhartia family / Birla group)",
   },
   {
     id: "ndtv",
@@ -75,6 +87,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.ndtv.com",
     region: "in",
     tier: 70,
+    group: "in-mainstream",
+    ownership: "AMG Media Networks (Adani Group, since 2022)",
   },
   {
     id: "toi",
@@ -84,6 +98,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://timesofindia.indiatimes.com",
     region: "in",
     tier: 62,
+    group: "in-mainstream",
+    ownership: "Bennett Coleman & Co / The Times Group (Jain family)",
   },
   {
     id: "pib",
@@ -92,7 +108,9 @@ export const SOURCES: SourceConfig[] = [
     url: "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
     homepage: "https://pib.gov.in",
     region: "in",
-    tier: 70, // official statements: primary source, but self-interested
+    tier: 70,
+    group: "official",
+    ownership: "Government of India (Ministry of I&B)", // official statements: primary source, but self-interested
     primarySource: true,
   },
 
@@ -105,6 +123,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.bbc.com/news",
     region: "world",
     tier: 88,
+    group: "international",
+    ownership: "UK public broadcaster (licence-fee funded)",
   },
   {
     id: "npr",
@@ -114,6 +134,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.npr.org",
     region: "world",
     tier: 87,
+    group: "international",
+    ownership: "US non-profit public media",
   },
   {
     id: "guardian",
@@ -123,6 +145,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.theguardian.com",
     region: "world",
     tier: 82,
+    group: "international",
+    ownership: "Scott Trust (non-profit trust)",
   },
   {
     id: "aljazeera",
@@ -132,6 +156,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.aljazeera.com",
     region: "world",
     tier: 78,
+    group: "international",
+    ownership: "Qatari state-funded broadcaster",
   },
   {
     id: "dw",
@@ -141,6 +167,8 @@ export const SOURCES: SourceConfig[] = [
     homepage: "https://www.dw.com",
     region: "world",
     tier: 84,
+    group: "international",
+    ownership: "German public broadcaster (state-funded)",
   },
   // Note: AP and Reuters no longer publish free public RSS feeds; their
   // reporting still reaches the site via outlets that syndicate them.

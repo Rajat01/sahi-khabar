@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CoverageStrip } from "../../../components/CoverageStrip";
 import { ScoreBadge } from "../../../components/ScoreBadge";
 import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { TimeAgo } from "../../../components/TimeAgo";
@@ -46,6 +47,7 @@ export default async function StoryPage({
         update <TimeAgo iso={story.latestPublishedAt} nowIso={generatedAt} /> ·{" "}
         {story.region === "in" ? "India" : "World"} · {story.category}
       </p>
+      <CoverageStrip coverage={story.coverage} blindspot={story.blindspot} />
 
       <div className="mt-6 grid gap-6 md:grid-cols-[1fr_280px]">
         <div>
@@ -80,6 +82,11 @@ export default async function StoryPage({
                     {" · "}
                     <TimeAgo iso={article.publishedAt} nowIso={generatedAt} /> ↗
                   </span>
+                  {SOURCE_BY_ID[article.sourceId]?.ownership && (
+                    <span className="mt-0.5 block text-xs text-ink-3">
+                      Owned by: {SOURCE_BY_ID[article.sourceId].ownership}
+                    </span>
+                  )}
                 </a>
               </li>
             ))}
