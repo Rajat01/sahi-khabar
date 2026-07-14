@@ -1,0 +1,28 @@
+{
+  "name": "sahi-khabar",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "ingest": "tsx pipeline/run.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.3.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.55.0",
+    "@tailwindcss/postcss": "^4.1.10",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "rss-parser": "^3.13.0",
+    "tailwindcss": "^4.1.10",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@11.13.0"
+}

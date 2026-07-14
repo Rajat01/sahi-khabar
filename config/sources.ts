@@ -1,0 +1,212 @@
+import type { SourceConfig } from "../lib/types";
+
+/**
+ * All ingestion sources. Reliability tiers (0-100) are hand-maintained,
+ * seeded from public press-reliability research (Reuters Institute digital
+ * news reports, IFCN signatories, general fact-check track records). They are
+ * editable opinions, not gospel — the /about page shows this table openly.
+ *
+ * Reddit/HN entries have no tier: they are engagement/discovery signals,
+ * never corroborating sources.
+ */
+export const SOURCES: SourceConfig[] = [
+  // ---- RSS: India ----
+  {
+    id: "thehindu",
+    name: "The Hindu",
+    type: "rss",
+    url: "https://www.thehindu.com/news/national/feeder/default.rss",
+    homepage: "https://www.thehindu.com",
+    region: "in",
+    tier: 85,
+  },
+  {
+    // The Indian Express RSS is behind aggressive bot protection (403);
+    // Deccan Herald stands in as the second high-tier Indian daily.
+    id: "deccanherald",
+    name: "Deccan Herald",
+    type: "rss",
+    url: "https://www.deccanherald.com/stories.rss",
+    homepage: "https://www.deccanherald.com",
+    region: "in",
+    tier: 78,
+  },
+  {
+    id: "scroll",
+    name: "Scroll.in",
+    type: "rss",
+    url: "https://feeds.feedburner.com/ScrollinArticles.rss",
+    homepage: "https://scroll.in",
+    region: "in",
+    tier: 74,
+  },
+  {
+    id: "thewire",
+    name: "The Wire",
+    type: "rss",
+    url: "https://cms.thewire.in/feed",
+    homepage: "https://thewire.in",
+    region: "in",
+    tier: 70,
+  },
+  {
+    id: "hindustantimes",
+    name: "Hindustan Times",
+    type: "rss",
+    url: "https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml",
+    homepage: "https://www.hindustantimes.com",
+    region: "in",
+    tier: 75,
+  },
+  {
+    id: "livemint",
+    name: "Mint",
+    type: "rss",
+    url: "https://www.livemint.com/rss/news",
+    homepage: "https://www.livemint.com",
+    region: "in",
+    tier: 78,
+  },
+  {
+    id: "ndtv",
+    name: "NDTV",
+    type: "rss",
+    url: "https://feeds.feedburner.com/ndtvnews-top-stories",
+    homepage: "https://www.ndtv.com",
+    region: "in",
+    tier: 70,
+  },
+  {
+    id: "toi",
+    name: "Times of India",
+    type: "rss",
+    url: "https://timesofindia.indiatimes.com/rssfeedstopstories.cms",
+    homepage: "https://timesofindia.indiatimes.com",
+    region: "in",
+    tier: 62,
+  },
+  {
+    id: "pib",
+    name: "PIB (Govt. of India)",
+    type: "rss",
+    url: "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
+    homepage: "https://pib.gov.in",
+    region: "in",
+    tier: 70, // official statements: primary source, but self-interested
+    primarySource: true,
+  },
+
+  // ---- RSS: World ----
+  {
+    id: "bbc",
+    name: "BBC News",
+    type: "rss",
+    url: "https://feeds.bbci.co.uk/news/world/rss.xml",
+    homepage: "https://www.bbc.com/news",
+    region: "world",
+    tier: 88,
+  },
+  {
+    id: "npr",
+    name: "NPR",
+    type: "rss",
+    url: "https://feeds.npr.org/1001/rss.xml",
+    homepage: "https://www.npr.org",
+    region: "world",
+    tier: 87,
+  },
+  {
+    id: "guardian",
+    name: "The Guardian",
+    type: "rss",
+    url: "https://www.theguardian.com/world/rss",
+    homepage: "https://www.theguardian.com",
+    region: "world",
+    tier: 82,
+  },
+  {
+    id: "aljazeera",
+    name: "Al Jazeera",
+    type: "rss",
+    url: "https://www.aljazeera.com/xml/rss/all.xml",
+    homepage: "https://www.aljazeera.com",
+    region: "world",
+    tier: 78,
+  },
+  {
+    id: "dw",
+    name: "DW News",
+    type: "rss",
+    url: "https://rss.dw.com/rdf/rss-en-world",
+    homepage: "https://www.dw.com",
+    region: "world",
+    tier: 84,
+  },
+  // Note: AP and Reuters no longer publish free public RSS feeds; their
+  // reporting still reaches the site via outlets that syndicate them.
+
+  // ---- Reddit (engagement signal only) ----
+  {
+    id: "r-india",
+    name: "r/india",
+    type: "reddit",
+    url: "india",
+    homepage: "https://www.reddit.com/r/india",
+    region: "in",
+  },
+  {
+    id: "r-worldnews",
+    name: "r/worldnews",
+    type: "reddit",
+    url: "worldnews",
+    homepage: "https://www.reddit.com/r/worldnews",
+    region: "world",
+  },
+  {
+    id: "r-news",
+    name: "r/news",
+    type: "reddit",
+    url: "news",
+    homepage: "https://www.reddit.com/r/news",
+    region: "world",
+  },
+  {
+    id: "r-geopolitics",
+    name: "r/geopolitics",
+    type: "reddit",
+    url: "geopolitics",
+    homepage: "https://www.reddit.com/r/geopolitics",
+    region: "world",
+  },
+
+  // ---- Hacker News (engagement signal only) ----
+  {
+    id: "hn",
+    name: "Hacker News",
+    type: "hn",
+    url: "",
+    homepage: "https://news.ycombinator.com",
+    region: "world",
+  },
+];
+
+export const SOURCE_BY_ID: Record<string, SourceConfig> = Object.fromEntries(
+  SOURCES.map((s) => [s.id, s]),
+);
+
+/** Domains that count as official/primary sources when linked directly. */
+export const PRIMARY_SOURCE_DOMAINS = [
+  "pib.gov.in",
+  ".gov.in",
+  ".nic.in",
+  ".gov",
+  "who.int",
+  "un.org",
+  "worldbank.org",
+  "imf.org",
+  "rbi.org.in",
+  "sebi.gov.in",
+  "eci.gov.in",
+  "supremecourtofindia.nic.in",
+  "courts.gov.in",
+];

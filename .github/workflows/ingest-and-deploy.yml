@@ -1,0 +1,72 @@
+name: Ingest news and deploy
+
+on:
+  schedule:
+    # Every 2 hours. On a private repo this uses ~700-1000 of the 2000 free
+    # Actions minutes/month — bump the frequency only after checking usage.
+    - cron: "17 */2 * * *"
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+
+concurrency:
+  group: ingest-and-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: write # push the single-commit data branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Restore previous stories from data branch
+        run: |
+          git fetch origin data --depth=1 2>/dev/null || true
+          mkdir -p data
+          git show origin/data:stories.json > data/stories.json 2>/dev/null \
+            && echo "restored previous dataset" \
+            || echo "no previous dataset (first run)"
+
+      - name: Ingest news
+        run: pnpm ingest
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Optional — unlocks real Reddit vote counts:
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+
+      - name: Build static site
+        run: pnpm build
+
+      - name: Persist stories to data branch (single force-pushed commit)
+        run: |
+          set -e
+          workdir=$(mktemp -d)
+          cp data/stories.json "$workdir/"
+          cd "$workdir"
+          git init -b data -q
+          git config user.name "sahi-khabar-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add stories.json
+          git commit -q -m "data snapshot $(date -u +%FT%TZ)"
+          git push --force \
+            "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" \
+            data
+
+      - name: Deploy prebuilt site to Netlify
+        run: npx netlify-cli deploy --prod --no-build --dir=out
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

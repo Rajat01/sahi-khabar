@@ -1,0 +1,5 @@
+# Site is prebuilt in GitHub Actions and deployed with `netlify deploy --prod --dir=out`,
+# so no build command runs on Netlify (keeps us at $0 build minutes).
+[build]
+  publish = "out"
+  command = "echo 'Prebuilt in CI - nothing to build'"
