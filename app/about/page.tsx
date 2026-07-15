@@ -99,9 +99,10 @@ export default function AboutPage() {
         <p className="mt-2 text-sm leading-relaxed text-ink-2">
           The home feed is ranked, not purely chronological: a story&rsquo;s
           position comes from its recency (half-life of ~18 hours), how many
-          outlets corroborate it, an India-relevance boost (×1.25), and a
-          category weight — tech and sports are down-weighted (×0.6) so a
-          gadget launch never outranks a court verdict.{" "}
+          outlets corroborate it, and a category weight — tech and sports are
+          down-weighted (×0.6) so a gadget launch never outranks a court
+          verdict. Ordering is region-neutral; use the India/World tabs to
+          focus.{" "}
           <strong>Nothing is ever removed by ranking</strong>: every ingested
           story keeps its page, appears in region and topic filters, and ships
           in the sitemap and RSS feed. These weights are published here and in

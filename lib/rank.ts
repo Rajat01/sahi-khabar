@@ -24,12 +24,13 @@ export function rankScore(story: Story, nowMs: number): number {
   const outlets = new Set(story.articles.map((a) => a.sourceName)).size;
   const corroboration = 1 + 0.4 * Math.log2(1 + outlets);
 
-  const indiaBoost = story.region === "in" ? 1.25 : 1.0;
+  // No region boost: the India/World tabs are the reader's lens, and the
+  // default "All" ordering stays region-neutral by design.
   const category = CATEGORY_WEIGHT[story.category] ?? 1.0;
   // single low-tier-source stories stay visible, just below corroborated news
   const bandFactor = story.score.band === "unverified" ? 0.75 : 1.0;
 
-  return recency * corroboration * indiaBoost * category * bandFactor;
+  return recency * corroboration * category * bandFactor;
 }
 
 export function rankStories(stories: Story[], nowIso: string): Story[] {
