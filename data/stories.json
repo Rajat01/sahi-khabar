@@ -1,6 +1,191 @@
 {
- "generatedAt": "2026-07-15T21:27:33.791Z",
+ "generatedAt": "2026-07-15T21:41:43.686Z",
  "stories": [
+  {
+   "id": "52f6422ffcb0",
+   "headline": "Uttar Pradesh PWD says road inside Jauhar University is open for public use",
+   "summary": "Uttar Pradesh PWD says road inside Jauhar University is open for public use",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "indiatoday",
+     "sourceName": "India Today",
+     "title": "Uttar Pradesh PWD says road inside Jauhar University is open for public use",
+     "url": "https://indiatoday.in/india/story/uttar-pradesh-jauhar-university-road-rampur-public-road-up-pwd-2948857-2026-07-16",
+     "publishedAt": "2026-07-15T21:34:29.000Z",
+     "summary": "Uttar Pradesh PWD says road inside Jauhar University is open for public use"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 20,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 50,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:34:29.000Z",
+   "latestPublishedAt": "2026-07-15T21:34:29.000Z"
+  },
+  {
+   "id": "cb141a9dabd4",
+   "headline": "Karnataka: 90% of hoblis with 1k mm rainfall record 20% deficit this year",
+   "summary": "90% of hoblis with 1k mm rainfall record 20% deficit this year",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "deccanherald",
+     "sourceName": "Deccan Herald",
+     "title": "Karnataka: 90% of hoblis with 1k mm rainfall record 20% deficit this year",
+     "url": "https://deccanherald.com/india/karnataka/karnataka-90-of-hoblis-with-1k-mm-rainfall-record-20-deficit-this-year-4075243",
+     "publishedAt": "2026-07-15T21:27:57.000Z",
+     "summary": "90% of hoblis with 1k mm rainfall record 20% deficit this year"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 23,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 53,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:27:57.000Z",
+   "latestPublishedAt": "2026-07-15T21:27:57.000Z"
+  },
+  {
+   "id": "15f21f431fa6",
+   "headline": "Australia news live: Josh Thomas weighs in on Divine Playhouse debate; meth surges in workplace drug use survey",
+   "summary": "Comedian backs LGBTQ+ theatre in ‘David v Goliath’ fight. Follow today’s news live Get our breaking news email, free app or daily news podcast Environmental and community groups have called for a pause on datacentre development until new regulations are in place after Anthony Albanese promised “g...",
+   "region": "world",
+   "category": "tech",
+   "articles": [
+    {
+     "sourceId": "guardian",
+     "sourceName": "The Guardian",
+     "title": "Australia news live: Josh Thomas weighs in on Divine Playhouse debate; meth surges in workplace drug use survey",
+     "url": "https://theguardian.com/australia-news/live/2026/jul/16/divine-playhouse-josh-thomas-workplace-drug-survey-anthony-albanese-labor-angus-taylor-coalition-one-nation-pauline-hanson-ntwnfb",
+     "publishedAt": "2026-07-15T21:27:31.000Z",
+     "summary": "Comedian backs LGBTQ+ theatre in ‘David v Goliath’ fight. Follow today’s news live Get our breaking news email, free app or daily news podcast Environmental and community groups have called for a pause on datacentre development until new regulations are in place after Anthony Albanese promised “g..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 25,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 55,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 1,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:13:49.000Z",
+   "latestPublishedAt": "2026-07-15T21:27:31.000Z"
+  },
+  {
+   "id": "dc172ccd50aa",
+   "headline": "CDC nominee Erica Schwartz pressed on whether she will resist RFK Jr’s vaccine agenda",
+   "summary": "During confirmation hearing Wednesday, Trump’s pick tells Senate health committee she will ‘never betray the science’ Erica Schwartz, the Trump administration’s latest nominee to lead the Centers for Disease Control and Prevention (CDC), faced sharp questioning from senators who pressed her to sa...",
+   "region": "world",
+   "category": "science",
+   "articles": [
+    {
+     "sourceId": "guardian",
+     "sourceName": "The Guardian",
+     "title": "CDC nominee Erica Schwartz pressed on whether she will resist RFK Jr’s vaccine agenda",
+     "url": "https://theguardian.com/us-news/2026/jul/15/erica-schwartz-cdc-senate-hearing",
+     "publishedAt": "2026-07-15T21:24:28.000Z",
+     "summary": "During confirmation hearing Wednesday, Trump’s pick tells Senate health committee she will ‘never betray the science’ Erica Schwartz, the Trump administration’s latest nominee to lead the Centers for Disease Control and Prevention (CDC), faced sharp questioning from senators who pressed her to sa..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 25,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 55,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 1,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:24:28.000Z",
+   "latestPublishedAt": "2026-07-15T21:24:28.000Z"
+  },
+  {
+   "id": "2ed27a75150b",
+   "headline": "IMD issues heatwave alert for coastal Karnataka",
+   "summary": "IMD issues heatwave alert for coastal K'taka",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "deccanherald",
+     "sourceName": "Deccan Herald",
+     "title": "IMD issues heatwave alert for coastal Karnataka",
+     "url": "https://deccanherald.com/india/karnataka/imd-issues-heatwave-alert-for-coastal-karnataka-4075242",
+     "publishedAt": "2026-07-15T21:22:49.000Z",
+     "summary": "IMD issues heatwave alert for coastal K'taka"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 23,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 53,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:22:49.000Z",
+   "latestPublishedAt": "2026-07-15T21:22:49.000Z"
+  },
   {
    "id": "18ff29c68628",
    "headline": "Authors, publishers sue Google over alleged AI copyright infringement",
@@ -93,131 +278,19 @@
    "latestPublishedAt": "2026-07-15T21:21:19.000Z"
   },
   {
-   "id": "be05de18665f",
-   "headline": "Quote of the Day by Lupita Nyong'o: ‘I discovered that joy is not the negation of pain, but rather acknowledging…’",
-   "summary": "Lupita Nyong'o's reflection on joy and pain offers a powerful perspective on resilience, shaped by her personal experiences, acclaimed career and a new chapter with Christopher Nolan's The Odyssey.",
-   "region": "in",
-   "category": "other",
-   "articles": [
-    {
-     "sourceId": "livemint",
-     "sourceName": "Mint",
-     "title": "Quote of the Day by Lupita Nyong'o: ‘I discovered that joy is not the negation of pain, but rather acknowledging…’",
-     "url": "https://livemint.com/news/us-news/quote-of-the-day-by-lupita-nyongo-i-discovered-that-joy-is-not-the-negation-of-pain-but-rather-acknowledging-11784147374785.html",
-     "publishedAt": "2026-07-15T21:13:59.000Z",
-     "summary": "Lupita Nyong'o's reflection on joy and pain offers a powerful perspective on resilience, shaped by her personal experiences, acclaimed career and a new chapter with Christopher Nolan's The Odyssey."
-    }
-   ],
-   "discussions": [],
-   "score": {
-    "corroboration": 15,
-    "reliability": 23,
-    "primarySource": 0,
-    "sanityCheck": 15,
-    "total": 53,
-    "band": "medium",
-    "flags": [],
-    "llmChecked": false
-   },
-   "radarScore": 0,
-   "coverage": {
-    "mainstream": 1,
-    "independent": 0,
-    "international": 0,
-    "official": 0
-   },
-   "firstSeenAt": "2026-07-15T21:13:59.000Z",
-   "latestPublishedAt": "2026-07-15T21:13:59.000Z"
-  },
-  {
-   "id": "15f21f431fa6",
-   "headline": "Australia news live: Josh Thomas weighs in on Divine Playhouse debate; meth surges in workplace drug use survey",
-   "summary": "Comedian backs LGBTQ+ theatre in ‘David v Goliath’ fight. Follow today’s news live Get our breaking news email, free app or daily news podcast The government has promised to strengthen modern slavery laws, and penalise companies with revenue over $100m that fail to prevent modern slavery in their...",
-   "region": "world",
-   "category": "business",
-   "articles": [
-    {
-     "sourceId": "guardian",
-     "sourceName": "The Guardian",
-     "title": "Australia news live: Josh Thomas weighs in on Divine Playhouse debate; meth surges in workplace drug use survey",
-     "url": "https://theguardian.com/australia-news/live/2026/jul/16/divine-playhouse-josh-thomas-workplace-drug-survey-anthony-albanese-labor-angus-taylor-coalition-one-nation-pauline-hanson-ntwnfb",
-     "publishedAt": "2026-07-15T21:13:49.000Z",
-     "summary": "Comedian backs LGBTQ+ theatre in ‘David v Goliath’ fight. Follow today’s news live Get our breaking news email, free app or daily news podcast The government has promised to strengthen modern slavery laws, and penalise companies with revenue over $100m that fail to prevent modern slavery in their..."
-    }
-   ],
-   "discussions": [],
-   "score": {
-    "corroboration": 15,
-    "reliability": 25,
-    "primarySource": 0,
-    "sanityCheck": 15,
-    "total": 55,
-    "band": "medium",
-    "flags": [],
-    "llmChecked": false
-   },
-   "radarScore": 0,
-   "coverage": {
-    "mainstream": 0,
-    "independent": 0,
-    "international": 1,
-    "official": 0
-   },
-   "firstSeenAt": "2026-07-15T21:13:49.000Z",
-   "latestPublishedAt": "2026-07-15T21:13:49.000Z"
-  },
-  {
-   "id": "d07b4544403f",
-   "headline": "Over 100 House Democrats vote to end military aid to Israel in rebuke to US ally",
-   "summary": "Vote underscores how sentiment in the party towards Israel and the Netanyahu government has soured More than 100 House Democrats on Wednesday voted to slash military aid to Israel, a significant rebuke of the longtime US ally as accusations that Prime Minister Benjamin Netanyahu’s government gree...",
-   "region": "world",
-   "category": "tech",
-   "articles": [
-    {
-     "sourceId": "guardian",
-     "sourceName": "The Guardian",
-     "title": "Over 100 House Democrats vote to end military aid to Israel in rebuke to US ally",
-     "url": "https://theguardian.com/us-news/2026/jul/15/house-democrats-israel-aid",
-     "publishedAt": "2026-07-15T21:11:37.000Z",
-     "summary": "Vote underscores how sentiment in the party towards Israel and the Netanyahu government has soured More than 100 House Democrats on Wednesday voted to slash military aid to Israel, a significant rebuke of the longtime US ally as accusations that Prime Minister Benjamin Netanyahu’s government gree..."
-    },
-    {
-     "sourceId": "guardian",
-     "sourceName": "The Guardian",
-     "title": "Top House Democrats vow to oppose bid to cut US military aid to Israel",
-     "url": "https://theguardian.com/world/2026/jul/14/us-military-aid-israel-house-democrats",
-     "publishedAt": "2026-07-14T21:07:48.000Z",
-     "summary": "House minority leader, Hakeem Jeffries, calls amendment ‘overly broad’ as party grapples with backlash over Israel US politics live – latest updates Top House Democrats split on Tuesday over a proposal to block aid for Israel’s military, with two of the party’s highest-ranking lawmakers saying th..."
-    }
-   ],
-   "discussions": [],
-   "score": {
-    "corroboration": 15,
-    "reliability": 25,
-    "primarySource": 0,
-    "sanityCheck": 15,
-    "total": 55,
-    "band": "medium",
-    "flags": [],
-    "llmChecked": false
-   },
-   "radarScore": 0,
-   "coverage": {
-    "mainstream": 0,
-    "independent": 0,
-    "international": 1,
-    "official": 0
-   },
-   "firstSeenAt": "2026-07-14T21:07:48.000Z",
-   "latestPublishedAt": "2026-07-15T21:11:37.000Z"
-  },
-  {
    "id": "e6644aff7810",
    "headline": "Argentina is back in the World Cup final after a thrilling semifinal win over England",
    "summary": "Argentina survived another heart-stopping match when it scored two late goals to topple England and extend the Three Lions' six-decade-long wait for another World Cup trophy.",
    "region": "world",
    "category": "sports",
    "articles": [
+    {
+     "sourceId": "deccanherald",
+     "sourceName": "Deccan Herald",
+     "title": "FIFA World Cup 2026 | Holders Argentina beat England 2-1 to set up World Cup final against Spain",
+     "url": "https://deccanherald.com/sports/football/fifa-world-cup-2026-holders-argentina-beat-england-2-1-to-set-up-world-cup-final-against-spain-4075382",
+     "publishedAt": "2026-07-15T21:21:14.000Z"
+    },
     {
      "sourceId": "npr",
      "sourceName": "NPR",
@@ -358,11 +431,159 @@
     }
    ],
    "score": {
-    "corroboration": 31,
+    "corroboration": 36,
     "reliability": 23,
     "primarySource": 0,
     "sanityCheck": 15,
-    "total": 69,
+    "total": 74,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 2,
+    "independent": 0,
+    "international": 2,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-14T05:00:00.000Z",
+   "latestPublishedAt": "2026-07-15T21:21:14.000Z"
+  },
+  {
+   "id": "d1fc1d1c3029",
+   "headline": "FIFA WC: Messi shines as Argentina pulls off stunner against England to reach final",
+   "summary": "Argentina clinched a dramatic 2-1 win against England on Wednesday, ensuring their place in the FIFA World Cup Final. The defending champions staged a remarkable comeback after trailing for a significant part of the match, as England's lead crumbled in the final moments. Next up for Argentina is ...",
+   "region": "in",
+   "category": "sports",
+   "articles": [
+    {
+     "sourceId": "toi",
+     "sourceName": "Times of India",
+     "title": "FIFA WC: Messi shines as Argentina pulls off stunner against England to reach final",
+     "url": "https://timesofindia.indiatimes.com/sports/football/fifa-world-cup/argentina-vs-england-fifa-world-cup-sf-match-result-lionel-messi-shines-as-argentina-pull-off-stunner-against-england-in-atlanta-to-reach-wc-final/articleshow/132424895.cms",
+     "publishedAt": "2026-07-15T21:19:40.000Z",
+     "summary": "Argentina clinched a dramatic 2-1 win against England on Wednesday, ensuring their place in the FIFA World Cup Final. The defending champions staged a remarkable comeback after trailing for a significant part of the match, as England's lead crumbled in the final moments. Next up for Argentina is ..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 19,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 49,
+    "band": "low",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:19:40.000Z",
+   "latestPublishedAt": "2026-07-15T21:19:40.000Z"
+  },
+  {
+   "id": "8993caccd330",
+   "headline": "House Republicans resurrect Save America Act by adding it to spending bill",
+   "summary": "Effort is latest attempt to pass bill that seeks to ban mail-in ballots and imposes voter identification requirements House Republicans on Wednesday made another attempt to answer Donald Trump’s demand for new restrictions on voting nationwide by linking the measure to an unrelated spending bill ...",
+   "region": "world",
+   "category": "politics",
+   "articles": [
+    {
+     "sourceId": "guardian",
+     "sourceName": "The Guardian",
+     "title": "House Republicans resurrect Save America Act by adding it to spending bill",
+     "url": "https://theguardian.com/us-news/2026/jul/15/house-republicans-save-america-act-spending-bill",
+     "publishedAt": "2026-07-15T21:17:25.000Z",
+     "summary": "Effort is latest attempt to pass bill that seeks to ban mail-in ballots and imposes voter identification requirements House Republicans on Wednesday made another attempt to answer Donald Trump’s demand for new restrictions on voting nationwide by linking the measure to an unrelated spending bill ..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 25,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 55,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 1,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:17:25.000Z",
+   "latestPublishedAt": "2026-07-15T21:17:25.000Z"
+  },
+  {
+   "id": "cd7187143ecb",
+   "headline": "Democrats grill Todd Blanche on ICE agents at polling sites and Kash Patel’s conduct at attorney general confirmation hearing – live",
+   "summary": "Trump’s nominee for attorney general – also his former personal defense lawyer – faces questions from senators as he attempts to take the top justice department role Sign up for the Breaking News US email In his opening statement before senators today, Todd Blanche, said that he is “pleased to te...",
+   "region": "world",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "guardian",
+     "sourceName": "The Guardian",
+     "title": "Democrats grill Todd Blanche on ICE agents at polling sites and Kash Patel’s conduct at attorney general confirmation hearing – live",
+     "url": "https://theguardian.com/us-news/live/2026/jul/15/todd-blanche-attorney-general-senate-donald-trump-ice-darline-graham-lindsey-graham-us-politics-live-news",
+     "publishedAt": "2026-07-15T21:17:20.000Z",
+     "summary": "Trump’s nominee for attorney general – also his former personal defense lawyer – faces questions from senators as he attempts to take the top justice department role Sign up for the Breaking News US email In his opening statement before senators today, Todd Blanche, said that he is “pleased to te..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 25,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 55,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 1,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T18:54:35.000Z",
+   "latestPublishedAt": "2026-07-15T21:17:20.000Z"
+  },
+  {
+   "id": "3ca829f0fc34",
+   "headline": "Karnataka: Notice to officials over 53 quarries in Malur",
+   "summary": "Notice to officials over 53 quarries in Malur",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "deccanherald",
+     "sourceName": "Deccan Herald",
+     "title": "Karnataka: Notice to officials over 53 quarries in Malur",
+     "url": "https://deccanherald.com/india/karnataka/karnataka-notice-to-officials-over-53-quarries-in-malur-4074022",
+     "publishedAt": "2026-07-15T21:14:02.000Z",
+     "summary": "Notice to officials over 53 quarries in Malur"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 23,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 53,
     "band": "medium",
     "flags": [],
     "llmChecked": false
@@ -371,11 +592,93 @@
    "coverage": {
     "mainstream": 1,
     "independent": 0,
-    "international": 2,
+    "international": 0,
     "official": 0
    },
-   "firstSeenAt": "2026-07-14T05:00:00.000Z",
-   "latestPublishedAt": "2026-07-15T21:10:43.000Z"
+   "firstSeenAt": "2026-07-15T21:14:02.000Z",
+   "latestPublishedAt": "2026-07-15T21:14:02.000Z"
+  },
+  {
+   "id": "be05de18665f",
+   "headline": "Quote of the Day by Lupita Nyong'o: ‘I discovered that joy is not the negation of pain, but rather acknowledging…’",
+   "summary": "Lupita Nyong'o's reflection on joy and pain offers a powerful perspective on resilience, shaped by her personal experiences, acclaimed career and a new chapter with Christopher Nolan's The Odyssey.",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "livemint",
+     "sourceName": "Mint",
+     "title": "Quote of the Day by Lupita Nyong'o: ‘I discovered that joy is not the negation of pain, but rather acknowledging…’",
+     "url": "https://livemint.com/news/us-news/quote-of-the-day-by-lupita-nyongo-i-discovered-that-joy-is-not-the-negation-of-pain-but-rather-acknowledging-11784147374785.html",
+     "publishedAt": "2026-07-15T21:13:59.000Z",
+     "summary": "Lupita Nyong'o's reflection on joy and pain offers a powerful perspective on resilience, shaped by her personal experiences, acclaimed career and a new chapter with Christopher Nolan's The Odyssey."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 23,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 53,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T21:13:59.000Z",
+   "latestPublishedAt": "2026-07-15T21:13:59.000Z"
+  },
+  {
+   "id": "d07b4544403f",
+   "headline": "Over 100 House Democrats vote to end military aid to Israel in rebuke to US ally",
+   "summary": "Backing by 103 Democrats underscores how sentiment in party towards Israel and Netanyahu government has soured More than 100 House Democrats on Wednesday voted to slash military aid to Israel, a significant rebuke of the longtime US ally as accusations that Prime Minister Benjamin Netanyahu’s gov...",
+   "region": "world",
+   "category": "tech",
+   "articles": [
+    {
+     "sourceId": "guardian",
+     "sourceName": "The Guardian",
+     "title": "Over 100 House Democrats vote to end military aid to Israel in rebuke to US ally",
+     "url": "https://theguardian.com/us-news/2026/jul/15/house-democrats-israel-aid",
+     "publishedAt": "2026-07-15T21:11:37.000Z",
+     "summary": "Backing by 103 Democrats underscores how sentiment in party towards Israel and Netanyahu government has soured More than 100 House Democrats on Wednesday voted to slash military aid to Israel, a significant rebuke of the longtime US ally as accusations that Prime Minister Benjamin Netanyahu’s gov..."
+    },
+    {
+     "sourceId": "guardian",
+     "sourceName": "The Guardian",
+     "title": "Top House Democrats vow to oppose bid to cut US military aid to Israel",
+     "url": "https://theguardian.com/world/2026/jul/14/us-military-aid-israel-house-democrats",
+     "publishedAt": "2026-07-14T21:07:48.000Z",
+     "summary": "House minority leader, Hakeem Jeffries, calls amendment ‘overly broad’ as party grapples with backlash over Israel US politics live – latest updates Top House Democrats split on Tuesday over a proposal to block aid for Israel’s military, with two of the party’s highest-ranking lawmakers saying th..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 25,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 55,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 1,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-14T21:07:48.000Z",
+   "latestPublishedAt": "2026-07-15T21:11:37.000Z"
   },
   {
    "id": "8c25283db63d",
@@ -981,6 +1284,54 @@
    "latestPublishedAt": "2026-07-15T20:47:41.000Z"
   },
   {
+   "id": "f42bd958467e",
+   "headline": "Grok Build",
+   "region": "world",
+   "category": "other",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "hn",
+     "label": "Hacker News",
+     "title": "Grok Build",
+     "url": "https://github.com/xai-org/grok-build",
+     "discussionUrl": "https://news.ycombinator.com/item?id=48926590",
+     "score": 61,
+     "comments": 63,
+     "publishedAt": "2026-07-15T20:24:58Z"
+    },
+    {
+     "platform": "hn",
+     "label": "Hacker News",
+     "title": "Grok Build is open source",
+     "url": "https://x.ai/open-source",
+     "discussionUrl": "https://news.ycombinator.com/item?id=48926841",
+     "score": 18,
+     "comments": 4,
+     "publishedAt": "2026-07-15T20:47:29Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 15,
+    "band": "unverified",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 43,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T20:24:58.000Z",
+   "latestPublishedAt": "2026-07-15T20:47:29.000Z"
+  },
+  {
    "id": "964ad3e6a35f",
    "headline": "What are the obstacles to peace between Israel and Lebanon?",
    "summary": "Another round of talks is under way between Israel and Lebanon to try to advance the ceasefire agreement.",
@@ -1016,43 +1367,6 @@
    },
    "firstSeenAt": "2026-07-15T20:46:03.000Z",
    "latestPublishedAt": "2026-07-15T20:46:03.000Z"
-  },
-  {
-   "id": "cd7187143ecb",
-   "headline": "Democrats grill Todd Blanche on ICE agents at polling sites and Kash Patel’s conduct at attorney general confirmation hearing – live",
-   "summary": "Trump’s nominee for attorney general – also his former personal defense lawyer – faces questions from senators as he attempts to take the top justice department role Sign up for the Breaking News US email In his opening statement before senators today, Todd Blanche, said that he is “pleased to te...",
-   "region": "world",
-   "category": "other",
-   "articles": [
-    {
-     "sourceId": "guardian",
-     "sourceName": "The Guardian",
-     "title": "Democrats grill Todd Blanche on ICE agents at polling sites and Kash Patel’s conduct at attorney general confirmation hearing – live",
-     "url": "https://theguardian.com/us-news/live/2026/jul/15/todd-blanche-attorney-general-senate-donald-trump-ice-darline-graham-lindsey-graham-us-politics-live-news",
-     "publishedAt": "2026-07-15T20:44:53.000Z",
-     "summary": "Trump’s nominee for attorney general – also his former personal defense lawyer – faces questions from senators as he attempts to take the top justice department role Sign up for the Breaking News US email In his opening statement before senators today, Todd Blanche, said that he is “pleased to te..."
-    }
-   ],
-   "discussions": [],
-   "score": {
-    "corroboration": 15,
-    "reliability": 25,
-    "primarySource": 0,
-    "sanityCheck": 15,
-    "total": 55,
-    "band": "medium",
-    "flags": [],
-    "llmChecked": false
-   },
-   "radarScore": 0,
-   "coverage": {
-    "mainstream": 0,
-    "independent": 0,
-    "international": 1,
-    "official": 0
-   },
-   "firstSeenAt": "2026-07-15T18:54:35.000Z",
-   "latestPublishedAt": "2026-07-15T20:44:53.000Z"
   },
   {
    "id": "4147119c0186",
@@ -1323,7 +1637,7 @@
   },
   {
    "id": "395664532568",
-   "headline": "China and Xi favored over US and Trump in many nations: Survey",
+   "headline": "China and Xi favored over U.S. and Trump in many nations: Survey",
    "summary": "The change is driven by improved perceptions of China and declining views of the United States.",
    "region": "world",
    "category": "other",
@@ -1331,7 +1645,7 @@
     {
      "sourceId": "npr",
      "sourceName": "NPR",
-     "title": "China and Xi favored over US and Trump in many nations: Survey",
+     "title": "China and Xi favored over U.S. and Trump in many nations: Survey",
      "url": "https://npr.org/2026/07/15/g-s1-133827/china-and-xi-favored-over-us-and-trump-in-many-nations-survey",
      "publishedAt": "2026-07-15T20:34:30.000Z",
      "summary": "The change is driven by improved perceptions of China and declining views of the United States."
@@ -1552,44 +1866,6 @@
    "latestPublishedAt": "2026-07-15T20:25:40.000Z"
   },
   {
-   "id": "f42bd958467e",
-   "headline": "Grok Build",
-   "region": "world",
-   "category": "other",
-   "articles": [],
-   "discussions": [
-    {
-     "platform": "hn",
-     "label": "Hacker News",
-     "title": "Grok Build",
-     "url": "https://github.com/xai-org/grok-build",
-     "discussionUrl": "https://news.ycombinator.com/item?id=48926590",
-     "score": 50,
-     "comments": 21,
-     "publishedAt": "2026-07-15T20:24:58Z"
-    }
-   ],
-   "score": {
-    "corroboration": 0,
-    "reliability": 0,
-    "primarySource": 0,
-    "sanityCheck": 15,
-    "total": 15,
-    "band": "unverified",
-    "flags": [],
-    "llmChecked": false
-   },
-   "radarScore": 24,
-   "coverage": {
-    "mainstream": 0,
-    "independent": 0,
-    "international": 0,
-    "official": 0
-   },
-   "firstSeenAt": "2026-07-15T20:24:58.000Z",
-   "latestPublishedAt": "2026-07-15T20:24:58.000Z"
-  },
-  {
    "id": "603614026dd1",
    "headline": "Bengaluru: Three vehicles damaged in Hebbal flyover crash; traffic hit during peak hours",
    "summary": "Three vehicles damaged in Hebbal flyover crash; traffic hit during peak hours",
@@ -1662,6 +1938,43 @@
    },
    "firstSeenAt": "2026-07-15T20:23:18.000Z",
    "latestPublishedAt": "2026-07-15T20:23:18.000Z"
+  },
+  {
+   "id": "844fb1b11634",
+   "headline": "Haldiram's UK debut: Huge queues at London store for chole bhature, bhujia and sweets",
+   "summary": "Haldiram's has officially opened its first-ever store in the UK, and it has already become one of the busiest new food destinations in London. Located in Leicester Square, the outlet witnessed huge crowds on its opening days, with customers queuing up to enjoy popular Indian favourites such as ch...",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "toi",
+     "sourceName": "Times of India",
+     "title": "Haldiram's UK debut: Huge queues at London store for chole bhature, bhujia and sweets",
+     "url": "https://timesofindia.indiatimes.com/etimes/trending/haldirams-opens-first-uk-store-in-london-viral-videos-show-huge-queues-outside-leicester-square-outlet-for-chole-bhature-bhujia-and-sweets/articleshow/132424799.cms",
+     "publishedAt": "2026-07-15T20:22:36.000Z",
+     "summary": "Haldiram's has officially opened its first-ever store in the UK, and it has already become one of the busiest new food destinations in London. Located in Leicester Square, the outlet witnessed huge crowds on its opening days, with customers queuing up to enjoy popular Indian favourites such as ch..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 19,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 49,
+    "band": "low",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T20:22:36.000Z",
+   "latestPublishedAt": "2026-07-15T20:22:36.000Z"
   },
   {
    "id": "c1364c9a746d",
@@ -2765,8 +3078,8 @@
      "title": "Brainless: Shadcn components that look like Claude Code, Codex and Grok",
      "url": "https://brainless.swerdlow.dev",
      "discussionUrl": "https://news.ycombinator.com/item?id=48926085",
-     "score": 25,
-     "comments": 3,
+     "score": 33,
+     "comments": 5,
      "publishedAt": "2026-07-15T19:42:53Z"
     }
    ],
@@ -2780,7 +3093,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 17,
+   "radarScore": 19,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -2803,7 +3116,7 @@
      "title": "Voxatron",
      "url": "https://lexaloffle.com/voxatron.php",
      "discussionUrl": "https://news.ycombinator.com/item?id=48926053",
-     "score": 21,
+     "score": 30,
      "comments": 9,
      "publishedAt": "2026-07-15T19:40:23Z"
     }
@@ -2818,7 +3131,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 18,
+   "radarScore": 20,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -3042,8 +3355,8 @@
      "title": "Duskers, the scary command line game, is getting a sequel",
      "url": "https://elbowgreasegames.substack.com/p/misfits-attic-announces-duskers-20",
      "discussionUrl": "https://news.ycombinator.com/item?id=48925888",
-     "score": 55,
-     "comments": 7,
+     "score": 60,
+     "comments": 9,
      "publishedAt": "2026-07-15T19:27:59Z"
     }
    ],
@@ -3057,7 +3370,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 22,
+   "radarScore": 23,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -4430,8 +4743,8 @@
      "title": "Why I Left Google DeepMind",
      "url": "https://turntrout.com/why-i-left-google-deepmind",
      "discussionUrl": "https://news.ycombinator.com/item?id=48925271",
-     "score": 252,
-     "comments": 131,
+     "score": 258,
+     "comments": 136,
      "publishedAt": "2026-07-15T18:40:34Z"
     }
    ],
@@ -5011,6 +5324,43 @@
    "latestPublishedAt": "2026-07-15T18:23:29.000Z"
   },
   {
+   "id": "6805eac7d443",
+   "headline": "Farmers stage motorcycle rally to protest against proposed India-U.S. trade deal",
+   "summary": "Farmers behind the ‘Desh Bachao Morcha’ urge the Central government to ‘prioritise the interests of farmers, workers, small traders, small industries and India’s economic and food sovereignty, and refrain from implementing any agreement that goes against the interests of the people’",
+   "region": "in",
+   "category": "business",
+   "articles": [
+    {
+     "sourceId": "thehindu",
+     "sourceName": "The Hindu",
+     "title": "Farmers stage motorcycle rally to protest against proposed India-U.S. trade deal",
+     "url": "https://thehindu.com/news/national/punjab/farmers-stage-motorcycle-rally-to-protest-against-proposed-india-us-trade-deal/article71225449.ece",
+     "publishedAt": "2026-07-15T18:23:23.000Z",
+     "summary": "Farmers behind the ‘Desh Bachao Morcha’ urge the Central government to ‘prioritise the interests of farmers, workers, small traders, small industries and India’s economic and food sovereignty, and refrain from implementing any agreement that goes against the interests of the people’"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 26,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 56,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T18:23:23.000Z",
+   "latestPublishedAt": "2026-07-15T18:23:23.000Z"
+  },
+  {
    "id": "6bca1f913c01",
    "headline": "Ukraine conducts record drone strike of 2,500km after 12-hour flight — $55,000 unit made of plywood halts operations at Russia's largest gasoline producer",
    "region": "world",
@@ -5350,8 +5700,8 @@
      "title": "Inkling: Our Open-Weights Model",
      "url": "https://thinkingmachines.ai/news/introducing-inkling",
      "discussionUrl": "https://news.ycombinator.com/item?id=48924912",
-     "score": 367,
-     "comments": 94,
+     "score": 393,
+     "comments": 103,
      "publishedAt": "2026-07-15T18:12:45Z"
     }
    ],
@@ -10208,7 +10558,7 @@
      "title": "Collection of Digital Clock Designs",
      "url": "https://clocks.dev",
      "discussionUrl": "https://news.ycombinator.com/item?id=48923380",
-     "score": 111,
+     "score": 122,
      "comments": 31,
      "publishedAt": "2026-07-15T16:33:15Z"
     }
@@ -11193,7 +11543,7 @@
      "title": "Open-source memory for coding agents, synced over SSH",
      "url": "https://github.com/vshulcz/deja-vu",
      "discussionUrl": "https://news.ycombinator.com/item?id=48923111",
-     "score": 86,
+     "score": 91,
      "comments": 19,
      "publishedAt": "2026-07-15T16:15:03Z"
     }
@@ -11231,7 +11581,7 @@
      "title": "Unsolved Problems in MLOps",
      "url": "https://spawn-queue.acm.org/doi/pdf/10.1145/3762989",
      "discussionUrl": "https://news.ycombinator.com/item?id=48923109",
-     "score": 38,
+     "score": 40,
      "comments": 4,
      "publishedAt": "2026-07-15T16:15:01Z"
     }
@@ -11246,7 +11596,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 19,
+   "radarScore": 20,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -11351,8 +11701,8 @@
      "title": "Codex Micro",
      "url": "https://openai.com/supply/co-lab/work-louder",
      "discussionUrl": "https://news.ycombinator.com/item?id=48923079",
-     "score": 231,
-     "comments": 199,
+     "score": 238,
+     "comments": 202,
      "publishedAt": "2026-07-15T16:12:58Z"
     }
    ],
@@ -12305,6 +12655,43 @@
    "latestPublishedAt": "2026-07-15T15:45:00.000Z"
   },
   {
+   "id": "305102d8f821",
+   "headline": "Inside Aamir Khan’s wedding with Gauri Spratt and bond with Quinn",
+   "summary": "Aamir Khan's close friend and Lagaan co-star Amin Hajee has shared some heartwarming details about the superstar's private wedding to Gauri Spratt, giving fans a glimpse into the intimate celebration and Aamir's life away from the spotlight. Amin opened up about everything, from how Aamir first i...",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "toi",
+     "sourceName": "Times of India",
+     "title": "Inside Aamir Khan’s wedding with Gauri Spratt and bond with Quinn",
+     "url": "https://timesofindia.indiatimes.com/entertainment/hindi/bollywood/news/inside-aamir-khan-and-gauri-spratts-intimate-wedding-amin-hajee-opens-up-about-their-love-story-and-aamirs-heartwarming-bond-with-quinn/articleshow/132419448.cms",
+     "publishedAt": "2026-07-15T15:43:28.000Z",
+     "summary": "Aamir Khan's close friend and Lagaan co-star Amin Hajee has shared some heartwarming details about the superstar's private wedding to Gauri Spratt, giving fans a glimpse into the intimate celebration and Aamir's life away from the spotlight. Amin opened up about everything, from how Aamir first i..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 19,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 49,
+    "band": "low",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T15:43:28.000Z",
+   "latestPublishedAt": "2026-07-15T15:43:28.000Z"
+  },
+  {
    "id": "6311197b19e8",
    "headline": "Lockheed Martin Backs US Licensing Process for Ukrainian Patriot Air Defense Production",
    "region": "world",
@@ -12681,8 +13068,8 @@
      "title": "Running Gemma 4 26B at 5 tokens/sec on a 13-year-old Xeon with no GPU",
      "url": "https://neomindlabs.com/2026/06/08/running-gemma-4-26b-at-5-tokens-sec-on-a-13-year-old-xeon-with-no-gpu",
      "discussionUrl": "https://news.ycombinator.com/item?id=48922434",
-     "score": 189,
-     "comments": 108,
+     "score": 196,
+     "comments": 111,
      "publishedAt": "2026-07-15T15:34:05Z"
     }
    ],
@@ -13921,7 +14308,7 @@
   {
    "id": "094037ad229c",
    "headline": "Albanese’s AI plan is admirable – but will face tech giants more powerful than most national governments",
-   "summary": "Challenges of regulating social media or stopping hate speech show these firms can set their own terms and prices for countries like Australia Follow our Australia news live blog for latest updates Get our breaking news email, free app or daily news podcast Anthony Albanese took a trip back in ti...",
+   "summary": "The reality is Australia won’t be able to direct much of the activity of Anthropic, Microsoft, Google or OpenAI Follow our Australia news live blog for latest updates Get our breaking news email, free app or daily news podcast Anthony Albanese took a trip back in time during his much-anticipated ...",
    "region": "world",
    "category": "tech",
    "articles": [
@@ -13931,7 +14318,7 @@
      "title": "Albanese’s AI plan is admirable – but will face tech giants more powerful than most national governments",
      "url": "https://theguardian.com/australia-news/2026/jul/16/albanese-ai-plan-tech-giants-regulating-social-media-analysis",
      "publishedAt": "2026-07-15T15:00:59.000Z",
-     "summary": "Challenges of regulating social media or stopping hate speech show these firms can set their own terms and prices for countries like Australia Follow our Australia news live blog for latest updates Get our breaking news email, free app or daily news podcast Anthony Albanese took a trip back in ti..."
+     "summary": "The reality is Australia won’t be able to direct much of the activity of Anthropic, Microsoft, Google or OpenAI Follow our Australia news live blog for latest updates Get our breaking news email, free app or daily news podcast Anthony Albanese took a trip back in time during his much-anticipated ..."
     }
    ],
    "discussions": [],
@@ -13997,7 +14384,7 @@
   {
    "id": "6d3475b3db5a",
    "headline": "Albanese’s AI blueprint sparks calls for datacentre moratorium until new regulations in place",
-   "summary": "Prime minister’s plan will create energy regulations for datacentres in Australia Get our breaking news email, free app or daily news podcast Environmental and community groups have called for a pause on datacentre development until new regulations are in place after Anthony Albanese promised “gr...",
+   "summary": "Prime minister’s plan will create energy regulations for datacentres in Australia Follow our Australia news live blog for latest updates Get our breaking news email, free app or daily news podcast Environmental and community groups have called for a pause on datacentre development until new regul...",
    "region": "world",
    "category": "tech",
    "articles": [
@@ -14007,7 +14394,7 @@
      "title": "Albanese’s AI blueprint sparks calls for datacentre moratorium until new regulations in place",
      "url": "https://theguardian.com/australia-news/2026/jul/16/albaneses-ai-blueprint-sparks-calls-for-datacentre-moratorium-until-new-regulations-in-place",
      "publishedAt": "2026-07-15T15:00:58.000Z",
-     "summary": "Prime minister’s plan will create energy regulations for datacentres in Australia Get our breaking news email, free app or daily news podcast Environmental and community groups have called for a pause on datacentre development until new regulations are in place after Anthony Albanese promised “gr..."
+     "summary": "Prime minister’s plan will create energy regulations for datacentres in Australia Follow our Australia news live blog for latest updates Get our breaking news email, free app or daily news podcast Environmental and community groups have called for a pause on datacentre development until new regul..."
     }
    ],
    "discussions": [],
@@ -14741,8 +15128,8 @@
      "title": "OpenAI loses trademark dispute at EU court",
      "url": "https://dpa-international.com/economics/urn:newsml:dpa.com:20090101:260715-930-389143",
      "discussionUrl": "https://news.ycombinator.com/item?id=48921461",
-     "score": 196,
-     "comments": 134,
+     "score": 199,
+     "comments": 138,
      "publishedAt": "2026-07-15T14:32:36Z"
     }
    ],
@@ -15109,8 +15496,8 @@
      "title": "My midlife crisis Corolla is fast, furious, and modded",
      "url": "https://zocalopublicsquare.org/my-midlife-crisis-corolla-fast-furious-fully-modded",
      "discussionUrl": "https://news.ycombinator.com/item?id=48921303",
-     "score": 134,
-     "comments": 278,
+     "score": 137,
+     "comments": 289,
      "publishedAt": "2026-07-15T14:23:44Z"
     }
    ],
@@ -15555,8 +15942,8 @@
      "title": "Towards a harness that can do anything",
      "url": "https://eardatasci.github.io/c/ambiance/index.html",
      "discussionUrl": "https://news.ycombinator.com/item?id=48921077",
-     "score": 142,
-     "comments": 72,
+     "score": 146,
+     "comments": 73,
      "publishedAt": "2026-07-15T14:08:28Z"
     }
    ],
@@ -16528,8 +16915,8 @@
      "title": "Mysteries of Telegram Data Centers (2022)",
      "url": "https://dev.moe/en/3025",
      "discussionUrl": "https://news.ycombinator.com/item?id=48920475",
-     "score": 215,
-     "comments": 105,
+     "score": 218,
+     "comments": 109,
      "publishedAt": "2026-07-15T13:22:00Z"
     }
    ],
@@ -16543,7 +16930,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 33,
+   "radarScore": 34,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -16638,8 +17025,8 @@
      "title": "The Three-Second Theft: Why AI Voice Fraud Outruns Every Defence",
      "url": "https://smarterarticles.co.uk/the-three-second-theft-why-ai-voice-fraud-outruns-every-defence",
      "discussionUrl": "https://news.ycombinator.com/item?id=48920432",
-     "score": 156,
-     "comments": 197,
+     "score": 157,
+     "comments": 204,
      "publishedAt": "2026-07-15T13:18:15Z"
     }
    ],
@@ -16653,7 +17040,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 33,
+   "radarScore": 34,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -17082,8 +17469,8 @@
      "title": "SpaceX bond worth 10% less than issue price – heading for junk bond status",
      "url": "https://ft.com/content/3a023b95-66c3-41e1-b0ce-df752a499541",
      "discussionUrl": "https://news.ycombinator.com/item?id=48920181",
-     "score": 502,
-     "comments": 495,
+     "score": 503,
+     "comments": 498,
      "publishedAt": "2026-07-15T12:59:09Z"
     }
    ],
@@ -17097,7 +17484,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 40,
+   "radarScore": 41,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -17479,8 +17866,8 @@
      "title": "Briar is in maintenance mode",
      "url": "https://briarproject.org/news/2026-maintenance-mode",
      "discussionUrl": "https://news.ycombinator.com/item?id=48919869",
-     "score": 128,
-     "comments": 87,
+     "score": 130,
+     "comments": 88,
      "publishedAt": "2026-07-15T12:33:27Z"
     }
    ],
@@ -18392,8 +18779,8 @@
      "title": "Sleep regularity is a stronger predictor of mortality risk than sleep duration (2023)",
      "url": "https://academic.oup.com/sleep/article/47/1/zsad253/7280269",
      "discussionUrl": "https://news.ycombinator.com/item?id=48919363",
-     "score": 609,
-     "comments": 305,
+     "score": 612,
+     "comments": 309,
      "publishedAt": "2026-07-15T11:46:06Z"
     }
    ],
@@ -18728,8 +19115,8 @@
      "title": "Prioritize mental health, and why communication is so important",
      "url": "https://ramones.dev/posts/mental-health",
      "discussionUrl": "https://news.ycombinator.com/item?id=48919198",
-     "score": 252,
-     "comments": 199,
+     "score": 253,
+     "comments": 203,
      "publishedAt": "2026-07-15T11:27:35Z"
     }
    ],
@@ -20403,7 +20790,7 @@
      "title": "Telegram Serverless",
      "url": "https://core.telegram.org/bots/serverless",
      "discussionUrl": "https://news.ycombinator.com/item?id=48918534",
-     "score": 165,
+     "score": 167,
      "comments": 91,
      "publishedAt": "2026-07-15T10:06:39Z"
     }
@@ -22118,6 +22505,42 @@
    "latestPublishedAt": "2026-07-15T06:52:18.000Z"
   },
   {
+   "id": "c6092e143e9d",
+   "headline": "India Steps Up Push for Diaspora Deposits as Rupee Slides and Foreign Exchange Reserves Shrink",
+   "region": "world",
+   "category": "business",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "reddit",
+     "label": "r/worldnews",
+     "title": "India Steps Up Push for Diaspora Deposits as Rupee Slides and Foreign Exchange Reserves Shrink",
+     "url": "https://slguardian.org/india-steps-up-push-for-diaspora-deposits-as-rupee-slides-and-foreign-exchange-reserves-shrink",
+     "discussionUrl": "https://www.reddit.com/r/worldnews/comments/1uwy1zg/india_steps_up_push_for_diaspora_deposits_as/",
+     "publishedAt": "2026-07-15T06:47:11.000Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 15,
+    "band": "unverified",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 20,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T06:47:11.000Z",
+   "latestPublishedAt": "2026-07-15T06:47:11.000Z"
+  },
+  {
    "id": "48f60b0b0521",
    "headline": "Why is Zelenskyy reshuffling Ukraine's government?",
    "summary": "Ukraine's Prime Minister Yulia Svyrydenko has resigned, prompting a Cabinet reshuffle led by President Volodymyr Zelenskyy. What comes next?",
@@ -22919,6 +23342,42 @@
    "latestPublishedAt": "2026-07-15T05:16:48.000Z"
   },
   {
+   "id": "4f67d623f3a3",
+   "headline": "Iran launches strikes on neighbours as Trump threatens to hit power plants",
+   "region": "world",
+   "category": "other",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "reddit",
+     "label": "r/worldnews",
+     "title": "Iran launches strikes on neighbours as Trump threatens to hit power plants",
+     "url": "https://yahoo.com/news/articles/iran-launches-strikes-neighbours-trump-043456119.html?fr=sycsrp_catchall",
+     "discussionUrl": "https://www.reddit.com/r/worldnews/comments/1uww64q/iran_launches_strikes_on_neighbours_as_trump/",
+     "publishedAt": "2026-07-15T05:04:46.000Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 15,
+    "band": "unverified",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 20,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T05:04:46.000Z",
+   "latestPublishedAt": "2026-07-15T05:04:46.000Z"
+  },
+  {
    "id": "d15b00070a56",
    "headline": "‘This is my life’: At a historic Kochi gathering, survivors of wrongful incarceration and families of lynching victims reclaimed their stories",
    "region": "in",
@@ -22990,6 +23449,43 @@
    },
    "firstSeenAt": "2026-07-15T04:54:43.000Z",
    "latestPublishedAt": "2026-07-15T04:54:43.000Z"
+  },
+  {
+   "id": "643083b5e6e9",
+   "headline": "Injured hiker carried down Mount Kearsarge gets surprise proposal",
+   "summary": "A hiker's leg injury on Mount Kearsarge led to a mountain rescue operation. While being carried down the mountain, her partner proposed marriage to her. The injured hiker accepted the proposal while still in the rescue stretcher. Rescuers successfully brought the couple safely off the mountain. O...",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "toi",
+     "sourceName": "Times of India",
+     "title": "Injured hiker carried down Mount Kearsarge gets surprise proposal",
+     "url": "https://timesofindia.indiatimes.com/relationships/a-new-hampshire-hiker-injured-her-leg-on-mount-kearsarge-and-had-to-be-carried-down-in-a-rescue-stretcher-but-the-rescue-turned-romantic-when-her-partner-proposed/articleshow/132394610.cms",
+     "publishedAt": "2026-07-15T04:46:55.000Z",
+     "summary": "A hiker's leg injury on Mount Kearsarge led to a mountain rescue operation. While being carried down the mountain, her partner proposed marriage to her. The injured hiker accepted the proposal while still in the rescue stretcher. Rescuers successfully brought the couple safely off the mountain. O..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 19,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 49,
+    "band": "low",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-15T04:46:55.000Z",
+   "latestPublishedAt": "2026-07-15T04:46:55.000Z"
   },
   {
    "id": "dc8dad8dbb14",
@@ -23262,8 +23758,8 @@
      "title": "Stripe and Advent have made a joint offer to acquire PayPal – sources",
      "url": "https://reuters.com/business/finance/stripe-advent-offer-buy-paypal-more-than-53-billion-sources-say-2026-07-15",
      "discussionUrl": "https://news.ycombinator.com/item?id=48915953",
-     "score": 239,
-     "comments": 123,
+     "score": 258,
+     "comments": 130,
      "publishedAt": "2026-07-15T03:32:45Z"
     }
    ],
@@ -23277,7 +23773,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 34,
+   "radarScore": 35,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -24255,8 +24751,8 @@
      "title": "Jurassic Park computers in excruciating detail",
      "url": "https://fabiensanglard.net/jurrasic_park_computers/index.html",
      "discussionUrl": "https://news.ycombinator.com/item?id=48915709",
-     "score": 849,
-     "comments": 224,
+     "score": 854,
+     "comments": 226,
      "publishedAt": "2026-07-15T02:57:47Z"
     }
    ],
@@ -25485,7 +25981,7 @@
      "title": "Data centers have hiked electricity prices on the public by $23B",
      "url": "https://fortune.com/2026/07/14/data-centers-23-billion-electricity-bills",
      "discussionUrl": "https://news.ycombinator.com/item?id=48914683",
-     "score": 191,
+     "score": 192,
      "comments": 113,
      "publishedAt": "2026-07-15T00:20:31Z"
     }
@@ -25595,7 +26091,7 @@
      "title": "Solving 20 Erdős Problems with 20 Codex Accounts Running in Parallel",
      "url": "https://starfleetmath.com",
      "discussionUrl": "https://news.ycombinator.com/item?id=48914646",
-     "score": 161,
+     "score": 162,
      "comments": 103,
      "publishedAt": "2026-07-15T00:15:56Z"
     }
@@ -25926,8 +26422,8 @@
      "title": "Who Is America's Homer?",
      "url": "https://plough.com/articles/who-is-americas-homer",
      "discussionUrl": "https://news.ycombinator.com/item?id=48913656",
-     "score": 11,
-     "comments": 4,
+     "score": 17,
+     "comments": 17,
      "publishedAt": "2026-07-14T22:19:13Z"
     }
    ],
@@ -25941,7 +26437,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 14,
+   "radarScore": 19,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -25950,6 +26446,44 @@
    },
    "firstSeenAt": "2026-07-14T22:19:13.000Z",
    "latestPublishedAt": "2026-07-14T22:19:13.000Z"
+  },
+  {
+   "id": "7be7d3364201",
+   "headline": "Book Prizes Don't Work How You Think",
+   "region": "world",
+   "category": "other",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "hn",
+     "label": "Hacker News",
+     "title": "Book Prizes Don't Work How You Think",
+     "url": "https://rebeccamakkai.substack.com/p/book-prizes-dont-work-how-you-think",
+     "discussionUrl": "https://news.ycombinator.com/item?id=48913653",
+     "score": 10,
+     "comments": 1,
+     "publishedAt": "2026-07-14T22:19:01Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 15,
+    "band": "unverified",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 12,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-14T22:19:01.000Z",
+   "latestPublishedAt": "2026-07-14T22:19:01.000Z"
   },
   {
    "id": "ac6de742f5dc",
@@ -28864,7 +29398,7 @@
      "title": "The Memory Heist",
      "url": "https://ayush.digital/blog/the-memory-heist",
      "discussionUrl": "https://news.ycombinator.com/item?id=48912013",
-     "score": 77,
+     "score": 78,
      "comments": 9,
      "publishedAt": "2026-07-14T19:40:54Z"
     }
@@ -58363,7 +58897,7 @@
      "title": "Designing APIs for Agents",
      "url": "https://freestyle.sh/blog/opinion/designing-apis-for-agents",
      "discussionUrl": "https://news.ycombinator.com/item?id=48894874",
-     "score": 12,
+     "score": 14,
      "comments": 4,
      "publishedAt": "2026-07-13T16:15:41Z"
     }
@@ -61319,7 +61853,7 @@
      "title": "Today I Rescued 7,234 Old GIFs",
      "url": "https://danq.me/2026/07/10/rescuing-7234-gifs",
      "discussionUrl": "https://news.ycombinator.com/item?id=48883578",
-     "score": 70,
+     "score": 71,
      "comments": 5,
      "publishedAt": "2026-07-12T19:00:49Z"
     }
@@ -63952,7 +64486,7 @@
   {
    "sourceId": "deccanherald",
    "ok": true,
-   "items": 48
+   "items": 40
   },
   {
    "sourceId": "scroll",
@@ -63982,7 +64516,7 @@
   {
    "sourceId": "toi",
    "ok": true,
-   "items": 43
+   "items": 44
   },
   {
    "sourceId": "toi-india",
@@ -64032,7 +64566,7 @@
   {
    "sourceId": "r-india",
    "ok": true,
-   "items": 25
+   "items": 24
   },
   {
    "sourceId": "r-worldnews",

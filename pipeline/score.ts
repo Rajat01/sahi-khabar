@@ -13,13 +13,30 @@ import { domainOf } from "./normalize";
 
 const WEIGHTS = { corroboration: 40, reliability: 30, primary: 15, sanity: 15 };
 
-/** Turn raw clusters into scored stories. One batched LLM call for all headlines. */
-export async function scoreClusters(clusters: Cluster[]): Promise<Story[]> {
+/**
+ * Turn raw clusters into scored stories. Headlines already LLM-checked in a
+ * previous run reuse their verdict — only new headlines cost API calls.
+ */
+export async function scoreClusters(
+  clusters: Cluster[],
+  previous: Story[] = [],
+): Promise<Story[]> {
   const stories = clusters.map(buildStory).filter((s): s is Story => s !== null);
 
-  const llmChecks = await checkHeadlines(stories.map((s) => s.headline));
-  stories.forEach((story, i) => {
-    applySanityCheck(story, llmChecks ? llmChecks[i] : null);
+  const cached = new Map<string, HeadlineCheck>();
+  for (const old of previous) {
+    if (old.score.llmChecked) cached.set(old.headline, { flags: old.score.flags });
+  }
+  const unchecked = stories.filter((s) => !cached.has(s.headline));
+  const llmChecks = await checkHeadlines(unchecked.map((s) => s.headline));
+  const freshChecks = new Map<string, HeadlineCheck | null>();
+  unchecked.forEach((s, i) => freshChecks.set(s.headline, llmChecks ? llmChecks[i] : null));
+
+  stories.forEach((story) => {
+    applySanityCheck(
+      story,
+      cached.get(story.headline) ?? freshChecks.get(story.headline) ?? null,
+    );
     story.score.total = Math.round(
       story.score.corroboration +
         story.score.reliability +

@@ -118,7 +118,7 @@ async function main() {
   // 3. Cluster and score.
   const clusters = await clusterItems(fresh);
   console.log(`[ingest] ${clusters.length} story clusters`);
-  const stories = await scoreClusters(clusters);
+  const stories = await scoreClusters(clusters, previous?.stories ?? []);
 
   // 4. Merge with the previous dataset: keep stable IDs and stories that have
   //    dropped out of feeds but are still < 7 days old.

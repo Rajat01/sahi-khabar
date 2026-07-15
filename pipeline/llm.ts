@@ -18,10 +18,16 @@ let client: Anthropic | null | undefined;
 
 function getClient(): Anthropic | null {
   if (client !== undefined) return client;
-  client = process.env.ANTHROPIC_API_KEY ? new Anthropic() : null;
+  client = process.env.ANTHROPIC_API_KEY
+    ? new Anthropic({ maxRetries: 5 }) // SDK backs off on 429/529 automatically
+    : null;
   if (!client) console.log("  [llm] ANTHROPIC_API_KEY not set — using heuristics only");
   return client;
 }
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+// Gentle pacing keeps a low-tier API account under its tokens-per-minute cap.
+const CHUNK_GAP_MS = 3000;
 
 function chunked<T>(arr: T[], size: number): T[][] {
   const out: T[][] = [];
@@ -54,7 +60,10 @@ export async function judgeSameStory(
 
   const results: (boolean | null)[] = [];
   let failures = 0;
+  let first = true;
   for (const chunk of chunked(pairs, PAIR_CHUNK)) {
+    if (!first) await sleep(CHUNK_GAP_MS);
+    first = false;
     const list = chunk
       .map((p, i) => `${i + 1}. A: "${p.a}"\n   B: "${p.b}"`)
       .join("\n");
@@ -105,7 +114,10 @@ export async function checkHeadlines(
 
   const results: (HeadlineCheck | null)[] = [];
   let failures = 0;
+  let first = true;
   for (const chunk of chunked(headlines, HEADLINE_CHUNK)) {
+    if (!first) await sleep(CHUNK_GAP_MS);
+    first = false;
     const list = chunk.map((h, i) => `${i + 1}. "${h}"`).join("\n");
     try {
       const response = await c.messages.create({
