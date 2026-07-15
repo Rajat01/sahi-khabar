@@ -259,27 +259,34 @@ function radarScore(articles: StoryArticle[], discussions: Discussion[]): number
   return Math.round(engagement * coveragePenalty * 10);
 }
 
+// Order matters: first match wins. Sports first (most distinctive vocabulary),
+// politics before business so governance stories aren't claimed by stray
+// economic words. Every alternative ends at a word boundary — a trailing \w*
+// once turned "Bankipur" into a business story and "aid" into tech.
 const CATEGORY_KEYWORDS: [Category, RegExp][] = [
   [
-    "business",
-    /\b(econom|market|stock|rupee|dollar|inflation|gdp|bank|rbi|sebi|ipo|startup|trade|tariff|invest|earnings|revenue|billion|crore)\w*/i,
-  ],
-  [
-    "tech",
-    /\b(ai|artificial intelligence|software|app|google|apple|microsoft|meta|openai|anthropic|chip|semiconductor|cyber|data breach|crypto|internet|smartphone|tech)\w*/i,
+    "sports",
+    /\b(cricket|footballer?s?|olympics?|world cup|ipl|t20|odi|test match|tennis|semi-?finals?|quarter-?finals?|tournaments?|medals?|athletes?|fifa|premier league|grand slam|playoffs?|wickets?|innings|stadium|coach|captaincy)\b/i,
   ],
   [
     "science",
-    /\b(research|study|scientist|space|isro|nasa|climate|vaccine|health|disease|species|physic|quantum|genome|fossil)\w*/i,
+    /\b(research(ers?)?|study|studies|scientists?|space(craft)?|isro|nasa|satellites?|climate|vaccines?|epidemic|pandemic|diseases?|species|physics|quantum|genomes?|fossils?|telescopes?|astronomy)\b/i,
   ],
-  ["sports", /\b(cricket|football|olympic|world cup|ipl|tennis|match|tournament|medal|athlete)\w*/i],
+  [
+    "tech",
+    /\b(ai|artificial intelligence|software|apps?|google|apple|microsoft|meta|openai|anthropic|chips?|semiconductors?|cyber(attack|security)?|data breach|crypto(currency)?|bitcoin|internet|smartphones?|silicon valley|start-?ups?|tech|gadgets?)\b/i,
+  ],
   [
     "politics",
-    /\b(election|parliament|minister|congress|bjp|senate|president|prime minister|court|supreme court|bill|policy|government|vote|coalition|sanction)\w*/i,
+    /\b(elections?|by-?polls?|bye-?polls?|polls?|parliament(ary)?|minist(er|ers|ry)|congress|bjp|aap|tmc|dmk|senate|president(ial)?|prime minister|chief minister|courts?|verdicts?|convict(ed|ion)?|bills?|policy|policies|government|governance|votes?|voters?|voting|coalition|sanctions?|diplomat(ic|s)?|treaty|opposition|cabinet|manifesto|constituenc(y|ies)|legislat(ure|ive|ion))\b/i,
+  ],
+  [
+    "business",
+    /\b(econom(y|ic|ics|ist)?|markets?|stocks?|sensex|nifty|rupees?|dollars?|inflation|gdp|banks?|banking|rbi|sebi|ipos?|trade|tariffs?|invest(s|ed|ing|ments?|ors?)?|earnings|revenue|profits?|shares|mergers?|acquisitions?|billion|crore|lakh|layoffs?|exports?|imports?)\b/i,
   ],
 ];
 
-function categorize(text: string): Category {
+export function categorize(text: string): Category {
   for (const [category, pattern] of CATEGORY_KEYWORDS) {
     if (pattern.test(text)) return category;
   }

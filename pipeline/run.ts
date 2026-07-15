@@ -8,7 +8,7 @@ import { fetchHn } from "./fetch/hn";
 import { fetchReddit } from "./fetch/reddit";
 import { fetchRss } from "./fetch/rss";
 import { dedupe } from "./normalize";
-import { applyCoverage, scoreClusters } from "./score";
+import { applyCoverage, categorize, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
 const MAX_AGE_DAYS = 7;
@@ -123,9 +123,13 @@ async function main() {
   // 4. Merge with the previous dataset: keep stable IDs and stories that have
   //    dropped out of feeds but are still < 7 days old.
   const merged = mergeStories(stories, previous?.stories ?? [], cutoff);
-  // Coverage/blindspot derive purely from articles + config, so recompute for
-  // carried-over stories too (keeps old datasets valid when the config evolves).
-  merged.forEach(applyCoverage);
+  // Coverage/blindspot/category derive purely from content + config, so
+  // recompute for carried-over stories too — old datasets heal immediately
+  // when the rules improve.
+  merged.forEach((story) => {
+    story.category = categorize(story.headline + " " + (story.summary ?? ""));
+    applyCoverage(story);
+  });
   merged.sort((a, b) => Date.parse(b.latestPublishedAt) - Date.parse(a.latestPublishedAt));
 
   const dataset: Dataset = {
@@ -165,23 +169,36 @@ function mergeStories(fresh: Story[], previous: Story[], cutoff: number): Story[
     for (const discussion of old.discussions) urlToOld.set(discussion.url, old);
   }
 
+  // An old id may already belong to a fresh cluster naturally (same anchor
+  // URL); letting a second cluster claim it would put duplicate ids in the
+  // dataset — which breaks React keys and corrupts client-side filtering.
+  const naturalIds = new Set(fresh.map((s) => s.id));
   const claimedOldIds = new Set<string>();
   for (const story of fresh) {
     const match =
       story.articles.map((a) => urlToOld.get(a.url)).find(Boolean) ??
       story.discussions.map((d) => urlToOld.get(d.url)).find(Boolean);
-    if (match && !claimedOldIds.has(match.id)) {
-      story.id = match.id;
-      story.firstSeenAt = match.firstSeenAt < story.firstSeenAt ? match.firstSeenAt : story.firstSeenAt;
-      claimedOldIds.add(match.id);
+    if (!match || claimedOldIds.has(match.id)) continue;
+    if (naturalIds.has(match.id) && match.id !== story.id) continue;
+    story.id = match.id;
+    story.firstSeenAt = match.firstSeenAt < story.firstSeenAt ? match.firstSeenAt : story.firstSeenAt;
+    claimedOldIds.add(match.id);
+  }
+  // Belt and braces: if duplicates slip through anyway, keep the richer story.
+  const byId = new Map<string, Story>();
+  for (const story of fresh) {
+    const existing = byId.get(story.id);
+    if (!existing || story.articles.length > existing.articles.length) {
+      byId.set(story.id, story);
     }
   }
+  const deduped = [...byId.values()];
 
-  const freshIds = new Set(fresh.map((s) => s.id));
+  const freshIds = new Set(deduped.map((s) => s.id));
   // Re-clustering can absorb several old stories into one fresh one; an old
   // story whose URLs now live inside fresh stories is superseded, not lost.
   const freshUrls = new Set(
-    fresh.flatMap((s) => [
+    deduped.flatMap((s) => [
       ...s.articles.map((a) => a.url),
       ...s.discussions.map((d) => d.url),
     ]),
@@ -194,7 +211,7 @@ function mergeStories(fresh: Story[], previous: Story[], cutoff: number): Story[
       !old.discussions.some((d) => freshUrls.has(d.url)) &&
       Date.parse(old.latestPublishedAt) > cutoff,
   );
-  return [...fresh, ...kept];
+  return [...deduped, ...kept];
 }
 
 main()
