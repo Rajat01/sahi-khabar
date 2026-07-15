@@ -1,0 +1,3 @@
+# Next.js emits the OG image as an extensionless file; scrapers need the type
+/opengraph-image
+  Content-Type: image/png

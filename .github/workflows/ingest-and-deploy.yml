@@ -70,3 +70,7 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Ping IndexNow with fresh story URLs
+        run: pnpm indexnow
+        continue-on-error: true

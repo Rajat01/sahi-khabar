@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import { Feed } from "../components/Feed";
 import { loadDataset, toFeedStory } from "../lib/data";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const MAX_FEED = 150;
 

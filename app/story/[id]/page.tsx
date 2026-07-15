@@ -7,6 +7,7 @@ import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { SOURCE_BY_ID } from "../../../config/sources";
 import { loadDataset } from "../../../lib/data";
+import { SITE_NAME, SITE_URL } from "../../../lib/site";
 
 export function generateStaticParams() {
   return loadDataset().stories.map((s) => ({ id: s.id }));
@@ -19,7 +20,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const story = loadDataset().stories.find((s) => s.id === id);
-  return { title: story?.headline ?? "Story" };
+  if (!story) return { title: "Story" };
+  const outlets = [...new Set(story.articles.map((a) => a.sourceName))];
+  const description =
+    story.summary ??
+    `Coverage from ${outlets.slice(0, 3).join(", ")} with a transparent confidence score of ${story.score.total}/100.`;
+  return {
+    title: story.headline,
+    description,
+    alternates: { canonical: `/story/${story.id}/` },
+    openGraph: {
+      type: "article",
+      title: story.headline,
+      description,
+      url: `${SITE_URL}/story/${story.id}/`,
+      publishedTime: story.firstSeenAt,
+      modifiedTime: story.latestPublishedAt,
+    },
+    twitter: { card: "summary_large_image", title: story.headline, description },
+  };
 }
 
 export default async function StoryPage({
@@ -32,8 +51,25 @@ export default async function StoryPage({
   const story = stories.find((s) => s.id === id);
   if (!story) notFound();
 
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: story.headline,
+    description: story.summary,
+    datePublished: story.firstSeenAt,
+    dateModified: story.latestPublishedAt,
+    mainEntityOfPage: `${SITE_URL}/story/${story.id}/`,
+    publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    // The original reporting this aggregation page is based on
+    citation: story.articles.map((a) => a.url),
+  }).replace(/</g, "\\u003c");
+
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      />
       <Link href="/" className="text-sm text-ink-3 hover:text-accent">
         ← Latest
       </Link>

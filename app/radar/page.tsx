@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { StoryCard } from "../../components/StoryCard";
 import { loadDataset, toFeedStory } from "../../lib/data";
 
-export const metadata: Metadata = { title: "Under the Radar" };
+export const metadata: Metadata = {
+  title: "Under the Radar",
+  description:
+    "Stories with high community engagement but little mainstream coverage — news the front pages are missing.",
+  alternates: { canonical: "/radar/" },
+};
 
 const MAX_RADAR = 40;
 

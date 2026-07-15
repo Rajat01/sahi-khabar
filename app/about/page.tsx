@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { SOURCES } from "../../config/sources";
 import type { SourceGroup } from "../../lib/types";
 
-export const metadata: Metadata = { title: "Methodology" };
+export const metadata: Metadata = {
+  title: "Methodology",
+  description:
+    "How KhabarCheck computes confidence scores, detects media blindspots, and rates outlets — the full methodology and source table.",
+  alternates: { canonical: "/about/" },
+};
 
 const GROUP_LABELS: Record<SourceGroup, string> = {
   "in-mainstream": "Indian mainstream",

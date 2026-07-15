@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "ingest": "tsx pipeline/run.ts",
+    "indexnow": "tsx pipeline/indexnow.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

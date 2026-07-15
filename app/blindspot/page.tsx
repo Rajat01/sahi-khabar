@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { StoryCard } from "../../components/StoryCard";
 import { loadDataset, toFeedStory } from "../../lib/data";
 
-export const metadata: Metadata = { title: "Media Blindspots" };
+export const metadata: Metadata = {
+  title: "Media Blindspots",
+  description:
+    "India-relevant stories covered by independent or international outlets but missing from Indian mainstream media.",
+  alternates: { canonical: "/blindspot/" },
+};
 
 const MAX = 50;
 

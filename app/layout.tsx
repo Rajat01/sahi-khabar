@@ -1,22 +1,62 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { loadDataset } from "../lib/data";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "../lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "KhabarCheck — fact-based news, with receipts",
-    template: "%s · KhabarCheck",
+    default: `${SITE_NAME} — fact-based news, with receipts`,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "News aggregated from real outlets and community signals, with a transparent confidence score and every source shown.",
+  description: SITE_DESCRIPTION,
+  alternates: {
+    types: { "application/rss+xml": `${SITE_URL}/feed.xml` },
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
+
+const JSONLD = JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    alternateName: "खबर चेक",
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/opengraph-image`,
+  },
+]).replace(/</g, "\\u003c");
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { generatedAt } = loadDataset();
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSONLD }}
+        />
         <header className="border-b border-hairline">
           <div className="mx-auto flex max-w-3xl flex-wrap items-baseline gap-x-6 gap-y-1 px-4 py-4">
             <Link href="/" className="text-xl font-bold tracking-tight">
