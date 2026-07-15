@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-2">
               <Link href="/" className="hover:text-accent">
-                Latest
+                Top Stories
               </Link>
               <Link href="/radar/" className="hover:text-accent">
                 Under the Radar

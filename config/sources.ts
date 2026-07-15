@@ -102,6 +102,42 @@ export const SOURCES: SourceConfig[] = [
     ownership: "Bennett Coleman & Co / The Times Group (Jain family)",
   },
   {
+    // Section feed of the same outlet: catches national stories that never
+    // reach the fast-churning top-stories widget. Same `name` as "toi" on
+    // purpose — corroboration counts unique outlet names, not feed ids.
+    id: "toi-india",
+    name: "Times of India",
+    type: "rss",
+    url: "https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms",
+    homepage: "https://timesofindia.indiatimes.com",
+    region: "in",
+    tier: 62,
+    group: "in-mainstream",
+    ownership: "Bennett Coleman & Co / The Times Group (Jain family)",
+  },
+  {
+    id: "ndtv-india",
+    name: "NDTV",
+    type: "rss",
+    url: "https://feeds.feedburner.com/ndtvnews-india-news",
+    homepage: "https://www.ndtv.com",
+    region: "in",
+    tier: 70,
+    group: "in-mainstream",
+    ownership: "AMG Media Networks (Adani Group, since 2022)",
+  },
+  {
+    id: "indiatoday",
+    name: "India Today",
+    type: "rss",
+    url: "https://www.indiatoday.in/rss/1206578",
+    homepage: "https://www.indiatoday.in",
+    region: "in",
+    tier: 68,
+    group: "in-mainstream",
+    ownership: "Living Media / India Today Group (Purie family)",
+  },
+  {
     id: "pib",
     name: "PIB (Govt. of India)",
     type: "rss",

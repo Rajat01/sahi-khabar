@@ -36,7 +36,11 @@ export function toFeedStory(story: Story): FeedStory {
     category: story.category,
     band: story.score.band,
     total: story.score.total,
-    sources: story.articles.map((a) => ({ id: a.sourceId, name: a.sourceName })),
+    sources: [
+      ...new Map(
+        story.articles.map((a) => [a.sourceName, { id: a.sourceId, name: a.sourceName }]),
+      ).values(),
+    ],
     discussionCount: story.discussions.length,
     radarScore: story.radarScore,
     blindspot: story.blindspot === "mainstream-blindspot",

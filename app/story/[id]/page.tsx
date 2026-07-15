@@ -71,7 +71,7 @@ export default async function StoryPage({
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <Link href="/" className="text-sm text-ink-3 hover:text-accent">
-        ← Latest
+        ← Top Stories
       </Link>
       <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
         <h1 className="max-w-xl text-2xl font-bold leading-tight">{story.headline}</h1>

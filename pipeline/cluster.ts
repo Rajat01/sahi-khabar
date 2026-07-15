@@ -10,8 +10,12 @@ export interface Cluster {
 }
 
 const STRONG_SIMILARITY = 0.6;
-const GREY_ZONE_MIN = 0.3;
-const MAX_LLM_PAIRS = 150;
+const GREY_ZONE_MIN = 0.22;
+// Shared proper nouns are the strongest same-event signal: two headlines that
+// both mention a rare name pair ("Tahir Hussain" + "Ankit Sharma") are worth
+// an LLM look even when the surrounding wording shares almost nothing.
+const RARE_NOUN_IDF = 9;
+const MAX_LLM_PAIRS = 600;
 
 /**
  * Group items describing the same news event.
@@ -63,6 +67,19 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
     return count;
   };
 
+  // IDF over proper nouns: how surprising is it that two titles share these?
+  const nounDf = new Map<string, number>();
+  for (const set of nouns) {
+    for (const noun of set) nounDf.set(noun, (nounDf.get(noun) ?? 0) + 1);
+  }
+  const sharedNounIdf = (i: number, j: number): number => {
+    let sum = 0;
+    for (const noun of nouns[i]) {
+      if (nouns[j].has(noun)) sum += Math.log(1 + n / (nounDf.get(noun) ?? 1));
+    }
+    return sum;
+  };
+
   // union-find
   const parent = items.map((_, i) => i);
   const find = (x: number): number => {
@@ -76,20 +93,33 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
     parent[find(a)] = find(b);
   };
 
-  const greyPairs: { i: number; j: number }[] = [];
+  const greyPairs: { i: number; j: number; strength: number }[] = [];
   for (let i = 0; i < n; i++) {
     for (let j = i + 1; j < n; j++) {
+      const overlap = nounOverlap(i, j);
+      if (overlap === 0) continue;
       const sim = cosine(i, j);
-      if (sim >= STRONG_SIMILARITY && nounOverlap(i, j) >= 1) {
+      if (sim >= STRONG_SIMILARITY) {
         union(i, j);
-      } else if (sim >= GREY_ZONE_MIN && nounOverlap(i, j) >= 2) {
-        greyPairs.push({ i, j });
+      } else if (overlap >= 3 && sim >= 0.35) {
+        // three shared names plus moderately similar wording is same-event
+        // with high confidence — merge without spending LLM budget
+        union(i, j);
+      } else if (overlap >= 2) {
+        const idf = sharedNounIdf(i, j);
+        // candidate when the wording is somewhat close OR the shared names
+        // are rare enough to be a same-event signal on their own
+        if (sim >= GREY_ZONE_MIN || idf >= RARE_NOUN_IDF) {
+          greyPairs.push({ i, j, strength: idf + sim * 5 });
+        }
       }
     }
   }
 
-  // LLM tie-break for grey-zone pairs (skip pairs already merged transitively)
+  // LLM tie-break for grey-zone pairs (skip pairs already merged transitively);
+  // strongest candidates first so the budget cap trims only the weakest.
   const pending = greyPairs
+    .sort((a, b) => b.strength - a.strength)
     .filter(({ i, j }) => find(i) !== find(j))
     .slice(0, MAX_LLM_PAIRS);
   if (pending.length > 0) {

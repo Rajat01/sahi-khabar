@@ -12,6 +12,44 @@ import { applyCoverage, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
 const MAX_AGE_DAYS = 7;
+const RECLUSTER_WINDOW_MS = 48 * 3600_000;
+
+/** Previous-dataset articles/discussions as raw items for re-clustering. */
+function recycleRecent(previous: Dataset | null, windowMs: number): RawItem[] {
+  if (!previous) return [];
+  const cutoff = Date.now() - windowMs;
+  const recycled: RawItem[] = [];
+  for (const story of previous.stories) {
+    if (Date.parse(story.latestPublishedAt) < cutoff) continue;
+    for (const a of story.articles) {
+      recycled.push({
+        sourceId: a.sourceId,
+        title: a.title,
+        url: a.url,
+        publishedAt: a.publishedAt,
+        summary: a.summary,
+      });
+    }
+    for (const d of story.discussions) {
+      recycled.push({
+        sourceId: d.platform === "hn" ? "hn" : redditSourceId(d.label),
+        title: d.title,
+        url: d.url,
+        publishedAt: d.publishedAt,
+        engagement: {
+          score: d.score,
+          comments: d.comments,
+          discussionUrl: d.discussionUrl,
+        },
+      });
+    }
+  }
+  return recycled;
+}
+
+function redditSourceId(label: string): string {
+  return "r-" + label.replace(/^r\//, "");
+}
 
 /**
  * Hard wall-clock cap per source. Socket-level timeouts are inactivity-based
@@ -64,8 +102,18 @@ async function main() {
 
   // 2. Drop stale items, dedupe by canonical URL.
   const cutoff = Date.now() - MAX_AGE_DAYS * 86400_000;
-  const fresh = dedupe(items.filter((it) => Date.parse(it.publishedAt) > cutoff));
-  console.log(`[ingest] ${items.length} fetched -> ${fresh.length} fresh+unique`);
+  const previous = loadPrevious();
+  // Outlets publish the same event hours apart, and fast-churning feeds drop
+  // articles quickly — items fetched in different runs would otherwise never
+  // meet in one clustering pool and the story stays fragmented forever. So
+  // recent articles from the previous dataset re-enter clustering every run.
+  const recycled = recycleRecent(previous, RECLUSTER_WINDOW_MS);
+  const fresh = dedupe(
+    [...items, ...recycled].filter((it) => Date.parse(it.publishedAt) > cutoff),
+  );
+  console.log(
+    `[ingest] ${items.length} fetched + ${recycled.length} recycled -> ${fresh.length} fresh+unique`,
+  );
 
   // 3. Cluster and score.
   const clusters = await clusterItems(fresh);
@@ -74,7 +122,6 @@ async function main() {
 
   // 4. Merge with the previous dataset: keep stable IDs and stories that have
   //    dropped out of feeds but are still < 7 days old.
-  const previous = loadPrevious();
   const merged = mergeStories(stories, previous?.stories ?? [], cutoff);
   // Coverage/blindspot derive purely from articles + config, so recompute for
   // carried-over stories too (keeps old datasets valid when the config evolves).
@@ -131,10 +178,20 @@ function mergeStories(fresh: Story[], previous: Story[], cutoff: number): Story[
   }
 
   const freshIds = new Set(fresh.map((s) => s.id));
+  // Re-clustering can absorb several old stories into one fresh one; an old
+  // story whose URLs now live inside fresh stories is superseded, not lost.
+  const freshUrls = new Set(
+    fresh.flatMap((s) => [
+      ...s.articles.map((a) => a.url),
+      ...s.discussions.map((d) => d.url),
+    ]),
+  );
   const kept = previous.filter(
     (old) =>
       !freshIds.has(old.id) &&
       !claimedOldIds.has(old.id) &&
+      !old.articles.some((a) => freshUrls.has(a.url)) &&
+      !old.discussions.some((d) => freshUrls.has(d.url)) &&
       Date.parse(old.latestPublishedAt) > cutoff,
   );
   return [...fresh, ...kept];

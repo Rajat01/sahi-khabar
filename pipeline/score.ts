@@ -111,8 +111,8 @@ export function applyCoverage(story: Story): void {
   };
   const seen = new Set<string>();
   for (const article of story.articles) {
-    if (seen.has(article.sourceId)) continue;
-    seen.add(article.sourceId);
+    if (seen.has(article.sourceName)) continue;
+    seen.add(article.sourceName);
     switch (SOURCE_BY_ID[article.sourceId]?.group) {
       case "in-mainstream":
         buckets.mainstream++;
@@ -148,7 +148,7 @@ export function applyCoverage(story: Story): void {
 
 function baseScore(articles: StoryArticle[]): ScoreBreakdown {
   // Corroboration: count independent outlets (distinct source AND distinct domain).
-  const outlets = new Set(articles.map((a) => a.sourceId));
+  const outlets = new Set(articles.map((a) => a.sourceName));
   const domains = new Set(articles.map((a) => domainOf(a.url)));
   const independent = Math.min(outlets.size, domains.size);
   // log-scaled: 1 outlet -> ~15, 2 -> ~25, 3 -> ~32, 5+ -> 40
