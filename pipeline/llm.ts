@@ -5,8 +5,14 @@ import Anthropic from "@anthropic-ai/sdk";
  * ANTHROPIC_API_KEY is absent, so the pipeline never hard-depends on it.
  * Haiku is used deliberately (cheap, high-volume classification work) — the
  * budget for this whole project is a few dollars a month.
+ *
+ * Requests are CHUNKED: one giant call truncates at max_tokens, breaks the
+ * JSON, and silently degrades everything to heuristics (the bug that kept
+ * production LLM-free for days). One failed chunk only affects its own items.
  */
 const MODEL = "claude-haiku-4-5";
+const HEADLINE_CHUNK = 100;
+const PAIR_CHUNK = 50;
 
 let client: Anthropic | null | undefined;
 
@@ -17,41 +23,70 @@ function getClient(): Anthropic | null {
   return client;
 }
 
+function chunked<T>(arr: T[], size: number): T[][] {
+  const out: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
+
+/** Extract the first complete JSON array from a model reply. */
+function parseArray(text: string, expectedLength: number): unknown[] | null {
+  const match = text.match(/\[[\s\S]*\]/);
+  if (!match) return null;
+  try {
+    const parsed = JSON.parse(match[0]) as unknown;
+    if (!Array.isArray(parsed) || parsed.length !== expectedLength) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Batch-decide whether borderline title pairs describe the same story.
- * Returns null (caller falls back to heuristics) on any failure.
+ * Per-pair null means "no verdict" (caller keeps them unmerged).
  */
 export async function judgeSameStory(
   pairs: { a: string; b: string }[],
-): Promise<boolean[] | null> {
+): Promise<(boolean | null)[] | null> {
   const c = getClient();
   if (!c || pairs.length === 0) return null;
-  const list = pairs
-    .map((p, i) => `${i + 1}. A: "${p.a}"\n   B: "${p.b}"`)
-    .join("\n");
-  try {
-    const response = await c.messages.create({
-      model: MODEL,
-      max_tokens: 1000,
-      messages: [
-        {
-          role: "user",
-          content:
-            `For each numbered pair of news headlines, decide if they report the SAME underlying news event (not just the same topic).\n\n${list}\n\n` +
-            `Reply with a JSON array of booleans only, one per pair, e.g. [true,false,...]`,
-        },
-      ],
-    });
-    const text = response.content.find((b) => b.type === "text")?.text ?? "";
-    const match = text.match(/\[[\s\S]*\]/);
-    if (!match) return null;
-    const parsed = JSON.parse(match[0]) as unknown;
-    if (!Array.isArray(parsed) || parsed.length !== pairs.length) return null;
-    return parsed.map(Boolean);
-  } catch (err) {
-    console.warn(`  [llm] same-story check failed: ${(err as Error).message}`);
-    return null;
+
+  const results: (boolean | null)[] = [];
+  let failures = 0;
+  for (const chunk of chunked(pairs, PAIR_CHUNK)) {
+    const list = chunk
+      .map((p, i) => `${i + 1}. A: "${p.a}"\n   B: "${p.b}"`)
+      .join("\n");
+    try {
+      const response = await c.messages.create({
+        model: MODEL,
+        max_tokens: Math.max(200, chunk.length * 8),
+        messages: [
+          {
+            role: "user",
+            content:
+              `For each numbered pair of news headlines, decide if they report the SAME underlying news event (not just the same topic).\n\n${list}\n\n` +
+              `Reply with a JSON array of booleans only, one per pair, e.g. [true,false,...]`,
+          },
+        ],
+      });
+      const text = response.content.find((b) => b.type === "text")?.text ?? "";
+      const parsed = parseArray(text, chunk.length);
+      results.push(...(parsed ? parsed.map((v) => Boolean(v)) : chunk.map(() => null)));
+      if (!parsed) failures++;
+    } catch (err) {
+      console.warn(`  [llm] same-story chunk failed: ${(err as Error).message}`);
+      results.push(...chunk.map(() => null));
+      failures++;
+    }
   }
+  const judged = results.filter((r) => r !== null).length;
+  console.log(
+    `  [llm] same-story: judged ${judged}/${pairs.length} pairs` +
+      (failures ? ` (${failures} chunk(s) failed)` : ""),
+  );
+  return judged > 0 ? results : null;
 }
 
 export interface HeadlineCheck {
@@ -60,40 +95,54 @@ export interface HeadlineCheck {
 
 /**
  * Batch sanity-check headlines for clickbait / sensationalism / opinion-as-news.
- * Returns null on any failure so scoring falls back to heuristics.
+ * Per-headline null means "unchecked" (caller uses heuristics for that one).
  */
 export async function checkHeadlines(
   headlines: string[],
-): Promise<HeadlineCheck[] | null> {
+): Promise<(HeadlineCheck | null)[] | null> {
   const c = getClient();
   if (!c || headlines.length === 0) return null;
-  const list = headlines.map((h, i) => `${i + 1}. "${h}"`).join("\n");
-  try {
-    const response = await c.messages.create({
-      model: MODEL,
-      max_tokens: 2000,
-      messages: [
-        {
-          role: "user",
-          content:
-            `Assess each numbered news headline. For each, list any of these issues that apply: ` +
-            `"clickbait", "sensationalized", "opinion presented as news", "unverifiable claim". ` +
-            `Most straight news headlines have no issues.\n\n${list}\n\n` +
-            `Reply with a JSON array only — one array of issue strings per headline (empty array if clean), ` +
-            `e.g. [[],["clickbait"],[]]`,
-        },
-      ],
-    });
-    const text = response.content.find((b) => b.type === "text")?.text ?? "";
-    const match = text.match(/\[[\s\S]*\]/);
-    if (!match) return null;
-    const parsed = JSON.parse(match[0]) as unknown;
-    if (!Array.isArray(parsed) || parsed.length !== headlines.length) return null;
-    return parsed.map((flags) => ({
-      flags: Array.isArray(flags) ? flags.map(String) : [],
-    }));
-  } catch (err) {
-    console.warn(`  [llm] headline check failed: ${(err as Error).message}`);
-    return null;
+
+  const results: (HeadlineCheck | null)[] = [];
+  let failures = 0;
+  for (const chunk of chunked(headlines, HEADLINE_CHUNK)) {
+    const list = chunk.map((h, i) => `${i + 1}. "${h}"`).join("\n");
+    try {
+      const response = await c.messages.create({
+        model: MODEL,
+        max_tokens: Math.max(300, chunk.length * 12),
+        messages: [
+          {
+            role: "user",
+            content:
+              `Assess each numbered news headline. For each, list any of these issues that apply: ` +
+              `"clickbait", "sensationalized", "opinion presented as news", "unverifiable claim". ` +
+              `Most straight news headlines have no issues.\n\n${list}\n\n` +
+              `Reply with a JSON array only — one array of issue strings per headline (empty array if clean), ` +
+              `e.g. [[],["clickbait"],[]]`,
+          },
+        ],
+      });
+      const text = response.content.find((b) => b.type === "text")?.text ?? "";
+      const parsed = parseArray(text, chunk.length);
+      results.push(
+        ...(parsed
+          ? parsed.map((flags) => ({
+              flags: Array.isArray(flags) ? flags.map(String) : [],
+            }))
+          : chunk.map(() => null)),
+      );
+      if (!parsed) failures++;
+    } catch (err) {
+      console.warn(`  [llm] headline chunk failed: ${(err as Error).message}`);
+      results.push(...chunk.map(() => null));
+      failures++;
+    }
   }
+  const checked = results.filter((r) => r !== null).length;
+  console.log(
+    `  [llm] headlines: checked ${checked}/${headlines.length}` +
+      (failures ? ` (${failures} chunk(s) failed)` : ""),
+  );
+  return checked > 0 ? results : null;
 }
