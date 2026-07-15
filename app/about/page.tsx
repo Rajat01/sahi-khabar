@@ -20,9 +20,9 @@ export default function AboutPage() {
   return (
     <div className="prose-sm max-w-none space-y-6">
       <section>
-        <h1 className="text-xl font-bold">How Sahi Khabar works</h1>
+        <h1 className="text-xl font-bold">How KhabarCheck works</h1>
         <p className="mt-2 text-sm leading-relaxed text-ink-2">
-          Sahi Khabar (सही ख़बर, &ldquo;true news&rdquo;) is a fully automated news
+          KhabarCheck (खबर चेक, &ldquo;news, checked&rdquo;) is a fully automated news
           aggregator. There is no newsroom and no editor: software fetches stories
           from the sources below every couple of hours, groups articles that
           describe the same event, and computes a <strong>confidence score</strong>{" "}

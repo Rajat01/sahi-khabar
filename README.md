@@ -1,4 +1,4 @@
-# Sahi Khabar — सही ख़बर
+# KhabarCheck — खबर चेक
 
 Fact-based news aggregator with receipts. No newsroom, no editor, no tracking —
 software fetches stories from real outlets (India + world), Reddit, and Hacker

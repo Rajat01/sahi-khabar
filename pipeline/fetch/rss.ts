@@ -5,7 +5,7 @@ const parser = new Parser({
   timeout: 15000,
   headers: {
     // Several outlets (PIB, HT) 403 anything that doesn't start with Mozilla/
-    "User-Agent": "Mozilla/5.0 (compatible; sahi-khabar/0.1; fact-based news reader)",
+    "User-Agent": "Mozilla/5.0 (compatible; khabarcheck/0.1; fact-based news reader)",
     Accept: "application/rss+xml, application/xml, text/xml, */*",
   },
 });

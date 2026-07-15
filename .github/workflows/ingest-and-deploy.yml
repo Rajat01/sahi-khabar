@@ -57,7 +57,7 @@ jobs:
           cp data/stories.json "$workdir/"
           cd "$workdir"
           git init -b data -q
-          git config user.name "sahi-khabar-bot"
+          git config user.name "khabarcheck-bot"
           git config user.email "actions@users.noreply.github.com"
           git add stories.json
           git commit -q -m "data snapshot $(date -u +%FT%TZ)"

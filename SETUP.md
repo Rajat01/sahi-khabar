@@ -1,4 +1,4 @@
-# Setting up Sahi Khabar
+# Setting up KhabarCheck (formerly Sahi Khabar)
 
 One-time steps to take the site from "runs on my laptop" to "auto-updates on the
 internet every 2 hours". Total cost: **$0 fixed + ~$2–5/month of Anthropic API**

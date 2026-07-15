@@ -9,7 +9,7 @@ import type { RawItem, SourceConfig } from "../../lib/types";
  *    "script" app from https://www.reddit.com/prefs/apps), use OAuth and get
  *    real scores and comment counts.
  */
-const USER_AGENT = "web:sahi-khabar:v0.1 (fact-based news aggregator)";
+const USER_AGENT = "web:khabarcheck:v0.1 (fact-based news aggregator)";
 
 const SKIP_DOMAINS = [
   "reddit.com",

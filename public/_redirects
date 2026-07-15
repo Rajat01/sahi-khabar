@@ -1,0 +1,3 @@
+# Old brand domain permanently redirects to khabarcheck.com (path-preserving)
+https://sahi-khabar.com/* https://khabarcheck.com/:splat 301!
+https://www.sahi-khabar.com/* https://khabarcheck.com/:splat 301!
