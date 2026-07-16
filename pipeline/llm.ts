@@ -75,7 +75,9 @@ export async function judgeSameStory(
           {
             role: "user",
             content:
-              `For each numbered pair of news headlines, decide if they report the SAME underlying news event (not just the same topic).\n\n${list}\n\n` +
+              `For each numbered pair of news headlines, decide if they report the SAME underlying news event.\n` +
+              `Strict rules: same topic, same party, or same people is NOT enough — different developments or different days are different events. ` +
+              `Reaction/analysis of an event counts as the same event. A digest/roundup headline covering multiple events matches nothing.\n\n${list}\n\n` +
               `Reply with a JSON array of booleans only, one per pair, e.g. [true,false,...]`,
           },
         ],

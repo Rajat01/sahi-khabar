@@ -46,6 +46,20 @@ export function properNouns(title: string): Set<string> {
 }
 
 /** Dedupe by canonical URL; keep the item with engagement data when duplicated. */
+/**
+ * Roundup/digest items cover several unrelated events in one headline, which
+ * makes them cluster "bridges": each event matches, and transitive merging
+ * then welds unrelated stories together (observed: an "Evening news wrap"
+ * fusing a court case with a party rebellion into one fake 9-outlet story).
+ * They add no unique reporting, so drop them at ingestion.
+ */
+const ROUNDUP_PATTERN =
+  /\b(news wrap|evening wrap|morning wrap|wrap-?up|news roundup|round-?up|daily briefing|morning briefing|evening briefing|news digest|top \d+ (news|stories|headlines)|headlines of the day|live updates|as it happened|key highlights|in brief)\b|^watch:|^in pics|^photos:/i;
+
+export function isRoundup(title: string): boolean {
+  return ROUNDUP_PATTERN.test(title);
+}
+
 export function dedupe(items: RawItem[]): RawItem[] {
   const byUrl = new Map<string, RawItem>();
   for (const item of items) {

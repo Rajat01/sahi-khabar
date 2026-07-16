@@ -15,7 +15,14 @@ const GREY_ZONE_MIN = 0.22;
 // both mention a rare name pair ("Tahir Hussain" + "Ankit Sharma") are worth
 // an LLM look even when the surrounding wording shares almost nothing.
 const RARE_NOUN_IDF = 9;
+// LLM-free auto-merge needs a higher bar: three ubiquitous names ("Delhi",
+// "BJP", "Centre") sum to ~9, two genuinely rare ones to ~11+.
+const AUTO_MERGE_IDF = 12;
 const MAX_LLM_PAIRS = 600;
+// Weak-signal (grey/heuristic) merges stop once a cluster is this big —
+// transitive chaining otherwise snowballs umbrella blobs that weld unrelated
+// events together. High-cosine merges stay uncapped.
+const MAX_GREY_COMPONENT = 12;
 
 /**
  * Group items describing the same news event.
@@ -80,8 +87,9 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
     return sum;
   };
 
-  // union-find
+  // union-find with component sizes
   const parent = items.map((_, i) => i);
+  const size = items.map(() => 1);
   const find = (x: number): number => {
     while (parent[x] !== x) {
       parent[x] = parent[parent[x]];
@@ -90,8 +98,14 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
     return x;
   };
   const union = (a: number, b: number) => {
-    parent[find(a)] = find(b);
+    const ra = find(a);
+    const rb = find(b);
+    if (ra === rb) return;
+    parent[ra] = rb;
+    size[rb] += size[ra];
   };
+  const withinGreyCap = (a: number, b: number): boolean =>
+    size[find(a)] + size[find(b)] <= MAX_GREY_COMPONENT;
 
   const greyPairs: { i: number; j: number; strength: number }[] = [];
   for (let i = 0; i < n; i++) {
@@ -101,9 +115,14 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
       const sim = cosine(i, j);
       if (sim >= STRONG_SIMILARITY) {
         union(i, j);
-      } else if (overlap >= 3 && sim >= 0.35) {
-        // three shared names plus moderately similar wording is same-event
-        // with high confidence — merge without spending LLM budget
+      } else if (
+        overlap >= 3 &&
+        sim >= 0.35 &&
+        sharedNounIdf(i, j) >= AUTO_MERGE_IDF &&
+        withinGreyCap(i, j)
+      ) {
+        // several RARE shared names plus similar wording is same-event with
+        // high confidence — merge without spending LLM budget
         union(i, j);
       } else if (overlap >= 2) {
         const idf = sharedNounIdf(i, j);
@@ -128,7 +147,7 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
     );
     if (verdicts) {
       pending.forEach(({ i, j }, k) => {
-        if (verdicts[k]) union(i, j);
+        if (verdicts[k] && withinGreyCap(i, j)) union(i, j);
       });
       console.log(
         `  [cluster] LLM merged ${verdicts.filter(Boolean).length}/${pending.length} grey-zone pairs`,
