@@ -221,6 +221,11 @@ export default function AboutPage() {
             incorrectly.
           </li>
           <li>
+            Non-news service content — horoscopes, puzzle answers, lottery
+            results, multi-event digests — is dropped at ingestion; it
+            isn&rsquo;t reporting.
+          </li>
+          <li>
             The reliability table is a maintained opinion, not an objective fact.
           </li>
         </ul>

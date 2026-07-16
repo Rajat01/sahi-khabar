@@ -7,7 +7,7 @@ import { clusterItems } from "./cluster";
 import { fetchHn } from "./fetch/hn";
 import { fetchReddit } from "./fetch/reddit";
 import { fetchRss } from "./fetch/rss";
-import { dedupe, isRoundup } from "./normalize";
+import { dedupe, isNonNews } from "./normalize";
 import { applyCoverage, categorize, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
@@ -110,7 +110,7 @@ async function main() {
   const recycled = recycleRecent(previous, RECLUSTER_WINDOW_MS);
   const fresh = dedupe(
     [...items, ...recycled].filter(
-      (it) => Date.parse(it.publishedAt) > cutoff && !isRoundup(it.title),
+      (it) => Date.parse(it.publishedAt) > cutoff && !isNonNews(it.title),
     ),
   );
   console.log(
@@ -211,8 +211,9 @@ function mergeStories(fresh: Story[], previous: Story[], cutoff: number): Story[
       !claimedOldIds.has(old.id) &&
       !old.articles.some((a) => freshUrls.has(a.url)) &&
       !old.discussions.some((d) => freshUrls.has(d.url)) &&
-      // roundups are filtered at ingestion now; purge ones already stored
-      !isRoundup(old.headline) &&
+      // non-news (roundups, horoscopes, …) is filtered at ingestion now;
+      // purge items already stored from before the rules existed
+      !isNonNews(old.headline) &&
       Date.parse(old.latestPublishedAt) > cutoff,
   );
   return [...deduped, ...kept];

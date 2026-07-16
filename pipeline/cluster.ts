@@ -23,6 +23,10 @@ const MAX_LLM_PAIRS = 600;
 // transitive chaining otherwise snowballs umbrella blobs that weld unrelated
 // events together. High-cosine merges stay uncapped.
 const MAX_GREY_COMPONENT = 12;
+// Pairs sharing just ONE name still deserve an LLM look when the wording is
+// close — "ISRO tightens exit rules…" vs "ISRO exit rules tightened…" share
+// only "ISRO" as a proper noun yet are plainly the same event.
+const SINGLE_NOUN_GREY_SIM = 0.33;
 
 /**
  * Group items describing the same news event.
@@ -131,6 +135,9 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
         if (sim >= GREY_ZONE_MIN || idf >= RARE_NOUN_IDF) {
           greyPairs.push({ i, j, strength: idf + sim * 5 });
         }
+      } else if (sim >= SINGLE_NOUN_GREY_SIM) {
+        // overlap === 1: one shared name + similar wording
+        greyPairs.push({ i, j, strength: sharedNounIdf(i, j) + sim * 5 });
       }
     }
   }

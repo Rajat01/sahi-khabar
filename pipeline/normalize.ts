@@ -56,8 +56,17 @@ export function properNouns(title: string): Set<string> {
 const ROUNDUP_PATTERN =
   /\b(news wrap|evening wrap|morning wrap|wrap-?up|news roundup|round-?up|daily briefing|morning briefing|evening briefing|news digest|top \d+ (news|stories|headlines)|headlines of the day|live updates|as it happened|key highlights|in brief)\b|^watch:|^in pics|^photos:/i;
 
-export function isRoundup(title: string): boolean {
-  return ROUNDUP_PATTERN.test(title);
+/**
+ * Recurring service content is not news reporting: horoscopes, puzzle
+ * answers, lottery results. Anchored patterns on purpose — a news FEATURE
+ * about astrology apps ("Beyond kundali matching & daily horoscopes: …")
+ * must survive this filter; only the service items themselves get dropped.
+ */
+const SERVICE_PATTERN =
+  /^(your )?(daily |weekly |monthly |today'?s? |love |career |chinese )?horoscopes?\b|\bhoroscopes? (today|for) \b|astrological predictions?|\bpanchang\b|\brashifal\b|tarot (card )?(reading|predictions?)|numerology predictions?|\b(wordle|quordle|connections|strands|sudoku) (hints?|answers?|today)|lottery (results?|sambad)|shillong teer/i;
+
+export function isNonNews(title: string): boolean {
+  return ROUNDUP_PATTERN.test(title) || SERVICE_PATTERN.test(title);
 }
 
 export function dedupe(items: RawItem[]): RawItem[] {
