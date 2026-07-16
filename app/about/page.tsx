@@ -17,9 +17,12 @@ const GROUP_LABELS: Record<SourceGroup, string> = {
 };
 
 export default function AboutPage() {
-  const outlets = SOURCES.filter((s) => s.type === "rss").sort(
-    (a, b) => (b.tier ?? 0) - (a.tier ?? 0),
-  );
+  // One row per outlet — some outlets contribute via several section feeds.
+  const outlets = [
+    ...new Map(
+      SOURCES.filter((s) => s.type === "rss").map((s) => [s.name, s]),
+    ).values(),
+  ].sort((a, b) => (b.tier ?? 0) - (a.tier ?? 0));
   const communities = SOURCES.filter((s) => s.type !== "rss");
 
   return (
