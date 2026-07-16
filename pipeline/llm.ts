@@ -49,6 +49,29 @@ function parseArray(text: string, expectedLength: number): unknown[] | null {
 }
 
 /**
+ * Extract a JSON object keyed by 1-based item numbers. Keyed output avoids
+ * making the model count: a fixed-length array reply drifts by one entry in
+ * most 40-item chunks, failing strict validation.
+ */
+function parseNumberKeyed(text: string, maxIndex: number): Map<number, unknown> | null {
+  const match = text.match(/\{[\s\S]*\}/);
+  if (!match) return null;
+  try {
+    const parsed = JSON.parse(match[0]) as unknown;
+    if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) return null;
+    const out = new Map<number, unknown>();
+    for (const [key, value] of Object.entries(parsed)) {
+      const idx = Number(key);
+      if (!Number.isInteger(idx) || idx < 1 || idx > maxIndex) return null;
+      out.set(idx, value);
+    }
+    return out;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Batch-decide whether borderline title pairs describe the same story.
  * Per-pair null means "no verdict" (caller keeps them unmerged).
  */
@@ -71,6 +94,7 @@ export async function judgeSameStory(
       const response = await c.messages.create({
         model: MODEL,
         max_tokens: Math.max(200, chunk.length * 8),
+        temperature: 0,
         messages: [
           {
             role: "user",
@@ -129,32 +153,35 @@ export async function checkHeadlines(
     try {
       const response = await c.messages.create({
         model: MODEL,
-        max_tokens: Math.max(600, chunk.length * 25),
+        max_tokens: Math.max(600, chunk.length * 20),
+        temperature: 0,
         messages: [
           {
             role: "user",
             content:
-              `Assess each numbered news headline. For each, list any of these issues that apply: ` +
+              `Assess each numbered news headline. The possible issues are: ` +
               `"clickbait", "sensationalized", "opinion presented as news", "unverifiable claim". ` +
               `Most straight news headlines have no issues.\n\n${list}\n\n` +
-              `Reply with one compact single-line JSON array only — one array of issue strings per headline ` +
-              `(empty array if clean), no whitespace, no other text, e.g. [[],["clickbait"],[]]`,
+              `Reply with one compact single-line JSON object mapping the NUMBER of each problematic headline ` +
+              `to its array of issues. Omit clean headlines entirely. No other text. ` +
+              `Example: {"2":["clickbait"],"17":["sensationalized"]} — or {} if all are clean.`,
           },
         ],
       });
       const text = response.content.find((b) => b.type === "text")?.text ?? "";
-      const parsed = parseArray(text, chunk.length);
+      const parsed = parseNumberKeyed(text, chunk.length);
       results.push(
         ...(parsed
-          ? parsed.map((flags) => ({
-              flags: Array.isArray(flags) ? flags.map(String) : [],
-            }))
+          ? chunk.map((_, i) => {
+              const flags = parsed.get(i + 1);
+              return { flags: Array.isArray(flags) ? flags.map(String) : [] };
+            })
           : chunk.map(() => null)),
       );
       if (!parsed) {
         failures++;
         console.warn(
-          `  [llm] headline chunk unparseable (stop=${response.stop_reason}, expected ${chunk.length}): ${text.slice(0, 100)}`,
+          `  [llm] headline chunk unparseable (stop=${response.stop_reason}): ${text.slice(0, 100)}`,
         );
       }
     } catch (err) {
