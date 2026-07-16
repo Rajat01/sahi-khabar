@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CoverageStrip } from "../../../components/CoverageStrip";
 import { ScoreBadge } from "../../../components/ScoreBadge";
+import { ShareBar } from "../../../components/ShareBar";
 import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { SOURCE_BY_ID } from "../../../config/sources";
@@ -97,6 +98,10 @@ export default async function StoryPage({
         {story.region === "in" ? "India" : "World"} · {story.category}
       </p>
       <CoverageStrip coverage={story.coverage} blindspot={story.blindspot} />
+      <ShareBar
+        url={`${SITE_URL}/story/${story.id}/`}
+        headline={story.headline}
+      />
 
       <div className="mt-6 grid gap-6 md:grid-cols-[1fr_280px]">
         <div>
