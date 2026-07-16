@@ -3,6 +3,7 @@ import { SOURCE_BY_ID } from "../config/sources";
 import type { RawItem } from "../lib/types";
 import { judgeSameStory } from "./llm";
 import { properNouns, tokenize } from "./normalize";
+import { loadPairCache, pairKey, savePairCache } from "./pair-cache";
 
 export interface Cluster {
   id: string;
@@ -142,25 +143,48 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
     }
   }
 
-  // LLM tie-break for grey-zone pairs (skip pairs already merged transitively);
-  // strongest candidates first so the budget cap trims only the weakest.
-  const pending = greyPairs
-    .sort((a, b) => b.strength - a.strength)
+  // Cached verdicts from previous runs are free — apply them first so the
+  // LLM budget is spent exclusively on never-before-seen pairs.
+  const cache = loadPairCache();
+  let cacheHits = 0;
+  const uncached: typeof greyPairs = [];
+  for (const pair of greyPairs.sort((a, b) => b.strength - a.strength)) {
+    const key = pairKey(items[pair.i].title, items[pair.j].title);
+    const cached = cache.get(key);
+    if (cached === undefined) {
+      uncached.push(pair);
+    } else {
+      cacheHits++;
+      if (cached && withinGreyCap(pair.i, pair.j)) union(pair.i, pair.j);
+    }
+  }
+
+  // LLM tie-break for uncached grey-zone pairs (skip ones already merged
+  // transitively); strongest candidates first so the cap trims the weakest.
+  const pending = uncached
     .filter(({ i, j }) => find(i) !== find(j))
     .slice(0, MAX_LLM_PAIRS);
+  const newVerdicts = new Map<string, boolean>();
   if (pending.length > 0) {
     const verdicts = await judgeSameStory(
       pending.map(({ i, j }) => ({ a: items[i].title, b: items[j].title })),
     );
     if (verdicts) {
       pending.forEach(({ i, j }, k) => {
-        if (verdicts[k] && withinGreyCap(i, j)) union(i, j);
+        const verdict = verdicts[k];
+        if (verdict === null) return; // chunk failed — retry next run
+        newVerdicts.set(pairKey(items[i].title, items[j].title), verdict);
+        if (verdict && withinGreyCap(i, j)) union(i, j);
       });
       console.log(
-        `  [cluster] LLM merged ${verdicts.filter(Boolean).length}/${pending.length} grey-zone pairs`,
+        `  [cluster] LLM merged ${verdicts.filter(Boolean).length}/${pending.length} new pairs` +
+          ` (${cacheHits} verdicts from cache)`,
       );
     }
+  } else if (cacheHits > 0) {
+    console.log(`  [cluster] all ${cacheHits} grey-zone verdicts served from cache`);
   }
+  savePairCache(newVerdicts);
 
   const groups = new Map<number, RawItem[]>();
   items.forEach((item, i) => {

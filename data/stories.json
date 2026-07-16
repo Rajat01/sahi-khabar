@@ -1,6 +1,80 @@
 {
- "generatedAt": "2026-07-16T22:52:30.696Z",
+ "generatedAt": "2026-07-16T23:08:23.909Z",
  "stories": [
+  {
+   "id": "4ddfb7daae4b",
+   "headline": "Old apartment complexes in Bengaluru to get makeover under new law",
+   "summary": "Old apartment complexes to get makeover under new law",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "deccanherald",
+     "sourceName": "Deccan Herald",
+     "title": "Old apartment complexes in Bengaluru to get makeover under new law",
+     "url": "https://deccanherald.com/india/karnataka/bengaluru/old-apartment-complexes-in-bengaluru-to-get-makeover-under-new-law-4076559",
+     "publishedAt": "2026-07-16T22:52:45.000Z",
+     "summary": "Old apartment complexes to get makeover under new law"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 23,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 53,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T22:52:45.000Z",
+   "latestPublishedAt": "2026-07-16T22:52:45.000Z"
+  },
+  {
+   "id": "7ff18e45f966",
+   "headline": "Florida House write-in candidate arrested for allegedly threatening to kill Trump",
+   "summary": "William Upham, a 35-year-old former marine, faces federal charges and up to five years in prison, officials say A former marine and Republican write-in candidate for the US House in Florida has been arrested and charged in federal court with threatening to kill Donald Trump, according to the US a...",
+   "region": "world",
+   "category": "politics",
+   "articles": [
+    {
+     "sourceId": "guardian",
+     "sourceName": "The Guardian",
+     "title": "Florida House write-in candidate arrested for allegedly threatening to kill Trump",
+     "url": "https://theguardian.com/us-news/2026/jul/16/marine-arrested-charged-allegedly-threatening-to-kill-trump",
+     "publishedAt": "2026-07-16T22:47:09.000Z",
+     "summary": "William Upham, a 35-year-old former marine, faces federal charges and up to five years in prison, officials say A former marine and Republican write-in candidate for the US House in Florida has been arrested and charged in federal court with threatening to kill Donald Trump, according to the US a..."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 25,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 55,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 1,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T22:47:09.000Z",
+   "latestPublishedAt": "2026-07-16T22:47:09.000Z"
+  },
   {
    "id": "a789ef419783",
    "headline": "Australia news live: Mark Butler ridicules Pauline Hanson’s NDIS claims on UK far-right activist’s podcast",
@@ -13,7 +87,7 @@
      "sourceName": "The Guardian",
      "title": "Australia news live: Mark Butler ridicules Pauline Hanson’s NDIS claims on UK far-right activist’s podcast",
      "url": "https://theguardian.com/australia-news/live/2026/jul/17/australia-news-live-telstra-mobile-outage-parliament-inquiry-royal-commission-antisemitism-ai-anthony-albanese-labor-liberals-coalition-politics-ntwnfb",
-     "publishedAt": "2026-07-16T22:38:45.000Z",
+     "publishedAt": "2026-07-16T22:40:39.000Z",
      "summary": "Greens senator Sarah Hanson-Young calls for One Nation leader to return to Australia and apologise. Follow today’s news live. Get our breaking news email, free app or daily news podcast One Nation leader urged to return home and apologise after appearing on far-right UK podcast Pauline Hanson has..."
     }
    ],
@@ -36,7 +110,7 @@
     "official": 0
    },
    "firstSeenAt": "2026-07-16T22:38:45.000Z",
-   "latestPublishedAt": "2026-07-16T22:38:45.000Z"
+   "latestPublishedAt": "2026-07-16T22:40:39.000Z"
   },
   {
    "id": "2a0df211e4df",
@@ -115,6 +189,42 @@
    "latestPublishedAt": "2026-07-16T22:34:38.000Z"
   },
   {
+   "id": "47d921deaa6c",
+   "headline": "Canada will not share bridge tolls with US until debt repaid, Carney says",
+   "region": "world",
+   "category": "other",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "reddit",
+     "label": "r/worldnews",
+     "title": "Canada will not share bridge tolls with US until debt repaid, Carney says",
+     "url": "https://reuters.com/business/canada-will-not-share-bridge-tolls-with-us-until-debt-repaid-carney-says-2026-07-16",
+     "discussionUrl": "https://www.reddit.com/r/worldnews/comments/1uyhog3/canada_will_not_share_bridge_tolls_with_us_until/",
+     "publishedAt": "2026-07-16T22:34:38.000Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 15,
+    "band": "unverified",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 20,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T22:34:38.000Z",
+   "latestPublishedAt": "2026-07-16T22:34:38.000Z"
+  },
+  {
    "id": "13c403030892",
    "headline": "श्रीगंगानगर रेप केस: आरोपियों की चौराहे पर फांसी का दावा सच नहीं",
    "summary": "मोहर्रम के वीडियो को श्रीगंगानगर रेप केस से जोड़कर गलत दावे से शेयर किया जा रहा है",
@@ -152,6 +262,57 @@
    },
    "firstSeenAt": "2026-07-16T22:33:56.000Z",
    "latestPublishedAt": "2026-07-16T22:33:56.000Z"
+  },
+  {
+   "id": "cf1563994609",
+   "headline": "PM Modi speaks to Amir of Qatar, conveys condolences on passing of Father Amir",
+   "summary": "Prime Minister Narendra Modi expressed condolences to Qatar's Amir Sheikh Tamim for the passing of Sheikh Hamad bin Khalifa Al Thani. Modi praised the late leader's impact on India-Qatar relations and highlighted his legacy in strengthening their strategic partnership.",
+   "region": "in",
+   "category": "politics",
+   "articles": [
+    {
+     "sourceId": "toi-india",
+     "sourceName": "Times of India",
+     "title": "Modi speaks to Qatar Amir, recalls legacy of his father",
+     "url": "https://timesofindia.indiatimes.com/india/modi-speaks-to-qatar-amir-recalls-legacy-of-his-father/articleshow/132450019.cms",
+     "publishedAt": "2026-07-16T22:33:21.000Z"
+    },
+    {
+     "sourceId": "deccanherald",
+     "sourceName": "Deccan Herald",
+     "title": "PM Modi speaks to Amir of Qatar, conveys condolences on passing of Father Amir",
+     "url": "https://deccanherald.com/india/pm-modi-speaks-to-amir-of-qatar-conveys-condolences-on-passing-of-father-amir-4076270",
+     "publishedAt": "2026-07-16T16:16:13.000Z"
+    },
+    {
+     "sourceId": "livemint",
+     "sourceName": "Mint",
+     "title": "PM Modi speaks to Amir of Qatar, conveys condolences on passing of Father Amir",
+     "url": "https://livemint.com/news/world/pm-modi-speaks-to-amir-of-qatar-conveys-condolences-on-passing-of-father-amir-11784216572424.html",
+     "publishedAt": "2026-07-16T15:47:32.000Z",
+     "summary": "Prime Minister Narendra Modi expressed condolences to Qatar's Amir Sheikh Tamim for the passing of Sheikh Hamad bin Khalifa Al Thani. Modi praised the late leader's impact on India-Qatar relations and highlighted his legacy in strengthening their strategic partnership."
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 31,
+    "reliability": 22,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 68,
+    "band": "medium",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 3,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T15:47:32.000Z",
+   "latestPublishedAt": "2026-07-16T22:33:21.000Z"
   },
   {
    "id": "00f8dd158b9a",
@@ -233,6 +394,114 @@
    },
    "firstSeenAt": "2026-07-16T07:25:16.000Z",
    "latestPublishedAt": "2026-07-16T22:30:53.000Z"
+  },
+  {
+   "id": "a6707350ff5f",
+   "headline": "Indore Bar Association Launches Crackdown On Fake Lawyers In District Court",
+   "region": "in",
+   "category": "politics",
+   "articles": [
+    {
+     "sourceId": "freepressjournal",
+     "sourceName": "Free Press Journal",
+     "title": "Indore Bar Association Launches Crackdown On Fake Lawyers In District Court",
+     "url": "https://freepressjournal.in/indore/indore-bar-association-launches-crackdown-on-fake-lawyers-in-district-court",
+     "publishedAt": "2026-07-16T22:30:00.000Z"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 19,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 49,
+    "band": "low",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T22:30:00.000Z",
+   "latestPublishedAt": "2026-07-16T22:30:00.000Z"
+  },
+  {
+   "id": "863220b030f3",
+   "headline": "CM Mohan Yadav To Inspect The Country's Longest Sleemanabad Water Tunnel Today In Katni District",
+   "region": "in",
+   "category": "other",
+   "articles": [
+    {
+     "sourceId": "freepressjournal",
+     "sourceName": "Free Press Journal",
+     "title": "CM Mohan Yadav To Inspect The Country's Longest Sleemanabad Water Tunnel Today In Katni District",
+     "url": "https://freepressjournal.in/bhopal/cm-mohan-yadav-to-inspect-the-countrys-longest-sleemanabad-water-tunnel-today-in-katni-district",
+     "publishedAt": "2026-07-16T22:30:00.000Z"
+    }
+   ],
+   "discussions": [],
+   "score": {
+    "corroboration": 15,
+    "reliability": 19,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 49,
+    "band": "low",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 0,
+   "coverage": {
+    "mainstream": 1,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T22:30:00.000Z",
+   "latestPublishedAt": "2026-07-16T22:30:00.000Z"
+  },
+  {
+   "id": "828f80161aba",
+   "headline": "My car's OTA update broke Android Auto, and it's a indictment of modern software",
+   "region": "world",
+   "category": "tech",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "hn",
+     "label": "Hacker News",
+     "title": "My car's OTA update broke Android Auto, and it's a indictment of modern software",
+     "url": "https://imdanielkendall.com/the-great-software-regress-how-move-fast-and-break-things-broke-our-lives",
+     "discussionUrl": "https://news.ycombinator.com/item?id=48941129",
+     "score": 31,
+     "comments": 17,
+     "publishedAt": "2026-07-16T22:29:44Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 15,
+    "band": "unverified",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 21,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T22:29:44.000Z",
+   "latestPublishedAt": "2026-07-16T22:29:44.000Z"
   },
   {
    "id": "9643e87e8791",
@@ -423,8 +692,8 @@
      "title": "FIFA World Cup 2026 Data Portraits",
      "url": "https://wc26.bogachev.fr/index.html",
      "discussionUrl": "https://news.ycombinator.com/item?id=48941056",
-     "score": 14,
-     "comments": 8,
+     "score": 24,
+     "comments": 11,
      "publishedAt": "2026-07-16T22:21:59Z"
     },
     {
@@ -716,6 +985,46 @@
    "latestPublishedAt": "2026-07-16T22:08:13.000Z"
   },
   {
+   "id": "4b78ed5781df",
+   "headline": "CVE-2026-25089: FortiSandbox unauthenticated command injection added to CISA KEV",
+   "region": "world",
+   "category": "other",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "hn",
+     "label": "Hacker News",
+     "title": "CVE-2026-25089: FortiSandbox unauthenticated command injection added to CISA KEV",
+     "url": "https://hellorecon.com/blog/cve-2026-25089",
+     "discussionUrl": "https://news.ycombinator.com/item?id=48940895",
+     "score": 9,
+     "comments": 0,
+     "publishedAt": "2026-07-16T22:07:30Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 9,
+    "total": 9,
+    "band": "unverified",
+    "flags": [
+     "sensationalized"
+    ],
+    "llmChecked": false
+   },
+   "radarScore": 10,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T22:07:30.000Z",
+   "latestPublishedAt": "2026-07-16T22:07:30.000Z"
+  },
+  {
    "id": "fae9268a2d46",
    "headline": "News in Pics | July 17, 2026: Best photos from around the world",
    "region": "in",
@@ -999,8 +1308,8 @@
      "title": "'Likweli': A new monkey species discovered in the Congo Basin",
      "url": "https://news.yale.edu/2026/07/15/meet-likweli-new-monkey-species-discovered-congo-basin",
      "discussionUrl": "https://news.ycombinator.com/item?id=48940833",
-     "score": 10,
-     "comments": 0,
+     "score": 16,
+     "comments": 1,
      "publishedAt": "2026-07-16T22:00:00Z"
     }
    ],
@@ -1014,7 +1323,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 10,
+   "radarScore": 14,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -1590,6 +1899,44 @@
    },
    "firstSeenAt": "2026-07-16T21:39:55.000Z",
    "latestPublishedAt": "2026-07-16T21:39:55.000Z"
+  },
+  {
+   "id": "74b96f140e7e",
+   "headline": "Ring-Zero: Scaling Zero RL to a Trillion Parameters for Emergent Reasoning",
+   "region": "world",
+   "category": "other",
+   "articles": [],
+   "discussions": [
+    {
+     "platform": "hn",
+     "label": "Hacker News",
+     "title": "Ring-Zero: Scaling Zero RL to a Trillion Parameters for Emergent Reasoning",
+     "url": "https://arxiv.org/abs/2607.12395",
+     "discussionUrl": "https://news.ycombinator.com/item?id=48940603",
+     "score": 14,
+     "comments": 0,
+     "publishedAt": "2026-07-16T21:38:02Z"
+    }
+   ],
+   "score": {
+    "corroboration": 0,
+    "reliability": 0,
+    "primarySource": 0,
+    "sanityCheck": 15,
+    "total": 15,
+    "band": "unverified",
+    "flags": [],
+    "llmChecked": false
+   },
+   "radarScore": 12,
+   "coverage": {
+    "mainstream": 0,
+    "independent": 0,
+    "international": 0,
+    "official": 0
+   },
+   "firstSeenAt": "2026-07-16T21:38:02.000Z",
+   "latestPublishedAt": "2026-07-16T21:38:02.000Z"
   },
   {
    "id": "2f6995b718e2",
@@ -2770,7 +3117,7 @@
      "title": "Mathematics of Data Science",
      "url": "https://arxiv.org/abs/2607.11938",
      "discussionUrl": "https://news.ycombinator.com/item?id=48939896",
-     "score": 47,
+     "score": 58,
      "comments": 1,
      "publishedAt": "2026-07-16T20:38:48Z"
     }
@@ -2785,7 +3132,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 18,
+   "radarScore": 19,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -3108,8 +3455,8 @@
      "title": "Timeline Scan – AI fixes the dates on your scanned photos",
      "url": "https://timelinescan.com",
      "discussionUrl": "https://news.ycombinator.com/item?id=48939764",
-     "score": 12,
-     "comments": 18,
+     "score": 14,
+     "comments": 19,
      "publishedAt": "2026-07-16T20:25:47Z"
     }
    ],
@@ -3220,7 +3567,7 @@
      "title": "Helium escaping from atmosphere of nearby rocky exoplanet in a habitable zone",
      "url": "https://science.org/doi/10.1126/science.aea9708",
      "discussionUrl": "https://news.ycombinator.com/item?id=48939742",
-     "score": 40,
+     "score": 42,
      "comments": 7,
      "publishedAt": "2026-07-16T20:24:02Z"
     }
@@ -3367,8 +3714,8 @@
      "title": "LM Studio Bionic: the AI agent for open models",
      "url": "https://lmstudio.ai/blog/introducing-lm-studio-bionic",
      "discussionUrl": "https://news.ycombinator.com/item?id=48939662",
-     "score": 83,
-     "comments": 27,
+     "score": 94,
+     "comments": 32,
      "publishedAt": "2026-07-16T20:18:15Z"
     }
    ],
@@ -3382,7 +3729,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 26,
+   "radarScore": 27,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -3444,8 +3791,8 @@
      "title": "The privacy problems hidden in your period tracker",
      "url": "https://bbc.com/future/article/20260715-how-period-trackers-share-womens-private-details",
      "discussionUrl": "https://news.ycombinator.com/item?id=48939641",
-     "score": 49,
-     "comments": 22,
+     "score": 54,
+     "comments": 24,
      "publishedAt": "2026-07-16T20:15:58Z"
     }
    ],
@@ -9427,7 +9774,7 @@
      "title": "German AI consortium releases Soofi S, an open 30B model that tops benchmarks",
      "url": "https://the-decoder.com/german-ai-consortium-releases-soofi-s-an-open-30b-model-that-tops-benchmarks-in-both-english-and-german",
      "discussionUrl": "https://news.ycombinator.com/item?id=48937756",
-     "score": 111,
+     "score": 112,
      "comments": 25,
      "publishedAt": "2026-07-16T17:44:46Z"
     }
@@ -10165,8 +10512,8 @@
      "title": "42% of adults rely on their parents for financial support",
      "url": "https://cnbc.com/2026/07/16/42percent-of-adults-rely-on-their-parents-for-financial-supportthere-are-no-bad-guys-here-says-financial-therapist.html",
      "discussionUrl": "https://news.ycombinator.com/item?id=48937288",
-     "score": 130,
-     "comments": 223,
+     "score": 132,
+     "comments": 226,
      "publishedAt": "2026-07-16T17:11:58Z"
     }
    ],
@@ -10747,8 +11094,8 @@
      "title": "Detecting LLM-Generated Texts with “Classical” Machine Learning",
      "url": "https://blog.lyc8503.net/en/post/llm-classifier",
      "discussionUrl": "https://news.ycombinator.com/item?id=48936880",
-     "score": 127,
-     "comments": 93,
+     "score": 132,
+     "comments": 94,
      "publishedAt": "2026-07-16T16:41:37Z"
     }
    ],
@@ -11619,7 +11966,7 @@
      "title": "Decoy Font",
      "url": "https://mixfont.com/experiments/decoy-font",
      "discussionUrl": "https://news.ycombinator.com/item?id=48936584",
-     "score": 334,
+     "score": 338,
      "comments": 86,
      "publishedAt": "2026-07-16T16:18:21Z"
     }
@@ -11787,50 +12134,6 @@
    },
    "firstSeenAt": "2026-07-16T16:16:22.000Z",
    "latestPublishedAt": "2026-07-16T16:16:22.000Z"
-  },
-  {
-   "id": "cf1563994609",
-   "headline": "PM Modi speaks to Amir of Qatar, conveys condolences on passing of Father Amir",
-   "summary": "Prime Minister Narendra Modi expressed condolences to Qatar's Amir Sheikh Tamim for the passing of Sheikh Hamad bin Khalifa Al Thani. Modi praised the late leader's impact on India-Qatar relations and highlighted his legacy in strengthening their strategic partnership.",
-   "region": "in",
-   "category": "politics",
-   "articles": [
-    {
-     "sourceId": "deccanherald",
-     "sourceName": "Deccan Herald",
-     "title": "PM Modi speaks to Amir of Qatar, conveys condolences on passing of Father Amir",
-     "url": "https://deccanherald.com/india/pm-modi-speaks-to-amir-of-qatar-conveys-condolences-on-passing-of-father-amir-4076270",
-     "publishedAt": "2026-07-16T16:16:13.000Z"
-    },
-    {
-     "sourceId": "livemint",
-     "sourceName": "Mint",
-     "title": "PM Modi speaks to Amir of Qatar, conveys condolences on passing of Father Amir",
-     "url": "https://livemint.com/news/world/pm-modi-speaks-to-amir-of-qatar-conveys-condolences-on-passing-of-father-amir-11784216572424.html",
-     "publishedAt": "2026-07-16T15:47:32.000Z",
-     "summary": "Prime Minister Narendra Modi expressed condolences to Qatar's Amir Sheikh Tamim for the passing of Sheikh Hamad bin Khalifa Al Thani. Modi praised the late leader's impact on India-Qatar relations and highlighted his legacy in strengthening their strategic partnership."
-    }
-   ],
-   "discussions": [],
-   "score": {
-    "corroboration": 25,
-    "reliability": 23,
-    "primarySource": 0,
-    "sanityCheck": 15,
-    "total": 63,
-    "band": "medium",
-    "flags": [],
-    "llmChecked": false
-   },
-   "radarScore": 0,
-   "coverage": {
-    "mainstream": 2,
-    "independent": 0,
-    "international": 0,
-    "official": 0
-   },
-   "firstSeenAt": "2026-07-16T15:47:32.000Z",
-   "latestPublishedAt": "2026-07-16T16:16:13.000Z"
   },
   {
    "id": "4f3cc4cd9ae8",
@@ -12700,8 +13003,8 @@
      "title": "NotebookLM is now Gemini Notebook",
      "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook",
      "discussionUrl": "https://news.ycombinator.com/item?id=48936451",
-     "score": 196,
-     "comments": 111,
+     "score": 201,
+     "comments": 113,
      "publishedAt": "2026-07-16T16:08:13Z"
     }
    ],
@@ -12810,8 +13113,8 @@
      "title": "Microsoft Comic Chat is now open source",
      "url": "https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source",
      "discussionUrl": "https://news.ycombinator.com/item?id=48936426",
-     "score": 447,
-     "comments": 102,
+     "score": 456,
+     "comments": 103,
      "publishedAt": "2026-07-16T16:06:27Z"
     }
    ],
@@ -14639,7 +14942,7 @@
      "title": "Immersive Linear Algebra Book with Interactive Figures (2015)",
      "url": "https://immersivemath.com/ila",
      "discussionUrl": "https://news.ycombinator.com/item?id=48935951",
-     "score": 134,
+     "score": 139,
      "comments": 24,
      "publishedAt": "2026-07-16T15:32:23Z"
     }
@@ -16190,7 +16493,7 @@
      "title": "How to Train a Gen AI Kick Drum Model on Your Old Linux Desktop with 6GB VRAM",
      "url": "https://zhinit.dev/blog/training-a-kick-drum-diffusion-model",
      "discussionUrl": "https://news.ycombinator.com/item?id=48935687",
-     "score": 82,
+     "score": 83,
      "comments": 52,
      "publishedAt": "2026-07-16T15:13:00Z"
     }
@@ -17382,7 +17685,7 @@
   {
    "id": "60cd8f6b1500",
    "headline": "Target of Monaco bomb blames attack on Ukrainian spy agency",
-   "summary": "Vadym Iermolaiev says military intelligence officers were behind assassination attempt that seriously wounded partner and child • Monaco bomb mystery deepens as Ukraine’s security services linked to murder of prime suspect • Europe live – latest updates The Ukrainian businessman who survived an a...",
+   "summary": "Vadym Iermolaiev says military intelligence officers were behind assassination attempt that seriously wounded partner and child • Monaco bomb mystery deepens as Ukraine’s security services linked to murder of prime suspect The Ukrainian businessman who survived an assassination attempt in Monaco ...",
    "region": "world",
    "category": "other",
    "articles": [
@@ -17392,7 +17695,7 @@
      "title": "Target of Monaco bomb blames attack on Ukrainian spy agency",
      "url": "https://theguardian.com/world/2026/jul/16/target-of-monaco-bomb-blames-attack-on-ukrainian-spy-agency",
      "publishedAt": "2026-07-16T14:51:34.000Z",
-     "summary": "Vadym Iermolaiev says military intelligence officers were behind assassination attempt that seriously wounded partner and child • Monaco bomb mystery deepens as Ukraine’s security services linked to murder of prime suspect • Europe live – latest updates The Ukrainian businessman who survived an a..."
+     "summary": "Vadym Iermolaiev says military intelligence officers were behind assassination attempt that seriously wounded partner and child • Monaco bomb mystery deepens as Ukraine’s security services linked to murder of prime suspect The Ukrainian businessman who survived an assassination attempt in Monaco ..."
     }
    ],
    "discussions": [],
@@ -17686,8 +17989,8 @@
      "title": "Kimi K3: Open Frontier Intelligence",
      "url": "https://kimi.com/blog/kimi-k3",
      "discussionUrl": "https://news.ycombinator.com/item?id=48935342",
-     "score": 962,
-     "comments": 586,
+     "score": 992,
+     "comments": 609,
      "publishedAt": "2026-07-16T14:46:05Z"
     }
    ],
@@ -21921,8 +22224,8 @@
      "title": "Goes-19 weather satellite enters Safe Hold mode",
      "url": "https://spaceweather.gov/news/goes-19-safe-hold",
      "discussionUrl": "https://news.ycombinator.com/item?id=48934286",
-     "score": 141,
-     "comments": 72,
+     "score": 142,
+     "comments": 73,
      "publishedAt": "2026-07-16T13:30:00Z"
     }
    ],
@@ -25062,7 +25365,7 @@
   {
    "id": "6c9a987c09f7",
    "headline": "US gas prices edge up again as US-Iran tensions heighten over strait of Hormuz",
-   "summary": "Diesel tops $5 a gallon as regular gas reaches almost $4, nearly a dollar and a quarter more than a year ago Middle East crisis live – latest updates The average price of diesel fuel in the US has increased again to more than $5 a gallon, according to the AAA, and the average price of gas is almo...",
+   "summary": "Diesel tops $5 a gallon as regular gas reaches almost $4, nearly a dollar and a quarter more than a year ago The average price of diesel fuel in the US has increased again to more than $5 a gallon, according to the AAA, and the average price of gas is almost $4, returning to their highs before th...",
    "region": "world",
    "category": "business",
    "articles": [
@@ -25072,7 +25375,7 @@
      "title": "US gas prices edge up again as US-Iran tensions heighten over strait of Hormuz",
      "url": "https://theguardian.com/world/2026/jul/16/us-gas-prices-rise-strait-of-hormuz",
      "publishedAt": "2026-07-16T12:26:57.000Z",
-     "summary": "Diesel tops $5 a gallon as regular gas reaches almost $4, nearly a dollar and a quarter more than a year ago Middle East crisis live – latest updates The average price of diesel fuel in the US has increased again to more than $5 a gallon, according to the AAA, and the average price of gas is almo..."
+     "summary": "Diesel tops $5 a gallon as regular gas reaches almost $4, nearly a dollar and a quarter more than a year ago The average price of diesel fuel in the US has increased again to more than $5 a gallon, according to the AAA, and the average price of gas is almost $4, returning to their highs before th..."
     }
    ],
    "discussions": [],
@@ -25543,8 +25846,8 @@
      "title": "Sony deletes more movies from the accounts of people who ‘bought’ them",
      "url": "https://techdirt.com/2026/07/15/sony-deletes-a-bunch-more-movies-from-the-accounts-of-people-who-bought-them",
      "discussionUrl": "https://news.ycombinator.com/item?id=48933419",
-     "score": 566,
-     "comments": 350,
+     "score": 569,
+     "comments": 356,
      "publishedAt": "2026-07-16T12:13:43Z"
     }
    ],
@@ -26020,7 +26323,7 @@
      "title": "SpaceX stock erases all its gains and slides below IPO price in intraday trading",
      "url": "https://latimes.com/business/story/2026-07-16/spacex-stock-erases-gains-slides-below-ipo-price-in-intraday-trading",
      "discussionUrl": "https://news.ycombinator.com/item?id=48933344",
-     "score": 281,
+     "score": 283,
      "comments": 258,
      "publishedAt": "2026-07-16T12:02:11Z"
     }
@@ -26208,8 +26511,8 @@
      "title": "The LLM Critics Are Right. I Use LLMs Anyway",
      "url": "https://theocharis.dev/blog/llm-critics-are-right-i-use-llms-anyway",
      "discussionUrl": "https://news.ycombinator.com/item?id=48933310",
-     "score": 164,
-     "comments": 171,
+     "score": 170,
+     "comments": 177,
      "publishedAt": "2026-07-16T11:59:01Z"
     }
    ],
@@ -26223,7 +26526,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 33,
+   "radarScore": 34,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -26791,8 +27094,8 @@
      "title": "How Our Rust-to-Zig Rewrite Is Going",
      "url": "https://rtfeldman.com/rust-to-zig",
      "discussionUrl": "https://news.ycombinator.com/item?id=48933149",
-     "score": 368,
-     "comments": 204,
+     "score": 372,
+     "comments": 207,
      "publishedAt": "2026-07-16T11:39:27Z"
     }
    ],
@@ -28805,7 +29108,7 @@
      "title": "Abstracting Effects with Continuations",
      "url": "https://crowdhailer.me/2026-07-15/abstracting-effects-with-continuations",
      "discussionUrl": "https://news.ycombinator.com/item?id=48932722",
-     "score": 20,
+     "score": 24,
      "comments": 0,
      "publishedAt": "2026-07-16T10:41:39Z"
     }
@@ -28820,7 +29123,7 @@
     "flags": [],
     "llmChecked": false
    },
-   "radarScore": 13,
+   "radarScore": 14,
    "coverage": {
     "mainstream": 0,
     "independent": 0,
@@ -29353,8 +29656,8 @@
      "title": "OnePlus halts operations in USA and Europe",
      "url": "https://community.oneplus.com/thread/2170715118587871237",
      "discussionUrl": "https://news.ycombinator.com/item?id=48932539",
-     "score": 507,
-     "comments": 301,
+     "score": 510,
+     "comments": 303,
      "publishedAt": "2026-07-16T10:14:04Z"
     }
    ],
@@ -41999,7 +42302,7 @@
      "url": "https://github.com/minh-ton/reynard-browser",
      "discussionUrl": "https://news.ycombinator.com/item?id=48930397",
      "score": 147,
-     "comments": 45,
+     "comments": 46,
      "publishedAt": "2026-07-16T04:36:07Z"
     }
    ],
@@ -42678,7 +42981,7 @@
      "url": "https://madcampos.dev/blog/2026/07/accessibility-from-scratch",
      "discussionUrl": "https://news.ycombinator.com/item?id=48930136",
      "score": 224,
-     "comments": 118,
+     "comments": 119,
      "publishedAt": "2026-07-16T03:48:43Z"
     }
    ],
@@ -47811,7 +48114,7 @@
      "title": "Governments, companies, nonprofits should invest in free, open source AI [pdf]",
      "url": "https://siegelendowment.org/wp-content/uploads/2026/07/fortune-david-siegel-open-source-ai.pdf",
      "discussionUrl": "https://news.ycombinator.com/item?id=48927095",
-     "score": 287,
+     "score": 288,
      "comments": 102,
      "publishedAt": "2026-07-15T21:16:36Z"
     }
@@ -81430,8 +81733,8 @@
      "title": "Pseudpocalypse",
      "url": "https://dynomight.net/pseudpocalypse",
      "discussionUrl": "https://news.ycombinator.com/item?id=48908886",
-     "score": 54,
-     "comments": 28,
+     "score": 56,
+     "comments": 31,
      "publishedAt": "2026-07-14T16:02:01Z"
     }
    ],
@@ -111088,7 +111391,7 @@
   {
    "sourceId": "deccanherald",
    "ok": true,
-   "items": 25
+   "items": 24
   },
   {
    "sourceId": "scroll",
@@ -111143,7 +111446,7 @@
   {
    "sourceId": "freepressjournal",
    "ok": true,
-   "items": 37
+   "items": 23
   },
   {
    "sourceId": "thequint",
@@ -111203,7 +111506,7 @@
   {
    "sourceId": "r-news",
    "ok": true,
-   "items": 16
+   "items": 14
   },
   {
    "sourceId": "r-geopolitics",
@@ -111213,7 +111516,7 @@
   {
    "sourceId": "hn",
    "ok": true,
-   "items": 45
+   "items": 46
   }
  ]
 }
