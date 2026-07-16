@@ -51,6 +51,19 @@ export default async function StoryPage({
   const story = stories.find((s) => s.id === id);
   if (!story) notFound();
 
+  // Group articles by outlet: on multi-outlet stories the coverage list
+  // becomes a side-by-side framing comparison in each outlet's own words.
+  const byOutlet = new Map<string, typeof story.articles>();
+  for (const article of story.articles) {
+    const group = byOutlet.get(article.sourceName) ?? [];
+    group.push(article);
+    byOutlet.set(article.sourceName, group);
+  }
+  const outletGroups = [...byOutlet.entries()].sort(
+    (a, b) => Date.parse(a[1][0].publishedAt) - Date.parse(b[1][0].publishedAt),
+  );
+  const isComparison = byOutlet.size >= 2;
+
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
@@ -88,8 +101,17 @@ export default async function StoryPage({
       <div className="mt-6 grid gap-6 md:grid-cols-[1fr_280px]">
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-3">
-            Coverage ({story.articles.length})
+            {isComparison
+              ? `How ${byOutlet.size} outlets headlined it`
+              : `Coverage (${story.articles.length})`}
           </h2>
+          {isComparison && (
+            <p className="mt-1 text-xs text-ink-3">
+              The same event in each outlet&rsquo;s own words. Differences in
+              emphasis and language are part of the picture — we show them,
+              you judge them.
+            </p>
+          )}
           {story.articles.length === 0 && (
             <p className="mt-2 text-sm text-ink-2">
               No established outlet in our source list has covered this yet — that is
@@ -101,31 +123,68 @@ export default async function StoryPage({
             </p>
           )}
           <ul className="mt-2 divide-y divide-hairline">
-            {story.articles.map((article) => (
-              <li key={article.url} className="py-3">
-                <a
-                  href={article.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <span className="text-sm font-medium group-hover:text-accent">
-                    {article.title}
-                  </span>
-                  <span className="mt-0.5 block text-xs text-ink-3">
-                    {article.sourceName}
-                    {SOURCE_BY_ID[article.sourceId]?.primarySource && " · official source"}
-                    {" · "}
-                    <TimeAgo iso={article.publishedAt} nowIso={generatedAt} /> ↗
-                  </span>
-                  {SOURCE_BY_ID[article.sourceId]?.ownership && (
-                    <span className="mt-0.5 block text-xs text-ink-3">
-                      Owned by: {SOURCE_BY_ID[article.sourceId].ownership}
-                    </span>
-                  )}
-                </a>
-              </li>
-            ))}
+            {isComparison
+              ? outletGroups.map(([outlet, articles]) => (
+                  <li key={outlet} className="py-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-ink-2">
+                      {outlet}
+                      {SOURCE_BY_ID[articles[0].sourceId]?.primarySource && (
+                        <span className="ml-2 font-normal normal-case text-ink-3">
+                          official source
+                        </span>
+                      )}
+                    </p>
+                    {SOURCE_BY_ID[articles[0].sourceId]?.ownership && (
+                      <p className="text-xs text-ink-3">
+                        Owned by: {SOURCE_BY_ID[articles[0].sourceId].ownership}
+                      </p>
+                    )}
+                    <ul className="mt-1.5 space-y-2">
+                      {articles.map((article) => (
+                        <li key={article.url}>
+                          <a
+                            href={article.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group block"
+                          >
+                            <span className="text-sm font-medium group-hover:text-accent">
+                              &ldquo;{article.title}&rdquo;
+                            </span>
+                            <span className="ml-2 whitespace-nowrap text-xs text-ink-3">
+                              <TimeAgo iso={article.publishedAt} nowIso={generatedAt} /> ↗
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))
+              : story.articles.map((article) => (
+                  <li key={article.url} className="py-3">
+                    <a
+                      href={article.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block"
+                    >
+                      <span className="text-sm font-medium group-hover:text-accent">
+                        {article.title}
+                      </span>
+                      <span className="mt-0.5 block text-xs text-ink-3">
+                        {article.sourceName}
+                        {SOURCE_BY_ID[article.sourceId]?.primarySource && " · official source"}
+                        {" · "}
+                        <TimeAgo iso={article.publishedAt} nowIso={generatedAt} /> ↗
+                      </span>
+                      {SOURCE_BY_ID[article.sourceId]?.ownership && (
+                        <span className="mt-0.5 block text-xs text-ink-3">
+                          Owned by: {SOURCE_BY_ID[article.sourceId].ownership}
+                        </span>
+                      )}
+                    </a>
+                  </li>
+                ))}
           </ul>
 
           {story.discussions.length > 0 && (
