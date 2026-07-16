@@ -11,7 +11,7 @@ import Anthropic from "@anthropic-ai/sdk";
  * production LLM-free for days). One failed chunk only affects its own items.
  */
 const MODEL = "claude-haiku-4-5";
-const HEADLINE_CHUNK = 100;
+const HEADLINE_CHUNK = 40;
 const PAIR_CHUNK = 50;
 
 let client: Anthropic | null | undefined;
@@ -78,14 +78,19 @@ export async function judgeSameStory(
               `For each numbered pair of news headlines, decide if they report the SAME underlying news event.\n` +
               `Strict rules: same topic, same party, or same people is NOT enough — different developments or different days are different events. ` +
               `Reaction/analysis of an event counts as the same event. A digest/roundup headline covering multiple events matches nothing.\n\n${list}\n\n` +
-              `Reply with a JSON array of booleans only, one per pair, e.g. [true,false,...]`,
+              `Reply with one compact single-line JSON array of booleans, one per pair, no other text, e.g. [true,false,...]`,
           },
         ],
       });
       const text = response.content.find((b) => b.type === "text")?.text ?? "";
       const parsed = parseArray(text, chunk.length);
       results.push(...(parsed ? parsed.map((v) => Boolean(v)) : chunk.map(() => null)));
-      if (!parsed) failures++;
+      if (!parsed) {
+        failures++;
+        console.warn(
+          `  [llm] same-story chunk unparseable (stop=${response.stop_reason}, expected ${chunk.length}): ${text.slice(0, 100)}`,
+        );
+      }
     } catch (err) {
       console.warn(`  [llm] same-story chunk failed: ${(err as Error).message}`);
       results.push(...chunk.map(() => null));
@@ -124,7 +129,7 @@ export async function checkHeadlines(
     try {
       const response = await c.messages.create({
         model: MODEL,
-        max_tokens: Math.max(300, chunk.length * 12),
+        max_tokens: Math.max(600, chunk.length * 25),
         messages: [
           {
             role: "user",
@@ -132,8 +137,8 @@ export async function checkHeadlines(
               `Assess each numbered news headline. For each, list any of these issues that apply: ` +
               `"clickbait", "sensationalized", "opinion presented as news", "unverifiable claim". ` +
               `Most straight news headlines have no issues.\n\n${list}\n\n` +
-              `Reply with a JSON array only — one array of issue strings per headline (empty array if clean), ` +
-              `e.g. [[],["clickbait"],[]]`,
+              `Reply with one compact single-line JSON array only — one array of issue strings per headline ` +
+              `(empty array if clean), no whitespace, no other text, e.g. [[],["clickbait"],[]]`,
           },
         ],
       });
@@ -146,7 +151,12 @@ export async function checkHeadlines(
             }))
           : chunk.map(() => null)),
       );
-      if (!parsed) failures++;
+      if (!parsed) {
+        failures++;
+        console.warn(
+          `  [llm] headline chunk unparseable (stop=${response.stop_reason}, expected ${chunk.length}): ${text.slice(0, 100)}`,
+        );
+      }
     } catch (err) {
       console.warn(`  [llm] headline chunk failed: ${(err as Error).message}`);
       results.push(...chunk.map(() => null));
