@@ -7,7 +7,7 @@ import { clusterItems } from "./cluster";
 import { fetchHn } from "./fetch/hn";
 import { fetchReddit } from "./fetch/reddit";
 import { fetchRss } from "./fetch/rss";
-import { dedupe, isNonNews } from "./normalize";
+import { decodeEntities, dedupe, isNonNews } from "./normalize";
 import { applyCoverage, categorize, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
@@ -129,6 +129,14 @@ async function main() {
   // recompute for carried-over stories too — old datasets heal immediately
   // when the rules improve.
   merged.forEach((story) => {
+    // heal double-encoded HTML entities in previously stored text too
+    story.headline = decodeEntities(story.headline);
+    if (story.summary) story.summary = decodeEntities(story.summary);
+    for (const a of story.articles) {
+      a.title = decodeEntities(a.title);
+      if (a.summary) a.summary = decodeEntities(a.summary);
+    }
+    for (const disc of story.discussions) disc.title = decodeEntities(disc.title);
     story.category = categorize(story.headline + " " + (story.summary ?? ""));
     applyCoverage(story);
   });

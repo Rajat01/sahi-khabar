@@ -1,5 +1,6 @@
 import Parser from "rss-parser";
 import type { RawItem, SourceConfig } from "../../lib/types";
+import { decodeEntities } from "../normalize";
 
 const parser = new Parser({
   timeout: 15000,
@@ -14,7 +15,7 @@ export async function fetchRss(source: SourceConfig): Promise<RawItem[]> {
   const feed = await parser.parseURL(source.url);
   const items: RawItem[] = [];
   for (const item of feed.items ?? []) {
-    const title = item.title?.trim();
+    const title = item.title && decodeEntities(item.title.trim());
     const url = item.link?.trim();
     if (!title || !url) continue;
     const publishedAt = item.isoDate ?? (item.pubDate ? new Date(item.pubDate).toISOString() : undefined);
@@ -24,7 +25,7 @@ export async function fetchRss(source: SourceConfig): Promise<RawItem[]> {
       title,
       url,
       publishedAt,
-      summary: cleanSummary(item.contentSnippet ?? item.summary),
+      summary: cleanSummary(decodeEntities(item.contentSnippet ?? item.summary ?? "") || undefined),
     });
   }
   return items;

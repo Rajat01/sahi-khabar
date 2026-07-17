@@ -69,6 +69,40 @@ export function isNonNews(title: string): boolean {
   return ROUNDUP_PATTERN.test(title) || SERVICE_PATTERN.test(title);
 }
 
+const NAMED_ENTITIES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+  lsquo: "‘",
+  rsquo: "’",
+  ldquo: "“",
+  rdquo: "”",
+  mdash: "—",
+  ndash: "–",
+  hellip: "…",
+};
+
+/**
+ * Some feeds double-encode HTML entities ("&amp;#8216;"), so one decode by
+ * the RSS parser still leaves "&#8216;" visible in headlines. Decode
+ * numeric, hex, and common named entities until the string is stable.
+ */
+export function decodeEntities(text: string): string {
+  let out = text;
+  for (let pass = 0; pass < 3; pass++) {
+    const next = out
+      .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+      .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+      .replace(/&([a-z]+);/gi, (m, name: string) => NAMED_ENTITIES[name.toLowerCase()] ?? m);
+    if (next === out) break;
+    out = next;
+  }
+  return out;
+}
+
 export function dedupe(items: RawItem[]): RawItem[] {
   const byUrl = new Map<string, RawItem>();
   for (const item of items) {
