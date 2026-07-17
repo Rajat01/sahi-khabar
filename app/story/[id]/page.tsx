@@ -7,7 +7,7 @@ import { ShareBar } from "../../../components/ShareBar";
 import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { SOURCE_BY_ID } from "../../../config/sources";
-import { loadDataset } from "../../../lib/data";
+import { isDeveloping, loadDataset } from "../../../lib/data";
 import { SITE_NAME, SITE_URL } from "../../../lib/site";
 
 export function generateStaticParams() {
@@ -97,6 +97,13 @@ export default async function StoryPage({
         update <TimeAgo iso={story.latestPublishedAt} nowIso={generatedAt} /> ·{" "}
         {story.region === "in" ? "India" : "World"} · {story.category}
       </p>
+      {isDeveloping(story) && (
+        <p className="mt-2 rounded-md border border-hairline bg-surface px-3 py-2 text-xs text-ink-2">
+          <span className="font-semibold">Developing:</span> this story surfaced
+          recently from a single outlet. It appears early by design — expect the
+          confidence score to move as more outlets report (or don&rsquo;t).
+        </p>
+      )}
       <CoverageStrip coverage={story.coverage} blindspot={story.blindspot} />
       <ShareBar
         url={`${SITE_URL}/story/${story.id}/`}

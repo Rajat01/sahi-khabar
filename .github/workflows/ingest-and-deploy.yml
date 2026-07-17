@@ -2,9 +2,9 @@ name: Ingest news and deploy
 
 on:
   schedule:
-    # Every 2 hours. On a private repo this uses ~700-1000 of the 2000 free
-    # Actions minutes/month — bump the frequency only after checking usage.
-    - cron: "17 */2 * * *"
+    # Every 30 minutes — free on a public repo (unlimited standard-runner
+    # minutes). Note GitHub schedules can start a few minutes late at peak.
+    - cron: "7,37 * * * *"
   workflow_dispatch: {}
   push:
     branches: [main]

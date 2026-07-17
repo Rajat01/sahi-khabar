@@ -32,7 +32,7 @@ export default function AboutPage() {
         <p className="mt-2 text-sm leading-relaxed text-ink-2">
           KhabarCheck (खबर चेक, &ldquo;news, checked&rdquo;) is a fully automated news
           aggregator. There is no newsroom and no editor: software fetches stories
-          from the sources below every couple of hours, groups articles that
+          from the sources below every half hour, groups articles that
           describe the same event, and computes a <strong>confidence score</strong>{" "}
           for each story. We never write news — every headline links to the outlet
           that published it.
@@ -93,7 +93,10 @@ export default function AboutPage() {
         <p className="mt-2 text-sm text-ink-2">
           The score estimates <em>how well-corroborated a story is right now</em> —
           it is not a truth verdict. Breaking news often starts Unverified and
-          climbs as more outlets confirm it.
+          climbs as more outlets confirm it. Stories that surfaced within the
+          last two hours from a single outlet carry a{" "}
+          <strong>Developing</strong> tag: they appear early by design, and
+          their score should be expected to move.
         </p>
       </section>
 

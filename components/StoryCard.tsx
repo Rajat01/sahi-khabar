@@ -16,6 +16,14 @@ export function StoryCard({ story, nowIso }: { story: FeedStory; nowIso: string 
           </Link>
         </h2>
         <span className="flex shrink-0 items-center gap-1.5">
+          {story.developing && (
+            <span
+              className="rounded-full border border-hairline px-2 py-0.5 text-xs font-medium text-ink-3"
+              title="Surfaced recently with a single outlet — the score will move as more outlets report"
+            >
+              Developing
+            </span>
+          )}
           {story.blindspot && (
             <span
               className="rounded-full border border-status-serious/50 px-2 py-0.5 text-xs font-medium text-ink-2"

@@ -24,7 +24,19 @@ export interface FeedStory {
   discussionCount: number;
   radarScore: number;
   blindspot: boolean;
+  /** Recently surfaced with a single outlet — early, expect the score to move. */
+  developing: boolean;
   latestPublishedAt: string;
+}
+
+const DEVELOPING_WINDOW_MS = 2 * 3600_000;
+
+export function isDeveloping(story: Story): boolean {
+  const outlets = new Set(story.articles.map((a) => a.sourceName)).size;
+  return (
+    outlets === 1 &&
+    Date.now() - Date.parse(story.firstSeenAt) < DEVELOPING_WINDOW_MS
+  );
 }
 
 export function toFeedStory(story: Story): FeedStory {
@@ -44,6 +56,7 @@ export function toFeedStory(story: Story): FeedStory {
     discussionCount: story.discussions.length,
     radarScore: story.radarScore,
     blindspot: story.blindspot === "mainstream-blindspot",
+    developing: isDeveloping(story),
     latestPublishedAt: story.latestPublishedAt,
   };
 }
