@@ -41,6 +41,9 @@ jobs:
           git show origin/data:pair-cache.json > data/pair-cache.json 2>/dev/null \
             && echo "restored pair cache" \
             || echo "no pair cache yet"
+          git show origin/data:redirects.json > data/redirects.json 2>/dev/null \
+            && echo "restored redirects" \
+            || echo "no redirects yet"
 
       - name: Ingest news
         run: pnpm ingest
@@ -59,12 +62,14 @@ jobs:
           workdir=$(mktemp -d)
           cp data/stories.json "$workdir/"
           cp data/pair-cache.json "$workdir/" 2>/dev/null || true
+          cp data/redirects.json "$workdir/" 2>/dev/null || true
           cd "$workdir"
           git init -b data -q
           git config user.name "khabarcheck-bot"
           git config user.email "actions@users.noreply.github.com"
           git add stories.json
           git add pair-cache.json 2>/dev/null || true
+          git add redirects.json 2>/dev/null || true
           git commit -q -m "data snapshot $(date -u +%FT%TZ)"
           git push --force \
             "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" \

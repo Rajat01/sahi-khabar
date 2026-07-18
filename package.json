@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "tsx pipeline/gen-redirects.ts",
     "ingest": "tsx pipeline/run.ts",
     "indexnow": "tsx pipeline/indexnow.ts",
     "typecheck": "tsc --noEmit"

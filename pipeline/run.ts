@@ -8,6 +8,7 @@ import { fetchHn } from "./fetch/hn";
 import { fetchReddit } from "./fetch/reddit";
 import { fetchRss } from "./fetch/rss";
 import { decodeEntities, dedupe, isNonNews } from "./normalize";
+import { saveRedirects } from "./redirects";
 import { applyCoverage, categorize, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
@@ -207,23 +208,31 @@ function mergeStories(fresh: Story[], previous: Story[], cutoff: number): Story[
   const freshIds = new Set(deduped.map((s) => s.id));
   // Re-clustering can absorb several old stories into one fresh one; an old
   // story whose URLs now live inside fresh stories is superseded, not lost.
-  const freshUrls = new Set(
-    deduped.flatMap((s) => [
-      ...s.articles.map((a) => a.url),
-      ...s.discussions.map((d) => d.url),
-    ]),
-  );
-  const kept = previous.filter(
-    (old) =>
-      !freshIds.has(old.id) &&
-      !claimedOldIds.has(old.id) &&
-      !old.articles.some((a) => freshUrls.has(a.url)) &&
-      !old.discussions.some((d) => freshUrls.has(d.url)) &&
-      // non-news (roundups, horoscopes, …) is filtered at ingestion now;
-      // purge items already stored from before the rules existed
-      !isNonNews(old.headline) &&
-      Date.parse(old.latestPublishedAt) > cutoff,
-  );
+  // Record where each absorbed id went so old links can 301 instead of 404.
+  const urlToFreshId = new Map<string, string>();
+  for (const s of deduped) {
+    for (const a of s.articles) urlToFreshId.set(a.url, s.id);
+    for (const d of s.discussions) urlToFreshId.set(d.url, s.id);
+  }
+  const redirects = new Map<string, string>();
+  const kept = previous.filter((old) => {
+    if (freshIds.has(old.id) || claimedOldIds.has(old.id)) return false;
+    const target =
+      old.articles.map((a) => urlToFreshId.get(a.url)).find(Boolean) ??
+      old.discussions.map((d) => urlToFreshId.get(d.url)).find(Boolean);
+    if (target) {
+      redirects.set(old.id, target);
+      return false;
+    }
+    // non-news (roundups, horoscopes, …) is filtered at ingestion now;
+    // purge items already stored from before the rules existed
+    if (isNonNews(old.headline)) return false;
+    return Date.parse(old.latestPublishedAt) > cutoff;
+  });
+  saveRedirects(redirects);
+  if (redirects.size > 0) {
+    console.log(`[ingest] recorded ${redirects.size} story redirect(s) for absorbed ids`);
+  }
   return [...deduped, ...kept];
 }
 
