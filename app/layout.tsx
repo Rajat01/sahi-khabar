@@ -96,8 +96,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               .
             </p>
             <p className="mt-1">
-              Last updated {new Date(generatedAt).toUTCString()}. No tracking, no
-              accounts, no ads.
+              Last updated {new Date(generatedAt).toUTCString()}. We never track
+              our readers — that one is permanent.{" "}
+              <Link href="/about/#sustainability" className="underline hover:text-accent">
+                How we plan to sustain this
+              </Link>
+              .
             </p>
           </div>
         </footer>

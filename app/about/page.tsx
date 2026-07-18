@@ -116,6 +116,22 @@ export default function AboutPage() {
         </p>
       </section>
 
+      <section id="sustainability">
+        <h2 className="text-base font-semibold">Sustainability &amp; our promises</h2>
+        <p className="mt-2 text-sm leading-relaxed text-ink-2">
+          KhabarCheck currently runs on a few dollars a month and carries no
+          ads and no accounts. As it grows, keeping it running may mean adding
+          revenue — clearly labeled sponsorships or ads, reader support, or
+          optional accounts for features like saved topics. We would rather be
+          honest about that possibility than make promises we might have to
+          break. One promise <em>is</em> permanent:{" "}
+          <strong>we will never track our readers</strong> — no behavioural
+          profiling, no selling data, no third-party trackers, whatever the
+          revenue model. Anything optional (like an account) will stay
+          optional, and everything commercial will be labeled as such.
+        </p>
+      </section>
+
       <section>
         <h2 className="text-base font-semibold">Media Blindspots</h2>
         <p className="mt-2 text-sm leading-relaxed text-ink-2">
