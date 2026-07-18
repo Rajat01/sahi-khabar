@@ -18,6 +18,7 @@ export interface FeedStory {
   summary?: string;
   region: Story["region"];
   category: Story["category"];
+  categories: Story["categories"];
   band: Story["score"]["band"];
   total: number;
   sources: { id: string; name: string }[];
@@ -46,6 +47,7 @@ export function toFeedStory(story: Story): FeedStory {
     summary: story.summary,
     region: story.region,
     category: story.category,
+    categories: story.categories ?? [story.category],
     band: story.score.band,
     total: story.score.total,
     sources: [

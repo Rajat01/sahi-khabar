@@ -100,6 +100,7 @@ function buildStory(cluster: Cluster): Story | null {
     summary,
     region,
     category: categorize(headline + " " + (summary ?? "")),
+    categories: categorizeAll(headline + " " + (summary ?? "")),
     articles,
     discussions,
     score: baseScore(articles),
@@ -270,11 +271,11 @@ const CATEGORY_KEYWORDS: [Category, RegExp][] = [
   ],
   [
     "science",
-    /\b(research(ers?)?|study|studies|scientists?|space(craft)?|isro|nasa|satellites?|climate|vaccines?|epidemic|pandemic|diseases?|species|physics|quantum|genomes?|fossils?|telescopes?|astronomy)\b/i,
+    /\b(research(ers?)?|study|studies|scientists?|space(craft)?|rockets?|orbits?|orbital|isro|nasa|satellites?|climate|vaccines?|epidemic|pandemic|diseases?|species|physics|quantum|genomes?|fossils?|telescopes?|astronomy)\b/i,
   ],
   [
     "tech",
-    /\b(ai|artificial intelligence|software|apps?|google|apple|microsoft|meta|openai|anthropic|chips?|semiconductors?|cyber(attack|security)?|data breach|crypto(currency)?|bitcoin|internet|smartphones?|silicon valley|start-?ups?|tech|gadgets?)\b/i,
+    /\b(ai|artificial intelligence|software|apps?|google|apple|microsoft|meta|openai|anthropic|chips?|semiconductors?|cyber(attack|security)?|data breach|crypto(currency)?|bitcoin|internet|smartphones?|silicon valley|start-?ups?|aerospace|space-?tech|skyroot|agnikul|pixxel|spacex|blue origin|tech|gadgets?)\b/i,
   ],
   [
     "politics",
@@ -286,9 +287,14 @@ const CATEGORY_KEYWORDS: [Category, RegExp][] = [
   ],
 ];
 
+/** All matching categories in priority order; ['other'] when none match. */
+export function categorizeAll(text: string): Category[] {
+  const matches = CATEGORY_KEYWORDS.filter(([, pattern]) => pattern.test(text)).map(
+    ([category]) => category,
+  );
+  return matches.length > 0 ? matches : ["other"];
+}
+
 export function categorize(text: string): Category {
-  for (const [category, pattern] of CATEGORY_KEYWORDS) {
-    if (pattern.test(text)) return category;
-  }
-  return "other";
+  return categorizeAll(text)[0];
 }

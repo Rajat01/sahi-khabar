@@ -28,7 +28,7 @@ export function Feed({ stories, nowIso }: { stories: FeedStory[]; nowIso: string
   const filtered = stories.filter(
     (s) =>
       (region === "all" || s.region === region) &&
-      (category === "all" || s.category === category),
+      (category === "all" || s.categories.includes(category)),
   );
 
   const pill = (active: boolean) =>

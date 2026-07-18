@@ -101,7 +101,10 @@ export interface Story {
   headline: string;
   summary?: string;
   region: Region;
+  /** Primary category — drives ranking weight. First entry of `categories`. */
   category: Category;
+  /** Every category the story belongs to; topic filters match any of them. */
+  categories: Category[];
   articles: StoryArticle[];
   discussions: Discussion[];
   score: ScoreBreakdown;
