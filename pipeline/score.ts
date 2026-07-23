@@ -91,14 +91,12 @@ function buildStory(cluster: Cluster): Story | null {
   const summary = articles.find((a) => a.summary)?.summary;
 
   const dates = [...articles, ...discussions].map((x) => Date.parse(x.publishedAt));
-  const regionVotes = cluster.items.map((it) => SOURCE_BY_ID[it.sourceId]?.region ?? "world");
-  const region = regionVotes.filter((r) => r === "in").length > regionVotes.length / 2 ? "in" : "world";
 
   const story: Story = {
     id: cluster.id,
     headline,
     summary,
-    region,
+    region: "world", // set by applyRegion below
     category: categorize(headline + " " + (summary ?? "")),
     categories: categorizeAll(headline + " " + (summary ?? "")),
     articles,
@@ -109,12 +107,27 @@ function buildStory(cluster: Cluster): Story | null {
     firstSeenAt: new Date(Math.min(...dates)).toISOString(),
     latestPublishedAt: new Date(Math.max(...dates)).toISOString(),
   };
+  applyRegion(story);
   applyCoverage(story);
   return story;
 }
 
+/**
+ * Region means what the story is ABOUT, not who reported it: a UK election
+ * covered by nine Indian outlets is still world news. India when the text is
+ * India-relevant or any article came from an India-section feed (whose
+ * content is about India by construction). Exported for the heal pass.
+ */
+export function applyRegion(story: Story): void {
+  const text = story.headline + " " + (story.summary ?? "");
+  const fromIndiaSection = story.articles.some(
+    (a) => SOURCE_BY_ID[a.sourceId]?.scope === "in",
+  );
+  story.region = INDIA_PATTERN.test(text) || fromIndiaSection ? "in" : "world";
+}
+
 const INDIA_PATTERN =
-  /\b(india|indian|bharat|hindustan|desi|delhi|mumbai|bengaluru|bangalore|kolkata|chennai|hyderabad|pune|ahmedabad|modi|lok sabha|rajya sabha|bjp|congress party|rahul gandhi|kashmir|punjab|kerala|tamil nadu|karnataka|maharashtra|gujarat|bihar|bengal|uttar pradesh|assam|manipur|rupee|rbi|sebi|isro|nifty|sensex|aadhaar|bollywood)\b/i;
+  /\b(india|indian|bharat|hindustan|desi|delhi|mumbai|bengaluru|bangalore|kolkata|chennai|hyderabad|pune|ahmedabad|surat|jaipur|lucknow|kanpur|nagpur|indore|bhopal|patna|noida|gurugram|gurgaon|varanasi|amritsar|kochi|coimbatore|mysuru|guwahati|bhubaneswar|ranchi|raipur|chandigarh|shimla|srinagar|modi|lok sabha|rajya sabha|bjp|congress party|rahul gandhi|amit shah|nirmala sitharaman|kejriwal|mamata|kashmir|ladakh|punjab|kerala|tamil nadu|karnataka|maharashtra|gujarat|bihar|bengal|uttar pradesh|uttarakhand|assam|manipur|odisha|jharkhand|chhattisgarh|telangana|andhra|haryana|himachal|rajasthan|goa|tripura|meghalaya|nagaland|mizoram|sikkim|tmc|dmk|shiv sena|aiadmk|rupee|crore|lakh|rbi|sebi|isro|nifty|sensex|aadhaar|gst|cbi|bollywood|supreme court of india|panchayat)\b/i;
 
 /**
  * Fill in coverage buckets and the blindspot flag. Exported so run.ts can

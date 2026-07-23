@@ -127,7 +127,7 @@ export function CheckTool({ corpus }: { corpus: CheckStory[] }) {
                       : "Circulating in community discussions, but no outlet we track has reported it."}
                 </p>
                 <p className="mt-1 text-sm text-ink-2">
-                  Closest matching story and its confidence score below — read
+                  Closest matching story and its reporting-confidence score below — read
                   the sources before forwarding.
                 </p>
               </div>

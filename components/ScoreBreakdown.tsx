@@ -37,7 +37,7 @@ export function ScoreBreakdown({ score }: { score: Breakdown }) {
   return (
     <div className="rounded-lg border border-hairline bg-surface p-4">
       <div className="flex items-baseline justify-between">
-        <h3 className="text-sm font-semibold">Confidence score</h3>
+        <h3 className="text-sm font-semibold">Reporting confidence</h3>
         <span className="text-2xl font-semibold tabular-nums">
           {score.total}
           <span className="text-sm font-normal text-ink-3">/100</span>

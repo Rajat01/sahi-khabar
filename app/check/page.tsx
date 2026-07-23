@@ -5,7 +5,7 @@ import { loadDataset, toCheckStory } from "../../lib/data";
 export const metadata: Metadata = {
   title: "Check a forward",
   description:
-    "Paste a WhatsApp-forwarded headline and see which established outlets are actually reporting it, with a confidence score. Runs on your device.",
+    "Paste a WhatsApp-forwarded headline and see which established outlets are actually reporting it, and how strongly. Runs on your device.",
   alternates: { canonical: "/check/" },
 };
 

@@ -9,7 +9,7 @@ import { fetchReddit } from "./fetch/reddit";
 import { fetchRss } from "./fetch/rss";
 import { decodeEntities, dedupe, isNonNews } from "./normalize";
 import { saveRedirects } from "./redirects";
-import { applyCoverage, categorizeAll, scoreClusters } from "./score";
+import { applyCoverage, applyRegion, categorizeAll, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
 const MAX_AGE_DAYS = 7;
@@ -140,6 +140,7 @@ async function main() {
     for (const disc of story.discussions) disc.title = decodeEntities(disc.title);
     story.categories = categorizeAll(story.headline + " " + (story.summary ?? ""));
     story.category = story.categories[0];
+    applyRegion(story);
     applyCoverage(story);
   });
   merged.sort((a, b) => Date.parse(b.latestPublishedAt) - Date.parse(a.latestPublishedAt));

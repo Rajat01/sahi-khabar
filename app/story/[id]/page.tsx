@@ -25,7 +25,7 @@ export async function generateMetadata({
   const outlets = [...new Set(story.articles.map((a) => a.sourceName))];
   const description =
     story.summary ??
-    `Coverage from ${outlets.slice(0, 3).join(", ")} with a transparent confidence score of ${story.score.total}/100.`;
+    `Coverage from ${outlets.slice(0, 3).join(", ")} — reporting confidence ${story.score.total}/100.`;
   return {
     title: story.headline,
     description,
@@ -101,7 +101,7 @@ export default async function StoryPage({
         <p className="mt-2 rounded-md border border-hairline bg-surface px-3 py-2 text-xs text-ink-2">
           <span className="font-semibold">Developing:</span> this story surfaced
           recently from a single outlet. It appears early by design — expect the
-          confidence score to move as more outlets report (or don&rsquo;t).
+          reporting-confidence score to move as more outlets report (or don&rsquo;t).
         </p>
       )}
       <CoverageStrip coverage={story.coverage} blindspot={story.blindspot} />

@@ -22,6 +22,12 @@ export interface SourceConfig {
   primarySource?: boolean;
   /** Editorial bucket for blindspot analysis. Outlets only. */
   group?: SourceGroup;
+  /**
+   * What the feed's CONTENT is about (not the outlet's nationality):
+   * "in" = India-section feed, "mixed" = general feed of an Indian outlet,
+   * "world" = international outlet. Drives story region.
+   */
+  scope?: "in" | "mixed" | "world";
   /** Who owns/funds this outlet — shown openly in the UI. Outlets only. */
   ownership?: string;
 }

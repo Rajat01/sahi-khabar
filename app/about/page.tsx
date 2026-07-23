@@ -5,7 +5,7 @@ import type { SourceGroup } from "../../lib/types";
 export const metadata: Metadata = {
   title: "Methodology",
   description:
-    "How KhabarCheck computes confidence scores, detects media blindspots, and rates outlets — the full methodology and source table.",
+    "How KhabarCheck computes reporting-confidence scores, detects media blindspots, and rates outlets — the full methodology and source table.",
   alternates: { canonical: "/about/" },
 };
 
@@ -33,14 +33,20 @@ export default function AboutPage() {
           KhabarCheck (खबर चेक, &ldquo;news, checked&rdquo;) is a fully automated news
           aggregator. There is no newsroom and no editor: software fetches stories
           from the sources below every half hour, groups articles that
-          describe the same event, and computes a <strong>confidence score</strong>{" "}
+          describe the same event, and computes a <strong>reporting-confidence score</strong>{" "}
           for each story. We never write news — every headline links to the outlet
           that published it.
         </p>
       </section>
 
       <section>
-        <h2 className="text-base font-semibold">The confidence score (0–100)</h2>
+        <h2 className="text-base font-semibold">The reporting-confidence score (0–100)</h2>
+        <p className="mt-2 text-sm text-ink-2">
+          It measures the <strong>strength and diversity of available
+          reporting</strong> — not whether every claim in the story is true.
+          Seven outlets can repeat the same wrong claim; one excellent reporter
+          can break a true story alone. Read the score accordingly.
+        </p>
         <table className="mt-2 w-full border-collapse text-sm">
           <thead>
             <tr className="border-b border-hairline text-left text-xs uppercase tracking-wide text-ink-3">
@@ -86,14 +92,17 @@ export default function AboutPage() {
           </tbody>
         </table>
         <p className="mt-2 text-sm text-ink-2">
-          <strong>Bands:</strong> High is 75+, Medium is 50–74, Low is below 50.
-          A story covered by a single lower-rated outlet is marked{" "}
-          <strong>Unverified</strong> regardless of its number.
+          <strong>Bands:</strong> <em>Widely reported</em> is 75+,{" "}
+          <em>Partially corroborated</em> is 50–74, <em>Limited reporting</em>{" "}
+          is below 50. A story covered by a single lower-rated outlet is marked{" "}
+          <strong>Not independently corroborated</strong> regardless of its
+          number.
         </p>
         <p className="mt-2 text-sm text-ink-2">
           The score estimates <em>how well-corroborated a story is right now</em> —
-          it is not a truth verdict. Breaking news often starts Unverified and
-          climbs as more outlets confirm it. Stories that surfaced within the
+          it is not a truth verdict. Breaking news often starts as{" "}
+          <em>Not independently corroborated</em> and climbs as more outlets
+          confirm it. Stories that surfaced within the
           last two hours from a single outlet carry a{" "}
           <strong>Developing</strong> tag: they appear early by design, and
           their score should be expected to move.
@@ -156,7 +165,7 @@ export default function AboutPage() {
           </a>{" "}
           matches pasted text against our last 7 days of stories, entirely on
           your device — nothing you paste is sent anywhere or stored. A match
-          shows who is reporting the claim and its confidence score; no match
+          shows who is reporting the claim and how strongly it is corroborated; no match
           means <em>unconfirmed by the outlets we track</em>, not necessarily
           false.
         </p>

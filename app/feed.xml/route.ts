@@ -20,7 +20,7 @@ export function GET() {
     .slice(0, MAX_ITEMS)
     .map((s) => {
       const outlets = [...new Set(s.articles.map((a) => a.sourceName))].join(", ");
-      const desc = `${s.summary ?? s.headline} — reported by ${outlets}. Confidence: ${s.score.total}/100 (${s.score.band}).`;
+      const desc = `${s.summary ?? s.headline} — reported by ${outlets}. Reporting confidence: ${s.score.total}/100 (${s.score.band}).`;
       return `    <item>
       <title>${esc(s.headline)}</title>
       <link>${SITE_URL}/story/${s.id}/</link>
