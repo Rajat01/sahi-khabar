@@ -177,12 +177,80 @@ export function applyCoverage(story: Story): void {
       : undefined;
 }
 
+// Wire agencies whose syndicated copy many outlets reprint. Bare "AP" is
+// deliberately absent — in Indian news it usually means Andhra Pradesh.
+const WIRE_PATTERN = /\b(PTI|ANI|IANS|AFP|Reuters|Associated Press|Xinhua)\b/;
+
+/**
+ * Count independent REPORTING ORIGINS, not outlets. Ten articles are not ten
+ * confirmations when Mint and Hindustan Times share an owner, five of them
+ * reprint the same PTI copy, or one just cites another outlet's reporting.
+ */
+function reportingOrigins(articles: StoryArticle[]): number {
+  if (articles.length === 0) return 0;
+
+  // 1. Common ownership: articles from outlets with the same owner are one
+  //    origin (the ownership string doubles as the group key).
+  const units = new Map<string, StoryArticle[]>();
+  for (const a of articles) {
+    const key = SOURCE_BY_ID[a.sourceId]?.ownership ?? a.sourceName;
+    const group = units.get(key) ?? [];
+    group.push(a);
+    units.set(key, group);
+  }
+  let groups = [...units.values()];
+
+  // 2. Syndicated copy: units crediting the same wire agency, or with
+  //    near-identical headlines, collapse into one origin.
+  const wireOf = (g: StoryArticle[]): string | undefined => {
+    for (const a of g) {
+      const m = (a.title + " " + (a.summary ?? "")).match(WIRE_PATTERN);
+      if (m) return m[1];
+    }
+    return undefined;
+  };
+  const tokensOf = (g: StoryArticle[]) => g.map((a) => new Set(a.title.toLowerCase().split(/\W+/).filter(Boolean)));
+  const nearIdentical = (a: Set<string>, b: Set<string>): boolean => {
+    let inter = 0;
+    for (const t of a) if (b.has(t)) inter++;
+    const union = a.size + b.size - inter;
+    return union > 0 && inter / union >= 0.85;
+  };
+  const parent = groups.map((_, i) => i);
+  const find = (x: number): number => (parent[x] === x ? x : (parent[x] = find(parent[x])));
+  const groupTokens = groups.map(tokensOf);
+  for (let i = 0; i < groups.length; i++) {
+    for (let j = i + 1; j < groups.length; j++) {
+      const wi = wireOf(groups[i]);
+      const sameWire = wi !== undefined && wi === wireOf(groups[j]);
+      const sameText = groupTokens[i].some((ta) => groupTokens[j].some((tb) => nearIdentical(ta, tb)));
+      if (sameWire || sameText) parent[find(i)] = find(j);
+    }
+  }
+  const merged = new Map<number, StoryArticle[]>();
+  groups.forEach((g, i) => {
+    const root = find(i);
+    merged.set(root, [...(merged.get(root) ?? []), ...g]);
+  });
+
+  // 3. Circular sourcing: a unit whose every article cites another outlet
+  //    ("according to The Hindu…") relays reporting, it doesn't originate it.
+  const outletNames = [...new Set(articles.map((a) => a.sourceName))];
+  const citesAnother = (a: StoryArticle): boolean => {
+    const text = a.title + " " + (a.summary ?? "");
+    return outletNames.some((n) => n !== a.sourceName && text.includes(n));
+  };
+  const origins = [...merged.values()].filter((g) => !g.every(citesAnother)).length;
+  return Math.max(1, origins);
+}
+
 function baseScore(articles: StoryArticle[]): ScoreBreakdown {
-  // Corroboration: count independent outlets (distinct source AND distinct domain).
+  // Corroboration: independent reporting origins (ownership, wire copy and
+  // circular citations discounted), capped by distinct domains.
   const outlets = new Set(articles.map((a) => a.sourceName));
   const domains = new Set(articles.map((a) => domainOf(a.url)));
-  const independent = Math.min(outlets.size, domains.size);
-  // log-scaled: 1 outlet -> ~15, 2 -> ~25, 3 -> ~32, 5+ -> 40
+  const independent = articles.length === 0 ? 0 : Math.min(reportingOrigins(articles), domains.size);
+  // log-scaled: 1 origin -> ~15, 2 -> ~25, 3 -> ~32, 5+ -> 40
   const corroboration =
     independent === 0
       ? 0
@@ -206,6 +274,8 @@ function baseScore(articles: StoryArticle[]): ScoreBreakdown {
 
   return {
     corroboration,
+    origins: independent,
+    outletCount: outlets.size,
     reliability,
     primarySource: hasPrimary ? WEIGHTS.primary : 0,
     sanityCheck: 0,

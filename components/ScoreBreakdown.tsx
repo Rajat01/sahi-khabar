@@ -10,7 +10,7 @@ const COMPONENTS: {
     key: "corroboration",
     max: 40,
     label: "Corroboration",
-    explains: "independent outlets reporting the same story",
+    explains: "independent reporting origins",
   },
   {
     key: "reliability",
@@ -74,6 +74,17 @@ export function ScoreBreakdown({ score }: { score: Breakdown }) {
           );
         })}
       </dl>
+      {score.origins !== undefined &&
+        score.outletCount !== undefined &&
+        score.outletCount > 0 && (
+          <p className="mt-3 text-xs text-ink-3">
+            {score.origins} independent reporting{" "}
+            {score.origins === 1 ? "origin" : "origins"} across{" "}
+            {score.outletCount} outlet{score.outletCount === 1 ? "" : "s"} —
+            shared ownership, reprinted wire copy, and articles citing another
+            outlet&rsquo;s reporting count once.
+          </p>
+        )}
       {score.flags.length > 0 && (
         <p className="mt-3 text-xs text-ink-2">
           <span className="font-medium">Flags:</span> {score.flags.join(", ")}

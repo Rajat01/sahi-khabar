@@ -9,6 +9,7 @@ import { fetchReddit } from "./fetch/reddit";
 import { fetchRss } from "./fetch/rss";
 import { decodeEntities, dedupe, isNonNews } from "./normalize";
 import { saveRedirects } from "./redirects";
+import { detectSagas } from "./sagas";
 import { applyCoverage, applyRegion, categorizeAll, scoreClusters } from "./score";
 
 const DATA_PATH = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "stories.json");
@@ -145,9 +146,17 @@ async function main() {
   });
   merged.sort((a, b) => Date.parse(b.latestPublishedAt) - Date.parse(a.latestPublishedAt));
 
+  // Second-level grouping for the feed: developing-story hubs.
+  merged.forEach((s) => { s.sagaId = undefined; });
+  const sagas = detectSagas(merged);
+  if (sagas.length > 0) {
+    console.log(`[ingest] ${sagas.length} developing-story hub(s): ${sagas.slice(0, 3).map((s) => `${s.title} (${s.storyIds.length})`).join(", ")}`);
+  }
+
   const dataset: Dataset = {
     generatedAt: new Date().toISOString(),
     stories: merged,
+    sagas,
     sourceStatus,
   };
   mkdirSync(dirname(DATA_PATH), { recursive: true });

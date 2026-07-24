@@ -60,8 +60,15 @@ export default function AboutPage() {
               <td className="py-2 pr-3 font-medium text-ink">Corroboration</td>
               <td className="py-2 pr-3 tabular-nums">40</td>
               <td className="py-2">
-                How many independent outlets report the same story. One outlet
-                scores low; five outlets score full marks.
+                How many <em>independent reporting origins</em> a story has —
+                not a raw outlet count. Outlets under shared ownership (Mint +
+                Hindustan Times), copies of the same wire report (PTI, ANI,
+                Reuters), and articles that merely cite another outlet&rsquo;s
+                reporting collapse into one origin. One origin scores low; five
+                score full marks. Known limit: we analyse headlines and
+                summaries, so several outlets independently covering the same
+                single statement can still overcount — flagging
+                single-statement stories is planned.
               </td>
             </tr>
             <tr className="border-b border-hairline align-top">

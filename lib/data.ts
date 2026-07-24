@@ -27,6 +27,7 @@ export interface FeedStory {
   blindspot: boolean;
   /** Recently surfaced with a single outlet — early, expect the score to move. */
   developing: boolean;
+  sagaId?: string;
   latestPublishedAt: string;
 }
 
@@ -59,6 +60,7 @@ export function toFeedStory(story: Story): FeedStory {
     radarScore: story.radarScore,
     blindspot: story.blindspot === "mainstream-blindspot",
     developing: isDeveloping(story),
+    sagaId: story.sagaId,
     latestPublishedAt: story.latestPublishedAt,
   };
 }

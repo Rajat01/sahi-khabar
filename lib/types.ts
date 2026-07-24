@@ -71,6 +71,10 @@ export interface Discussion {
 }
 
 export interface ScoreBreakdown {
+  /** Independent reporting origins after ownership/wire/citation discounts. */
+  origins?: number;
+  /** Unique outlets before discounts — shown alongside origins for honesty. */
+  outletCount?: number;
   /** 0-40: independent outlets corroborating the story */
   corroboration: number;
   /** 0-30: average reliability rating of the outlets involved */
@@ -119,12 +123,23 @@ export interface Story {
   coverage: CoverageBuckets;
   /** Set when an India-relevant story has zero Indian-mainstream coverage. */
   blindspot?: "mainstream-blindspot";
+  /** Developing-story hub this story belongs to, when one exists. */
+  sagaId?: string;
   firstSeenAt: string;
+  latestPublishedAt: string;
+}
+
+/** A developing-story hub: distinct scored stories orbiting one entity. */
+export interface Saga {
+  id: string;
+  title: string;
+  storyIds: string[];
   latestPublishedAt: string;
 }
 
 export interface Dataset {
   generatedAt: string;
   stories: Story[];
+  sagas?: Saga[];
   sourceStatus: { sourceId: string; ok: boolean; items: number; error?: string }[];
 }
