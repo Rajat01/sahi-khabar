@@ -132,6 +132,33 @@ export default function AboutPage() {
         </p>
       </section>
 
+      <section id="developing-stories">
+        <h2 className="text-base font-semibold">Ongoing story hubs</h2>
+        <p className="mt-2 text-sm leading-relaxed text-ink-2">
+          A single running story — a protest, a court case, a crisis — can
+          produce a dozen separate developments in a few days: health updates,
+          political reactions, celebrity comments, court orders. Each is its
+          own verified story with its own score, but showing all of them as
+          separate feed entries reads as repetition. When four or more
+          stories share a specific, non-generic detail — not just a topic
+          like &ldquo;Kerala High Court,&rdquo; which rules on unrelated
+          cases daily — they collapse into one <strong>ongoing story</strong>{" "}
+          card showing the latest development, linking to a page with the
+          full timeline. Nothing is hidden: every development keeps its own
+          page, score, and place in the region/topic filters and sitemap; the
+          hub only changes how the home feed displays them together.
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-ink-2">
+          <strong>Known limits:</strong> grouping runs on shared names and
+          places extracted from headlines, not on understanding what a
+          development actually says — it can occasionally miss a development
+          or, rarely, group two similar-sounding but unrelated stories.
+          Splitting developments into background / reactions / claims-checked
+          (as opposed to one flat timeline) needs deeper analysis of each
+          article and isn&rsquo;t built yet.
+        </p>
+      </section>
+
       <section id="sustainability">
         <h2 className="text-base font-semibold">Sustainability &amp; our promises</h2>
         <p className="mt-2 text-sm leading-relaxed text-ink-2">

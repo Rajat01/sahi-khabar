@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { rankStories } from "./rank";
 import type { Dataset, Story } from "./types";
 
 /**
@@ -28,6 +29,9 @@ export interface FeedStory {
   /** Recently surfaced with a single outlet — early, expect the score to move. */
   developing: boolean;
   sagaId?: string;
+  /** Set only on the one card that stands in for a developing-story hub. */
+  sagaTitle?: string;
+  sagaCount?: number;
   latestPublishedAt: string;
 }
 
@@ -63,6 +67,44 @@ export function toFeedStory(story: Story): FeedStory {
     sagaId: story.sagaId,
     latestPublishedAt: story.latestPublishedAt,
   };
+}
+
+/**
+ * Rank stories, then collapse each developing-story saga into ONE card so a
+ * busy news cycle (14+ Wangchuk-protest developments) doesn't dominate the
+ * feed. The card sits at the position its best-ranked development earned,
+ * but shows the LATEST development's headline — readers get "what's new,"
+ * not whichever fragment happened to rank highest. Individual developments
+ * remain full stories with their own pages, scores, and place in filters —
+ * nothing is hidden, only de-duplicated in this one list.
+ */
+export function collapseSagasForFeed(stories: Story[], nowIso: string, sagas: Dataset["sagas"]): FeedStory[] {
+  const ranked = rankStories(stories, nowIso);
+  const sagaById = new Map((sagas ?? []).map((s) => [s.id, s]));
+  const storyById = new Map(stories.map((s) => [s.id, s]));
+  const emitted = new Set<string>();
+  const out: FeedStory[] = [];
+  for (const story of ranked) {
+    if (!story.sagaId) {
+      out.push(toFeedStory(story));
+      continue;
+    }
+    if (emitted.has(story.sagaId)) continue;
+    emitted.add(story.sagaId);
+    const saga = sagaById.get(story.sagaId);
+    if (!saga) {
+      out.push(toFeedStory(story));
+      continue;
+    }
+    const latest = storyById.get(saga.storyIds[0]) ?? story;
+    out.push({
+      ...toFeedStory(latest),
+      sagaId: saga.id,
+      sagaTitle: saga.title,
+      sagaCount: saga.storyIds.length,
+    });
+  }
+  return out;
 }
 
 /** Slimmer still — the corpus the /check tool searches in the browser. */

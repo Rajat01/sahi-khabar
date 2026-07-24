@@ -34,11 +34,45 @@ import { STOPWORDS, tokenize } from "../lib/text";
 export { tokenize };
 
 /** Capitalized words from the original title — a cheap proper-noun signal. */
+/**
+ * Many Indian outlets Title Case Every Word In A Headline, so a naive
+ * "capitalized = proper noun" test misfires on ordinary function words
+ * ("Here", "Says", "Where To Watch"). This list of common English words
+ * that show up capitalized in headline title case is deliberately large —
+ * false negatives (missing a real rare name) are cheap; false positives
+ * (a filler word with huge document frequency) previously created bogus
+ * "sagas" with dozens of unrelated stories.
+ */
+export const TITLE_CASE_NOISE = new Set(
+  `here there this that these those what where when why how who which
+   says said say tells told asks ask claims calls call gets get set sets
+   makes make takes take comes come goes go meets meet watch watching read
+   reading know knows first new now then still just also even only all
+   every some many more most other such own same too very can will would
+   could should shall not nor but and yet for from with without within
+   into onto upon amid after before during over under between against
+   about around across along among per via as at by in of on to up out off
+   down back away out through than while if unless because since until
+   despite though although once again already yet still soon today
+   tomorrow yesterday next last week month year day days weeks months
+   years top big small major minor key latest breaking exclusive live
+   update updates report reports amid amidst versus vs its his her their
+   our your my ours yours theirs mine himself herself itself themselves
+   who's what's where's here's there's it's let lets let's how's why's
+   watch: read: full video photos pics pic images image
+   crore crores lakh lakhs rs rupee rupees percent pc cr per`
+    .split(/\s+/)
+    .filter(Boolean),
+);
+
 export function properNouns(title: string): Set<string> {
   const nouns = new Set<string>();
   for (const word of title.split(/\s+/).slice(1)) {
     const m = word.match(/^[A-Z][a-zA-Z]{2,}/);
-    if (m && !STOPWORDS.has(m[0].toLowerCase())) nouns.add(m[0].toLowerCase());
+    const lower = m?.[0].toLowerCase();
+    if (lower && !STOPWORDS.has(lower) && !TITLE_CASE_NOISE.has(lower)) {
+      nouns.add(lower);
+    }
   }
   const first = title.split(/\s+/)[0]?.match(/^[A-Z]{2,}$/);
   if (first) nouns.add(first[0].toLowerCase());

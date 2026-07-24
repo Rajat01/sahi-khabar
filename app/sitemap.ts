@@ -5,7 +5,7 @@ import { SITE_URL } from "../lib/site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const { stories, generatedAt } = loadDataset();
+  const { stories, sagas, generatedAt } = loadDataset();
 
   const pages: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, lastModified: generatedAt, changeFrequency: "hourly", priority: 1 },
@@ -22,5 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...storyPages];
+  const sagaPages: MetadataRoute.Sitemap = (sagas ?? []).map((s) => ({
+    url: `${SITE_URL}/saga/${s.id}/`,
+    lastModified: s.latestPublishedAt,
+    changeFrequency: "hourly",
+    priority: 0.75,
+  }));
+
+  return [...pages, ...sagaPages, ...storyPages];
 }
