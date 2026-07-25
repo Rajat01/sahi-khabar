@@ -245,19 +245,32 @@ function reportingOrigins(articles: StoryArticle[]): number {
 }
 
 function baseScore(articles: StoryArticle[]): ScoreBreakdown {
+  // A primary/official source (PIB) confirms that a position was officially
+  // stated — that's the dedicated Primary Source component below. It is NOT
+  // independent verification of the claim, so it must not also inflate
+  // Corroboration or Source reliability, which specifically measure
+  // independent reporting. Without this split, "reported by PIB + one
+  // outlet" scored as if two independent voices agreed with the government.
+  const independentArticles = articles.filter(
+    (a) => SOURCE_BY_ID[a.sourceId]?.group !== "official",
+  );
+
   // Corroboration: independent reporting origins (ownership, wire copy and
   // circular citations discounted), capped by distinct domains.
-  const outlets = new Set(articles.map((a) => a.sourceName));
-  const domains = new Set(articles.map((a) => domainOf(a.url)));
-  const independent = articles.length === 0 ? 0 : Math.min(reportingOrigins(articles), domains.size);
+  const outlets = new Set(independentArticles.map((a) => a.sourceName));
+  const domains = new Set(independentArticles.map((a) => domainOf(a.url)));
+  const independent =
+    independentArticles.length === 0 ? 0 : Math.min(reportingOrigins(independentArticles), domains.size);
   // log-scaled: 1 origin -> ~15, 2 -> ~25, 3 -> ~32, 5+ -> 40
   const corroboration =
     independent === 0
       ? 0
       : Math.min(WEIGHTS.corroboration, Math.round((WEIGHTS.corroboration * Math.log2(1 + independent)) / Math.log2(6)));
 
-  // Reliability: average tier of participating outlets.
-  const tiers = articles
+  // Reliability: average tier of independent outlets only — an official
+  // source's tier reflects the authenticity of the government's own
+  // statements, not a track record of independently verifying claims.
+  const tiers = independentArticles
     .map((a) => SOURCE_BY_ID[a.sourceId]?.tier)
     .filter((t): t is number => typeof t === "number");
   const avgTier = tiers.length ? tiers.reduce((a, b) => a + b, 0) / tiers.length : 0;
@@ -320,6 +333,9 @@ function heuristicFlags(headline: string): string[] {
 function band(story: Story): ScoreBreakdown["band"] {
   const { articles, score } = story;
   if (articles.length === 0) return "unverified";
+  // Only official/primary-source articles (e.g. PIB alone): the government's
+  // own statement is authenticated, not independently corroborated yet.
+  if ((score.origins ?? 0) === 0) return "unverified";
   if (articles.length === 1 && (SOURCE_BY_ID[articles[0].sourceId]?.tier ?? 0) < 60) return "unverified";
   if (score.total >= 75) return "high";
   if (score.total >= 50) return "medium";

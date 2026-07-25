@@ -76,7 +76,7 @@ export function ScoreBreakdown({ score }: { score: Breakdown }) {
       </dl>
       {score.origins !== undefined &&
         score.outletCount !== undefined &&
-        score.outletCount > 0 && (
+        (score.outletCount > 0 ? (
           <p className="mt-3 text-xs text-ink-3">
             {score.origins} independent reporting{" "}
             {score.origins === 1 ? "origin" : "origins"} across{" "}
@@ -84,7 +84,16 @@ export function ScoreBreakdown({ score }: { score: Breakdown }) {
             shared ownership, reprinted wire copy, and articles citing another
             outlet&rsquo;s reporting count once.
           </p>
-        )}
+        ) : (
+          score.primarySource > 0 && (
+            <p className="mt-3 text-xs text-ink-3">
+              Only an official/primary source has stated this so far —
+              that authenticates the official position (see Primary source
+              above) but is not independent corroboration, so Corroboration
+              reads 0 until an independent outlet reports it too.
+            </p>
+          )
+        ))}
       {score.flags.length > 0 && (
         <p className="mt-3 text-xs text-ink-2">
           <span className="font-medium">Flags:</span> {score.flags.join(", ")}

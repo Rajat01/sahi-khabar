@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { SOURCES } from "../../config/sources";
-import type { SourceGroup } from "../../lib/types";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -9,22 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about/" },
 };
 
-const GROUP_LABELS: Record<SourceGroup, string> = {
-  "in-mainstream": "Indian mainstream",
-  "in-independent": "Indian independent",
-  international: "International",
-  official: "Official",
-};
-
 export default function AboutPage() {
-  // One row per outlet — some outlets contribute via several section feeds.
-  const outlets = [
-    ...new Map(
-      SOURCES.filter((s) => s.type === "rss").map((s) => [s.name, s]),
-    ).values(),
-  ].sort((a, b) => (b.tier ?? 0) - (a.tier ?? 0));
-  const communities = SOURCES.filter((s) => s.type !== "rss");
-
   return (
     <div className="prose-sm max-w-none space-y-6">
       <section>
@@ -216,55 +199,12 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section>
+      <section id="reliability-governance">
         <h2 className="text-base font-semibold">Source reliability table</h2>
         <p className="mt-2 text-sm text-ink-2">
           Ratings (0–100) are opinions, seeded from public press-reliability
           research and maintained in the open — the full list ships with the
           site&rsquo;s source code so anyone can audit or dispute it.
-        </p>
-        <div className="overflow-x-auto">
-          <table className="mt-2 w-full border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-hairline text-left text-xs uppercase tracking-wide text-ink-3">
-                <th className="py-2 pr-3 font-medium">Outlet</th>
-                <th className="py-2 pr-3 font-medium">Bucket</th>
-                <th className="py-2 pr-3 font-medium">Ownership / funding</th>
-                <th className="py-2 font-medium">Rating</th>
-              </tr>
-            </thead>
-            <tbody className="text-ink-2">
-              {outlets.map((s) => (
-                <tr key={s.id} className="border-b border-hairline align-top">
-                  <td className="py-2 pr-3">
-                    <a
-                      href={s.homepage}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-ink hover:text-accent"
-                    >
-                      {s.name}
-                    </a>
-                    {s.primarySource && (
-                      <span className="block text-xs text-ink-3">official / primary source</span>
-                    )}
-                  </td>
-                  <td className="py-2 pr-3 whitespace-nowrap">{GROUP_LABELS[s.group ?? "international"]}</td>
-                  <td className="py-2 pr-3">{s.ownership}</td>
-                  <td className="py-2 tabular-nums">{s.tier}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-2 text-xs text-ink-3">
-          Ownership is listed because concentrated media ownership shapes
-          coverage. It does not change an outlet&rsquo;s rating by itself — track
-          record does.
-        </p>
-        <p className="mt-3 text-sm text-ink-2">
-          <strong>Engagement signals (not rated, never corroborate):</strong>{" "}
-          {communities.map((s) => s.name).join(", ")}.
         </p>
       </section>
 
