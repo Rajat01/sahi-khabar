@@ -58,8 +58,8 @@ export default function AboutPage() {
               <td className="py-2 pr-3 font-medium text-ink">Source reliability</td>
               <td className="py-2 pr-3 tabular-nums">30</td>
               <td className="py-2">
-                The average rating of the outlets involved, from the
-                hand-maintained table below.
+                The average rating of the outlets involved, from a
+                hand-maintained per-outlet score kept in the source code.
               </td>
             </tr>
             <tr className="border-b border-hairline align-top">
@@ -106,12 +106,30 @@ export default function AboutPage() {
           position comes from its recency (half-life of ~18 hours), how many
           outlets corroborate it, and a category weight — tech and sports are
           down-weighted (×0.6) so a gadget launch never outranks a court
-          verdict. Ordering is region-neutral; use the India/World tabs to
-          focus.{" "}
+          verdict. By default the ordering carries no built-in preference for
+          India or World stories either way; use those tabs to focus on one.{" "}
           <strong>Nothing is ever removed by ranking</strong>: every ingested
           story keeps its page, appears in region and topic filters, and ships
-          in the sitemap and RSS feed. These weights are published here and in
-          the source code precisely so they can be disputed.
+          in the sitemap and RSS feed.
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-ink-2">
+          Automated is not the same as neutral. Recency half-life, the
+          tech/sports discount, corroboration weight — each is a choice about
+          what matters more, made by one person, encoded in software instead
+          of an editor&rsquo;s desk. No ranking of news is neutral in an
+          absolute sense; ours doesn&rsquo;t claim to be. What we can offer
+          instead is <strong>transparency</strong>: every weight above is
+          published here and in{" "}
+          <a
+            href="https://github.com/Rajat01/sahi-khabar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-accent"
+          >
+            the source code
+          </a>
+          , specifically so it can be read, argued with, and disputed —
+          rather than trusted on faith.
         </p>
       </section>
 
