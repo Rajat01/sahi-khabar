@@ -20,16 +20,30 @@ const MIN_SAGA_STORIES = 4;
 const MAX_SAGA_STORIES = 40;
 
 const GENERIC_ENTITY =
-  /^(india|indian|indias|bharat|delhi|mumbai|bengaluru|kolkata|chennai|hyderabad|modi|bjp|congress|aap|tmc|dmk|senate|centre|center|government|govt|supreme|high|court|police|minister|ministry|parliament|assembly|state|states|city|world|us|uk|china|pakistan|russia|ukraine|israel|gaza|trump|europe|american|chinese|russian|kerala|karnataka|maharashtra|tamil|nadu|bengal|gujarat|bihar|punjab|rajasthan|monday|tuesday|wednesday|thursday|friday|saturday|sunday|january|february|march|april|may|june|july|august|september|october|november|december)$/i;
+  /^(india|indian|indias|bharat|delhi|mumbai|bengaluru|kolkata|chennai|hyderabad|modi|bjp|congress|aap|tmc|dmk|senate|centre|center|government|govt|supreme|high|court|police|minister|ministry|parliament|assembly|state|states|city|world|us|uk|china|pakistan|russia|ukraine|israel|gaza|trump|europe|american|chinese|russian|kerala|karnataka|maharashtra|tamil|nadu|bengal|gujarat|bihar|punjab|rajasthan|monday|tuesday|wednesday|thursday|friday|saturday|sunday|january|february|march|april|may|june|july|august|september|october|november|december|sabha|lok|rajya|union|bill|house|session|cabinet|deputy|tenure|rebellion|leader|leaders|member|members|speaker|mp|mla|mps|mlas|cm|pm|chief|secretary|officer|official|spokesperson|spokesman|spokeswoman|party|opposition|ruling|national|central|federal|committee|panel|chairman|chairperson|president|vice|fy|fy24|fy25|fy26|fy27|fy28|q1|q2|q3|q4|consolidated|standalone|profit|profits|revenue|revenues|ebitda|turnover|dividend|earnings|results|reports|reported|rises|rise|falls|fall|dips|dip|declines|decline|jumps|jump|surges|surge|soars|soar|slips|slip|gains|gain|growth|yoy|qoq|net|gross|quarterly|annual|pradesh|madhya|andhra|uttar|odisha|orissa|jharkhand|chhattisgarh|telangana|haryana|himachal|goa|tripura|meghalaya|nagaland|mizoram|sikkim|puducherry|chandigarh|ladakh|jammu|kashmir|assam|manipur|fifa|cup|students|student|open|crackdown|border|higher|education|yatra|diwas)$/i;
+
+/**
+ * Same filter, applied per-story: the pairwise coherence check below must
+ * only count SPECIFIC shared nouns, not generic ones. Without this, two
+ * unrelated Parliament stories can "connect" by sharing two generic words
+ * ("Bill" + "Union") even though neither is a real entity match — and since
+ * connections are transitive (single-linkage), one such weak link chains an
+ * entire pool of unrelated stories into one fake saga. This is the same
+ * chaining failure that over-merged clusters before MAX_GREY_COMPONENT.
+ */
+function specificNouns(all: Set<string>): Set<string> {
+  return new Set([...all].filter((n) => n.length > 3 && !GENERIC_ENTITY.test(n)));
+}
 
 export function detectSagas(stories: Story[]): Saga[] {
+  // Every downstream use — seed selection AND pairwise coherence — reads
+  // from this same filtered set, so a generic word can never satisfy either.
   const storyNouns = new Map<string, Set<string>>();
   const nounStories = new Map<string, Story[]>();
   for (const story of stories) {
-    const nouns = properNouns(story.headline);
+    const nouns = specificNouns(properNouns(story.headline));
     storyNouns.set(story.id, nouns);
     for (const noun of nouns) {
-      if (noun.length <= 3 || GENERIC_ENTITY.test(noun)) continue;
       const list = nounStories.get(noun) ?? [];
       list.push(story);
       nounStories.set(noun, list);
@@ -48,6 +62,13 @@ export function detectSagas(stories: Story[]): Saga[] {
     // seed noun AND at least one more proper noun. The largest resulting
     // component is the real saga; unrelated stories that merely mention the
     // same institution/person in passing fall into their own tiny islands.
+    //
+    // A very prominent person (a top minister quoted on every unrelated
+    // story of the day) produces a large pool that single-linkage chaining
+    // can dilute — two unrelated stories both mentioning them plus one other
+    // incidental shared word still "connect". A large pool is itself a
+    // signal of that risk, so it demands more shared evidence per pair.
+    const required = pool.length > 8 ? 3 : 2;
     const parent = pool.map((_, i) => i);
     const find = (x: number): number => (parent[x] === x ? x : (parent[x] = find(parent[x])));
     for (let i = 0; i < pool.length; i++) {
@@ -56,7 +77,7 @@ export function detectSagas(stories: Story[]): Saga[] {
         const b = storyNouns.get(pool[j].id)!;
         let shared = 0;
         for (const n of a) if (b.has(n)) shared++;
-        if (shared >= 2) parent[find(i)] = find(j);
+        if (shared >= required) parent[find(i)] = find(j);
       }
     }
     const components = new Map<number, number[]>();

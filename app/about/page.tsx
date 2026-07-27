@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { REPO_URL } from "../../lib/site";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -14,11 +16,35 @@ export default function AboutPage() {
         <h1 className="text-xl font-bold">How KhabarCheck works</h1>
         <p className="mt-2 text-sm leading-relaxed text-ink-2">
           KhabarCheck (खबर चेक, &ldquo;news, checked&rdquo;) is a fully automated news
-          aggregator. There is no newsroom and no editor: software fetches stories
+          aggregator. There is no newsroom: software fetches stories
           from the sources below every half hour, groups articles that
           describe the same event, and computes a <strong>reporting-confidence score</strong>{" "}
           for each story. We never write news — every headline links to the outlet
           that published it.
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-ink-2">
+          Automated doesn&rsquo;t mean unaccountable. The feed is generated
+          without a human in the loop, but the system isn&rsquo;t: reader
+          reports, methodology changes, and anything that looks like a
+          high-risk error are reviewed by the person who built and maintains
+          it — publicly, since{" "}
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">
+            the repository
+          </a>{" "}
+          and every{" "}
+          <a
+            href={`${REPO_URL}/issues`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-accent"
+          >
+            reader-filed issue
+          </a>{" "}
+          are open for anyone to read. Resolved corrections are listed on the{" "}
+          <Link href="/corrections/" className="underline hover:text-accent">
+            corrections log
+          </Link>
+          .
         </p>
       </section>
 
@@ -121,7 +147,7 @@ export default function AboutPage() {
           instead is <strong>transparency</strong>: every weight above is
           published here and in{" "}
           <a
-            href="https://github.com/Rajat01/sahi-khabar"
+            href={REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="underline hover:text-accent"

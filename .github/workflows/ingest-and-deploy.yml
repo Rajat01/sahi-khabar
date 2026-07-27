@@ -44,6 +44,9 @@ jobs:
           git show origin/data:redirects.json > data/redirects.json 2>/dev/null \
             && echo "restored redirects" \
             || echo "no redirects yet"
+          git show origin/data:corrections.json > data/corrections.json 2>/dev/null \
+            && echo "restored corrections log" \
+            || echo "no corrections log yet"
 
       - name: Ingest news
         run: pnpm ingest
@@ -52,6 +55,10 @@ jobs:
           # Optional — unlocks real Reddit vote counts:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+
+      - name: Fetch corrections log from closed GitHub issues
+        run: pnpm corrections
+        continue-on-error: true
 
       - name: Build static site
         run: pnpm build
@@ -63,6 +70,7 @@ jobs:
           cp data/stories.json "$workdir/"
           cp data/pair-cache.json "$workdir/" 2>/dev/null || true
           cp data/redirects.json "$workdir/" 2>/dev/null || true
+          cp data/corrections.json "$workdir/" 2>/dev/null || true
           cd "$workdir"
           git init -b data -q
           git config user.name "khabarcheck-bot"
@@ -70,6 +78,7 @@ jobs:
           git add stories.json
           git add pair-cache.json 2>/dev/null || true
           git add redirects.json 2>/dev/null || true
+          git add corrections.json 2>/dev/null || true
           git commit -q -m "data snapshot $(date -u +%FT%TZ)"
           git push --force \
             "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" \

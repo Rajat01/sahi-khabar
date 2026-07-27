@@ -8,7 +8,7 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 const MAX_FEED = 250;
 
 const ACTIONS = [
-  { href: "#feed", label: "Compare today's news" },
+  { href: "#feed", label: "Check today's news" },
   { href: "/check/", label: "Check a WhatsApp forward" },
   { href: "/blindspot/", label: "See media blindspots" },
 ];

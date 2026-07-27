@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/blindspot/`, lastModified: generatedAt, changeFrequency: "hourly", priority: 0.9 },
     { url: `${SITE_URL}/check/`, lastModified: generatedAt, changeFrequency: "daily", priority: 0.8 },
     { url: `${SITE_URL}/about/`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${SITE_URL}/corrections/`, changeFrequency: "weekly", priority: 0.5 },
   ];
 
   const storyPages: MetadataRoute.Sitemap = stories.map((s) => ({

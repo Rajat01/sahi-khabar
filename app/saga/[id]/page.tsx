@@ -6,6 +6,7 @@ import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { ShareBar } from "../../../components/ShareBar";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { loadDataset } from "../../../lib/data";
+import { sagaReportLink } from "../../../lib/report";
 import { SITE_NAME, SITE_URL } from "../../../lib/site";
 
 export function generateStaticParams() {
@@ -156,6 +157,15 @@ export default async function SagaPage({
         <Link href="/about/#developing-stories" className="underline">
           read the method
         </Link>
+        . See a development that doesn&rsquo;t belong here?{" "}
+        <a
+          href={sagaReportLink({ id: saga.id, title: saga.title }).href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-accent"
+        >
+          Report it
+        </a>
         .
       </p>
     </article>

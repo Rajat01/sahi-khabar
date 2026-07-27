@@ -10,13 +10,13 @@ export function StoryCard({ story, nowIso }: { story: FeedStory; nowIso: string 
   const isHub = story.sagaCount !== undefined && story.sagaCount > 1;
   return (
     <article className="border-b border-hairline py-4">
-      <div className="flex items-start justify-between gap-3">
-        <h2 className="text-base font-semibold leading-snug">
+      <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1.5">
+        <h2 className="min-w-[60%] flex-1 text-base font-semibold leading-snug">
           <Link href={isHub ? `/saga/${story.sagaId}/` : `/story/${story.id}/`} className="hover:text-accent">
             {story.headline}
           </Link>
         </h2>
-        <span className="flex shrink-0 items-center gap-1.5">
+        <span className="flex flex-wrap items-center gap-1.5">
           {isHub && (
             <span
               className="rounded-full border border-hairline px-2 py-0.5 text-xs font-medium text-ink-3"
@@ -60,6 +60,18 @@ export function StoryCard({ story, nowIso }: { story: FeedStory; nowIso: string 
       )}
       <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
         <TimeAgo iso={story.latestPublishedAt} nowIso={nowIso} />
+        {(story.officialCount > 0 || story.origins > 0) && (
+          <>
+            <span aria-hidden>·</span>
+            <span>
+              {story.officialCount > 0 &&
+                `${story.officialCount} official source${story.officialCount === 1 ? "" : "s"}`}
+              {story.officialCount > 0 && story.origins > 0 && " · "}
+              {story.origins > 0 &&
+                `${story.origins} independent reporting origin${story.origins === 1 ? "" : "s"}`}
+            </span>
+          </>
+        )}
         {outletNames.length > 0 && (
           <>
             <span aria-hidden>·</span>
@@ -80,6 +92,19 @@ export function StoryCard({ story, nowIso }: { story: FeedStory; nowIso: string 
         <span aria-hidden>·</span>
         <span className="uppercase tracking-wide">{story.region === "in" ? "India" : "World"}</span>
       </p>
+      {story.uncertainty && (
+        <p className="mt-1 text-xs text-ink-3">
+          <span className="font-medium text-ink-2">Uncertainty:</span> {story.uncertainty}
+        </p>
+      )}
+      {story.rankReason && (
+        <details className="mt-1.5 text-xs text-ink-3">
+          <summary className="cursor-pointer select-none hover:text-ink-2">
+            Why am I seeing this?
+          </summary>
+          <p className="mt-1">{story.rankReason}</p>
+        </details>
+      )}
     </article>
   );
 }

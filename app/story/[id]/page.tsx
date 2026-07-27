@@ -8,7 +8,8 @@ import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { SOURCE_BY_ID } from "../../../config/sources";
 import { isDeveloping, loadDataset } from "../../../lib/data";
-import { SITE_NAME, SITE_URL } from "../../../lib/site";
+import { storyReportLinks } from "../../../lib/report";
+import { REPO_URL, SITE_NAME, SITE_URL } from "../../../lib/site";
 
 export function generateStaticParams() {
   return loadDataset().stories.map((s) => ({ id: s.id }));
@@ -236,6 +237,25 @@ export default async function StoryPage({
         <aside>
           <ScoreBreakdown score={story.score} />
         </aside>
+      </div>
+
+      <div className="mt-6 border-t border-hairline pt-3">
+        <p className="text-xs text-ink-3">
+          See a mistake?{" "}
+          {storyReportLinks(story).map((r, i) => (
+            <span key={r.label}>
+              {i > 0 && " · "}
+              <a href={r.href} target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">
+                {r.label}
+              </a>
+            </span>
+          ))}
+          {" — each opens a pre-filled report on "}
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="underline hover:text-accent">
+            GitHub
+          </a>
+          .
+        </p>
       </div>
     </article>
   );

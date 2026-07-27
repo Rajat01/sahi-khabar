@@ -11,3 +11,4 @@ next-env.d.ts
 .netlify
 data/pair-cache.json
 data/redirects.json
+data/corrections.json

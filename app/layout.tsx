@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { loadDataset } from "../lib/data";
+import { generalReportLink } from "../lib/report";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "../lib/site";
 import "./globals.css";
 
@@ -100,6 +101,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               our readers — that one is permanent.{" "}
               <Link href="/about/#sustainability" className="underline hover:text-accent">
                 How we plan to sustain this
+              </Link>
+              .
+            </p>
+            <p className="mt-1">
+              Built and maintained by Rajat Bhardwaj.{" "}
+              <a
+                href={generalReportLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-accent"
+              >
+                Report an issue
+              </a>
+              {" · "}
+              <Link href="/corrections/" className="underline hover:text-accent">
+                Corrections log
               </Link>
               .
             </p>
