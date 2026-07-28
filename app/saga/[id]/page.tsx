@@ -5,7 +5,7 @@ import { ScoreBadge } from "../../../components/ScoreBadge";
 import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { ShareBar } from "../../../components/ShareBar";
 import { TimeAgo } from "../../../components/TimeAgo";
-import { loadDataset } from "../../../lib/data";
+import { getStoryById, loadDataset } from "../../../lib/data";
 import { sagaReportLink } from "../../../lib/report";
 import { SITE_NAME, SITE_URL } from "../../../lib/site";
 
@@ -14,11 +14,10 @@ export function generateStaticParams() {
 }
 
 function getSagaWithStories(id: string) {
-  const { stories, sagas, generatedAt } = loadDataset();
+  const { sagas, generatedAt } = loadDataset();
   const saga = (sagas ?? []).find((s) => s.id === id);
   if (!saga) return null;
-  const byId = new Map(stories.map((s) => [s.id, s]));
-  const members = saga.storyIds.map((sid) => byId.get(sid)).filter((s) => s !== undefined);
+  const members = saga.storyIds.map((sid) => getStoryById(sid)).filter((s) => s !== undefined);
   return { saga, members, generatedAt };
 }
 

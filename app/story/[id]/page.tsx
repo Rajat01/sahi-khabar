@@ -7,7 +7,7 @@ import { ShareBar } from "../../../components/ShareBar";
 import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { SOURCE_BY_ID } from "../../../config/sources";
-import { isDeveloping, loadDataset } from "../../../lib/data";
+import { getStoryById, isDeveloping, loadDataset } from "../../../lib/data";
 import { storyReportLinks } from "../../../lib/report";
 import { REPO_URL, SITE_NAME, SITE_URL } from "../../../lib/site";
 
@@ -21,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const story = loadDataset().stories.find((s) => s.id === id);
+  const story = getStoryById(id);
   if (!story) return { title: "Story" };
   const outlets = [...new Set(story.articles.map((a) => a.sourceName))];
   const description =
@@ -49,8 +49,8 @@ export default async function StoryPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { stories, generatedAt } = loadDataset();
-  const story = stories.find((s) => s.id === id);
+  const { generatedAt } = loadDataset();
+  const story = getStoryById(id);
   if (!story) notFound();
 
   // Group articles by outlet: on multi-outlet stories the coverage list

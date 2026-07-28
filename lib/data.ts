@@ -1,15 +1,35 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { explainRank, rankStories } from "./rank";
 import type { Dataset, Story } from "./types";
+
+const DATA_PATH = join(process.cwd(), "data", "stories.json");
+
+// generateStaticParams/generateMetadata/the page component each call
+// loadDataset() independently for every one of the 11k+ story/saga pages —
+// keyed on mtime so a fresh `pnpm ingest` (dev mode) still invalidates it.
+let cache: { mtimeMs: number; dataset: Dataset; byId: Map<string, Story> } | null = null;
+
+function getCache() {
+  const mtimeMs = statSync(DATA_PATH).mtimeMs;
+  if (cache && cache.mtimeMs === mtimeMs) return cache;
+  const dataset = JSON.parse(readFileSync(DATA_PATH, "utf8")) as Dataset;
+  const byId = new Map(dataset.stories.map((s) => [s.id, s]));
+  cache = { mtimeMs, dataset, byId };
+  return cache;
+}
 
 /**
  * The dataset is baked in at build time (static export). Dev mode re-reads on
  * each request, so a fresh `pnpm ingest` shows up on reload.
  */
 export function loadDataset(): Dataset {
-  const path = join(process.cwd(), "data", "stories.json");
-  return JSON.parse(readFileSync(path, "utf8")) as Dataset;
+  return getCache().dataset;
+}
+
+/** O(1) story lookup instead of scanning the full array on every call. */
+export function getStoryById(id: string): Story | undefined {
+  return getCache().byId.get(id);
 }
 
 /** Slim shape embedded in the feed pages (keeps HTML payload small). */
