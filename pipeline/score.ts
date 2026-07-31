@@ -117,17 +117,48 @@ function buildStory(cluster: Cluster): Story | null {
  * covered by nine Indian outlets is still world news. India when the text is
  * India-relevant or any article came from an India-section feed (whose
  * content is about India by construction). Exported for the heal pass.
+ *
+ * India has thousands of towns/districts that will never all fit in
+ * INDIA_PATTERN — a domestic crime story from a small town (e.g. "Virar")
+ * matches none of it. Enumerating the much smaller set of countries/leaders
+ * that dominate actual world-news volume is more tractable, so a "mixed"
+ * scope Indian outlet (general feed, not an India-only vertical) defaults to
+ * "in" unless the text names something clearly foreign. Sports is excluded
+ * from that default: international fixtures name clubs/countries (Man City,
+ * Argentina, Rodri) that will never all fit FOREIGN_PATTERN either, and
+ * Indian sports coverage reliably names India or an Indian player/team
+ * anyway, so INDIA_PATTERN alone is the safer bar there.
  */
 export function applyRegion(story: Story): void {
   const text = story.headline + " " + (story.summary ?? "");
   const fromIndiaSection = story.articles.some(
     (a) => SOURCE_BY_ID[a.sourceId]?.scope === "in",
   );
-  story.region = INDIA_PATTERN.test(text) || fromIndiaSection ? "in" : "world";
+  const fromMixedIndianOutlet = story.articles.some(
+    (a) => SOURCE_BY_ID[a.sourceId]?.scope === "mixed",
+  );
+  const looksForeign = FOREIGN_PATTERN.test(text) || FOREIGN_ACRONYM_PATTERN.test(text);
+  story.region =
+    INDIA_PATTERN.test(text) || fromIndiaSection
+      ? "in"
+      : fromMixedIndianOutlet && story.category !== "sports" && !looksForeign
+        ? "in"
+        : "world";
 }
 
 const INDIA_PATTERN =
   /\b(india|indian|bharat|hindustan|desi|delhi|mumbai|bengaluru|bangalore|kolkata|chennai|hyderabad|pune|ahmedabad|surat|jaipur|lucknow|kanpur|nagpur|indore|bhopal|patna|noida|gurugram|gurgaon|varanasi|amritsar|kochi|coimbatore|mysuru|guwahati|bhubaneswar|ranchi|raipur|chandigarh|shimla|srinagar|modi|lok sabha|rajya sabha|bjp|congress party|rahul gandhi|amit shah|nirmala sitharaman|kejriwal|mamata|kashmir|ladakh|punjab|kerala|tamil nadu|karnataka|maharashtra|gujarat|bihar|bengal|uttar pradesh|uttarakhand|assam|manipur|odisha|jharkhand|chhattisgarh|telangana|andhra|haryana|himachal|rajasthan|goa|tripura|meghalaya|nagaland|mizoram|sikkim|tmc|dmk|shiv sena|aiadmk|rupee|crore|lakh|rbi|sebi|isro|nifty|sensex|aadhaar|gst|cbi|bollywood|supreme court of india|panchayat)\b/i;
+
+// Countries/leaders/institutions that dominate actual world-news volume —
+// enough to catch most genuinely foreign stories without needing an
+// exhaustive (impossible) list of every place name on Earth.
+const FOREIGN_PATTERN =
+  /\b(pakistan|pakistani|china|chinese|beijing|russia|russian|moscow|putin|ukraine|ukrainian|kyiv|zelensky|america|american|usa|u\.s\.|washington|white house|trump|biden|florida|california|texas|fda|cdc|pentagon|wall street|britain|british|uk|england|london|starmer|france|french|paris|macron|germany|german|berlin|scholz|japan|japanese|tokyo|korea|korean|seoul|pyongyang|israel|israeli|gaza|palestine|palestinian|hamas|netanyahu|iran|iranian|iraq|syria|syrian|afghanistan|taliban|bangladesh|nepal|sri lanka|myanmar|canada|canadian|australia|australian|brazil|argentina|mexico|europe|european union|\beu\b|nato|united nations|kremlin|xi jinping|zelenskyy|sunak|brussels|taiwan|taiwanese|hong kong|vietnam|thailand|indonesia|philippines|malaysia|singapore|saudi arabia|dubai|uae|qatar|turkey|egypt|nigeria|kenya|south africa)\b/i;
+
+// "US"/"UN" as bare acronyms — deliberately case-SENSITIVE. Lowercased "us"
+// is an ordinary English pronoun ("tells us", "with us") and would false-hit
+// constantly if matched case-insensitively like the rest of FOREIGN_PATTERN.
+const FOREIGN_ACRONYM_PATTERN = /\b(US|UN)\b/;
 
 /**
  * Fill in coverage buckets and the blindspot flag. Exported so run.ts can

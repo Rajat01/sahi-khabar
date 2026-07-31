@@ -267,6 +267,11 @@ export default function AboutPage() {
             incorrectly.
           </li>
           <li>
+            India vs. World tagging relies on keyword matching and can
+            occasionally mistag a story — most often a niche foreign
+            business/tech story that names a company but not a country.
+          </li>
+          <li>
             Non-news service content — horoscopes, puzzle answers, lottery
             results, multi-event digests — is dropped at ingestion; it
             isn&rsquo;t reporting.
