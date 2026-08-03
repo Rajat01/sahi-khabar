@@ -111,6 +111,15 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
   };
   const withinGreyCap = (a: number, b: number): boolean =>
     size[find(a)] + size[find(b)] <= MAX_GREY_COMPONENT;
+  // Welding two ALREADY-multi-article components together is far riskier
+  // than adding one new article to an existing one: a single wrong grey-zone
+  // verdict (LLM slip, or a cached one) then merges two unrelated stories in
+  // their entirety, not just mislabels one article. A lone item can still
+  // join on the grey-zone bar alone; welding two real components requires
+  // auto-merge-grade evidence, checked fresh at union time since sizes
+  // change as earlier pairs in this same pass get merged.
+  const trustedForWeld = (a: number, b: number): boolean =>
+    !(size[find(a)] > 1 && size[find(b)] > 1) || sharedNounIdf(a, b) >= AUTO_MERGE_IDF;
 
   const greyPairs: { i: number; j: number; strength: number }[] = [];
   for (let i = 0; i < n; i++) {
@@ -155,7 +164,9 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
       uncached.push(pair);
     } else {
       cacheHits++;
-      if (cached && withinGreyCap(pair.i, pair.j)) union(pair.i, pair.j);
+      if (cached && withinGreyCap(pair.i, pair.j) && trustedForWeld(pair.i, pair.j)) {
+        union(pair.i, pair.j);
+      }
     }
   }
 
@@ -174,7 +185,7 @@ export async function clusterItems(items: RawItem[]): Promise<Cluster[]> {
         const verdict = verdicts[k];
         if (verdict === null) return; // chunk failed — retry next run
         newVerdicts.set(pairKey(items[i].title, items[j].title), verdict);
-        if (verdict && withinGreyCap(i, j)) union(i, j);
+        if (verdict && withinGreyCap(i, j) && trustedForWeld(i, j)) union(i, j);
       });
       console.log(
         `  [cluster] LLM merged ${verdicts.filter(Boolean).length}/${pending.length} new pairs` +
