@@ -6,6 +6,7 @@ import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { ShareBar } from "../../../components/ShareBar";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { getStoryById, loadDataset } from "../../../lib/data";
+import { ogImageUrl } from "../../../lib/og";
 import { sagaReportLink } from "../../../lib/report";
 import { SITE_NAME, SITE_URL } from "../../../lib/site";
 
@@ -29,8 +30,9 @@ export async function generateMetadata({
   const { id } = await params;
   const found = getSagaWithStories(id);
   if (!found) return { title: "Story" };
-  const { saga, members } = found;
+  const { saga, members, generatedAt } = found;
   const description = `${members.length} separately verified developments in the ${saga.title} story, oldest to newest, each with its own sources and reporting-confidence score.`;
+  const image = ogImageUrl("saga", saga.id, saga.latestPublishedAt, generatedAt);
   return {
     title: `${saga.title} — ${members.length} developments`,
     description,
@@ -40,6 +42,13 @@ export async function generateMetadata({
       title: `${saga.title} — ${members.length} developments`,
       description,
       url: `${SITE_URL}/saga/${saga.id}/`,
+      images: [{ url: image, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${saga.title} — ${members.length} developments`,
+      description,
+      images: [image],
     },
   };
 }

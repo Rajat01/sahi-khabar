@@ -12,3 +12,4 @@ next-env.d.ts
 data/pair-cache.json
 data/redirects.json
 data/corrections.json
+public/og/

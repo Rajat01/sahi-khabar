@@ -8,6 +8,7 @@ import { ScoreBreakdown } from "../../../components/ScoreBreakdown";
 import { TimeAgo } from "../../../components/TimeAgo";
 import { SOURCE_BY_ID } from "../../../config/sources";
 import { getStoryById, isDeveloping, loadDataset } from "../../../lib/data";
+import { ogImageUrl } from "../../../lib/og";
 import { storyReportLinks } from "../../../lib/report";
 import { REPO_URL, SITE_NAME, SITE_URL } from "../../../lib/site";
 
@@ -27,6 +28,7 @@ export async function generateMetadata({
   const description =
     story.summary ??
     `Coverage from ${outlets.slice(0, 3).join(", ")} — reporting confidence ${story.score.total}/100.`;
+  const image = ogImageUrl("story", story.id, story.latestPublishedAt, loadDataset().generatedAt);
   return {
     title: story.headline,
     description,
@@ -38,8 +40,9 @@ export async function generateMetadata({
       url: `${SITE_URL}/story/${story.id}/`,
       publishedTime: story.firstSeenAt,
       modifiedTime: story.latestPublishedAt,
+      images: [{ url: image, width: 1200, height: 630 }],
     },
-    twitter: { card: "summary_large_image", title: story.headline, description },
+    twitter: { card: "summary_large_image", title: story.headline, description, images: [image] },
   };
 }
 
@@ -68,13 +71,19 @@ export default async function StoryPage({
 
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "NewsArticle",
     headline: story.headline,
     description: story.summary,
+    image: [ogImageUrl("story", story.id, story.latestPublishedAt, generatedAt)],
     datePublished: story.firstSeenAt,
     dateModified: story.latestPublishedAt,
     mainEntityOfPage: `${SITE_URL}/story/${story.id}/`,
-    publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/og/logo.png`, width: 512, height: 128 },
+    },
     // The original reporting this aggregation page is based on
     citation: story.articles.map((a) => a.url),
   }).replace(/</g, "\\u003c");

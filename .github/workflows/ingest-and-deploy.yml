@@ -60,6 +60,10 @@ jobs:
         run: pnpm corrections
         continue-on-error: true
 
+      - name: Generate share images for recent stories
+        run: pnpm og-images
+        continue-on-error: true
+
       - name: Build static site
         run: pnpm build
 

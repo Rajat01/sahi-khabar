@@ -7,6 +7,7 @@
     "build": "next build",
     "postbuild": "tsx pipeline/gen-redirects.ts",
     "ingest": "tsx pipeline/run.ts",
+    "og-images": "tsx pipeline/gen-og-images.ts",
     "indexnow": "tsx pipeline/indexnow.ts",
     "corrections": "tsx pipeline/corrections.ts",
     "typecheck": "tsc --noEmit"
